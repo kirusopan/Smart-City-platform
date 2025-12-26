@@ -14,7 +14,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/utilities.css">
 </head>
 
 <body>
@@ -143,27 +143,633 @@
 
         <!-- Page Content -->
         <div class="page-content">
-            <!-- Page Header -->
-            <div class="page-header">
-                <div>
-                    <h1 class="page-title">Dashboard Overview</h1>
-                    <p class="page-subtitle">Monitor and manage your city operations</p>
+
+            <div class="page-content">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Utilities & Energy Management</h1>
+                        <p class="page-subtitle">Real-time monitoring of power distribution and water supply systems</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="btn btn-outline-primary" onclick="exportUtilityReport()">
+                            <i class="bi bi-download"></i> Export Report
+                        </button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertSettingsModal">
+                            <i class="bi bi-bell"></i> Alert Settings
+                        </button>
+                    </div>
                 </div>
-                <div class="page-actions">
-                    <button class="btn btn-outline-primary">
-                        <i class="bi bi-download"></i> Export Report
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="bi bi-plus-lg"></i> Add New
-                    </button>
+
+                <!-- System Overview Stats -->
+                <div class="row g-4 mb-4">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="utility-stat-card power-card">
+                            <div class="stat-header">
+                                <div class="stat-icon">
+                                    <i class="bi bi-lightning-charge-fill"></i>
+                                </div>
+                                <div class="stat-indicator">
+                                    <span class="pulse-dot"></span>
+                                    <span class="indicator-text">Live</span>
+                                </div>
+                            </div>
+                            <div class="stat-value" id="powerConsumption">1,245</div>
+                            <div class="stat-label">MW - Power Consumption</div>
+                            <div class="stat-footer">
+                                <div class="mini-chart" id="powerMiniChart"></div>
+                                <span class="trend-neutral">↔ Stable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="utility-stat-card water-card">
+                            <div class="stat-header">
+                                <div class="stat-icon">
+                                    <i class="bi bi-droplet-fill"></i>
+                                </div>
+                                <div class="stat-indicator">
+                                    <span class="pulse-dot"></span>
+                                    <span class="indicator-text">Live</span>
+                                </div>
+                            </div>
+                            <div class="stat-value" id="waterSupply">892</div>
+                            <div class="stat-label">ML/day - Water Supply</div>
+                            <div class="stat-footer">
+                                <div class="mini-chart" id="waterMiniChart"></div>
+                                <span class="trend-up">↑ 3.2%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="utility-stat-card uptime-card">
+                            <div class="stat-header">
+                                <div class="stat-icon">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="stat-indicator success">
+                                    <span class="pulse-dot"></span>
+                                    <span class="indicator-text">Healthy</span>
+                                </div>
+                            </div>
+                            <div class="stat-value">99.8%</div>
+                            <div class="stat-label">System Uptime</div>
+                            <div class="stat-footer">
+                                <span class="uptime-detail">Last 30 days</span>
+                                <span class="trend-up">↑ 0.2%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="utility-stat-card alert-card">
+                            <div class="stat-header">
+                                <div class="stat-icon">
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                </div>
+                                <div class="stat-indicator warning">
+                                    <span class="pulse-dot"></span>
+                                    <span class="indicator-text">Active</span>
+                                </div>
+                            </div>
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Active Alerts</div>
+                            <div class="stat-footer">
+                                <span class="alert-detail">3 Critical, 2 Warning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Power Distribution Section -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-lightning-charge text-warning"></i> Power Distribution Network
+                                </h5>
+                                <div class="d-flex gap-2">
+                                    <select class="form-select form-select-sm" style="width: auto;"
+                                        onchange="updatePowerView(this.value)">
+                                        <option value="realtime">Real-time</option>
+                                        <option value="hourly">Last 24 Hours</option>
+                                        <option value="daily">Last 7 Days</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="powerDistributionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Power Grid Status</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="grid-status-list">
+                                    <div class="grid-zone-item status-normal">
+                                        <div class="zone-info">
+                                            <div class="zone-name">North Grid</div>
+                                            <div class="zone-capacity">Capacity: 450 MW</div>
+                                        </div>
+                                        <div class="zone-meter">
+                                            <div class="meter-bar">
+                                                <div class="meter-fill" style="width: 72%"></div>
+                                            </div>
+                                            <span class="meter-value">72%</span>
+                                        </div>
+                                        <span class="zone-status status-badge badge-success">Normal</span>
+                                    </div>
+
+                                    <div class="grid-zone-item status-normal">
+                                        <div class="zone-info">
+                                            <div class="zone-name">South Grid</div>
+                                            <div class="zone-capacity">Capacity: 380 MW</div>
+                                        </div>
+                                        <div class="zone-meter">
+                                            <div class="meter-bar">
+                                                <div class="meter-fill" style="width: 65%"></div>
+                                            </div>
+                                            <span class="meter-value">65%</span>
+                                        </div>
+                                        <span class="zone-status status-badge badge-success">Normal</span>
+                                    </div>
+
+                                    <div class="grid-zone-item status-warning">
+                                        <div class="zone-info">
+                                            <div class="zone-name">East Grid</div>
+                                            <div class="zone-capacity">Capacity: 320 MW</div>
+                                        </div>
+                                        <div class="zone-meter">
+                                            <div class="meter-bar">
+                                                <div class="meter-fill warning" style="width: 88%"></div>
+                                            </div>
+                                            <span class="meter-value">88%</span>
+                                        </div>
+                                        <span class="zone-status status-badge badge-warning">High Load</span>
+                                    </div>
+
+                                    <div class="grid-zone-item status-normal">
+                                        <div class="zone-info">
+                                            <div class="zone-name">West Grid</div>
+                                            <div class="zone-capacity">Capacity: 290 MW</div>
+                                        </div>
+                                        <div class="zone-meter">
+                                            <div class="meter-bar">
+                                                <div class="meter-fill" style="width: 58%"></div>
+                                            </div>
+                                            <span class="meter-value">58%</span>
+                                        </div>
+                                        <span class="zone-status status-badge badge-success">Normal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Water Distribution Section -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-droplet text-primary"></i> Water Supply Sources
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="waterSourceChart"></canvas>
+                                <div class="water-source-legend mt-3">
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #2563eb;"></span>
+                                        <span class="legend-label">Reservoir A - 45%</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #06b6d4;"></span>
+                                        <span class="legend-label">Reservoir B - 30%</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #10b981;"></span>
+                                        <span class="legend-label">Ground Water - 15%</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #f59e0b;"></span>
+                                        <span class="legend-label">Recycled - 10%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Water Distribution by District</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="waterDistributionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Energy Sources & Consumption -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Energy Consumption by Sector</h5>
+                                <div class="consumption-tabs">
+                                    <button class="tab-btn active" onclick="switchConsumptionTab('sector')">By
+                                        Sector</button>
+                                    <button class="tab-btn" onclick="switchConsumptionTab('time')">By Time</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="consumptionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Energy Source Mix</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="energy-source-list">
+                                    <div class="energy-source-item">
+                                        <div class="source-icon solar">
+                                            <i class="bi bi-sun-fill"></i>
+                                        </div>
+                                        <div class="source-info">
+                                            <div class="source-name">Solar Power</div>
+                                            <div class="source-capacity">520 MW</div>
+                                        </div>
+                                        <div class="source-percentage">28%</div>
+                                    </div>
+
+                                    <div class="energy-source-item">
+                                        <div class="source-icon wind">
+                                            <i class="bi bi-wind"></i>
+                                        </div>
+                                        <div class="source-info">
+                                            <div class="source-name">Wind Power</div>
+                                            <div class="source-capacity">380 MW</div>
+                                        </div>
+                                        <div class="source-percentage">20%</div>
+                                    </div>
+
+                                    <div class="energy-source-item">
+                                        <div class="source-icon hydro">
+                                            <i class="bi bi-moisture"></i>
+                                        </div>
+                                        <div class="source-info">
+                                            <div class="source-name">Hydro Power</div>
+                                            <div class="source-capacity">470 MW</div>
+                                        </div>
+                                        <div class="source-percentage">25%</div>
+                                    </div>
+
+                                    <div class="energy-source-item">
+                                        <div class="source-icon thermal">
+                                            <i class="bi bi-fire"></i>
+                                        </div>
+                                        <div class="source-info">
+                                            <div class="source-name">Thermal</div>
+                                            <div class="source-capacity">320 MW</div>
+                                        </div>
+                                        <div class="source-percentage">17%</div>
+                                    </div>
+
+                                    <div class="energy-source-item">
+                                        <div class="source-icon nuclear">
+                                            <i class="bi bi-radioactive"></i>
+                                        </div>
+                                        <div class="source-info">
+                                            <div class="source-name">Nuclear</div>
+                                            <div class="source-capacity">190 MW</div>
+                                        </div>
+                                        <div class="source-percentage">10%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Alerts & Outages -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Active Alerts</h5>
+                                <span class="alert-count-badge">5 Active</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="utility-alerts-list">
+                                    <div class="utility-alert-item alert-critical">
+                                        <div class="alert-indicator">
+                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                        </div>
+                                        <div class="alert-content">
+                                            <div class="alert-title">Power Outage - District 5</div>
+                                            <div class="alert-desc">Transformer failure affecting 2,500 residents</div>
+                                            <div class="alert-meta">
+                                                <span class="alert-time"><i class="bi bi-clock"></i> 15 mins ago</span>
+                                                <span class="alert-priority">Critical</span>
+                                            </div>
+                                        </div>
+                                        <button class="alert-action-btn" onclick="viewAlert(1)">
+                                            <i class="bi bi-chevron-right"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="utility-alert-item alert-critical">
+                                        <div class="alert-indicator">
+                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                        </div>
+                                        <div class="alert-content">
+                                            <div class="alert-title">Water Pressure Drop - Zone 3</div>
+                                            <div class="alert-desc">Main pipeline pressure below threshold</div>
+                                            <div class="alert-meta">
+                                                <span class="alert-time"><i class="bi bi-clock"></i> 32 mins ago</span>
+                                                <span class="alert-priority">Critical</span>
+                                            </div>
+                                        </div>
+                                        <button class="alert-action-btn" onclick="viewAlert(2)">
+                                            <i class="bi bi-chevron-right"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="utility-alert-item alert-warning">
+                                        <div class="alert-indicator">
+                                            <i class="bi bi-exclamation-triangle-fill"></i>
+                                        </div>
+                                        <div class="alert-content">
+                                            <div class="alert-title">High Load - East Grid</div>
+                                            <div class="alert-desc">Power consumption at 88% capacity</div>
+                                            <div class="alert-meta">
+                                                <span class="alert-time"><i class="bi bi-clock"></i> 1 hour ago</span>
+                                                <span class="alert-priority">Warning</span>
+                                            </div>
+                                        </div>
+                                        <button class="alert-action-btn" onclick="viewAlert(3)">
+                                            <i class="bi bi-chevron-right"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="utility-alert-item alert-warning">
+                                        <div class="alert-indicator">
+                                            <i class="bi bi-exclamation-triangle-fill"></i>
+                                        </div>
+                                        <div class="alert-content">
+                                            <div class="alert-title">Scheduled Maintenance</div>
+                                            <div class="alert-desc">Water supply interruption - Zone 7</div>
+                                            <div class="alert-meta">
+                                                <span class="alert-time"><i class="bi bi-clock"></i> 2 hours ago</span>
+                                                <span class="alert-priority">Info</span>
+                                            </div>
+                                        </div>
+                                        <button class="alert-action-btn" onclick="viewAlert(4)">
+                                            <i class="bi bi-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Utility Infrastructure Map</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="utilityMap"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monitoring Stations -->
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Monitoring Stations</h5>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary"
+                                        onclick="filterStations('all')">All</button>
+                                    <button class="btn btn-sm btn-outline-primary"
+                                        onclick="filterStations('power')">Power</button>
+                                    <button class="btn btn-sm btn-outline-primary"
+                                        onclick="filterStations('water')">Water</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table monitoring-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Station ID</th>
+                                                <th>Type</th>
+                                                <th>Location</th>
+                                                <th>Status</th>
+                                                <th>Current Reading</th>
+                                                <th>Capacity</th>
+                                                <th>Last Updated</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="stationsTableBody">
+                                            <tr class="station-power">
+                                                <td><strong>PWR-N-001</strong></td>
+                                                <td><span class="station-badge power-badge"><i
+                                                            class="bi bi-lightning-charge"></i> Power</span></td>
+                                                <td>North Substation</td>
+                                                <td><span class="status-badge badge-success">Online</span></td>
+                                                <td>324 MW</td>
+                                                <td>
+                                                    <div class="capacity-indicator">
+                                                        <div class="capacity-bar">
+                                                            <div class="capacity-fill" style="width: 72%"></div>
+                                                        </div>
+                                                        72%
+                                                    </div>
+                                                </td>
+                                                <td>2 mins ago</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary"
+                                                        onclick="viewStation('PWR-N-001')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="station-water">
+                                                <td><strong>WTR-S-012</strong></td>
+                                                <td><span class="station-badge water-badge"><i
+                                                            class="bi bi-droplet"></i> Water</span></td>
+                                                <td>South Treatment Plant</td>
+                                                <td><span class="status-badge badge-success">Online</span></td>
+                                                <td>235 ML/day</td>
+                                                <td>
+                                                    <div class="capacity-indicator">
+                                                        <div class="capacity-bar">
+                                                            <div class="capacity-fill" style="width: 65%"></div>
+                                                        </div>
+                                                        65%
+                                                    </div>
+                                                </td>
+                                                <td>1 min ago</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary"
+                                                        onclick="viewStation('WTR-S-012')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="station-power">
+                                                <td><strong>PWR-E-003</strong></td>
+                                                <td><span class="station-badge power-badge"><i
+                                                            class="bi bi-lightning-charge"></i> Power</span></td>
+                                                <td>East Distribution Center</td>
+                                                <td><span class="status-badge badge-warning">High Load</span></td>
+                                                <td>282 MW</td>
+                                                <td>
+                                                    <div class="capacity-indicator">
+                                                        <div class="capacity-bar">
+                                                            <div class="capacity-fill warning" style="width: 88%"></div>
+                                                        </div>
+                                                        88%
+                                                    </div>
+                                                </td>
+                                                <td>3 mins ago</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary"
+                                                        onclick="viewStation('PWR-E-003')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="station-water">
+                                                <td><strong>WTR-W-008</strong></td>
+                                                <td><span class="station-badge water-badge"><i
+                                                            class="bi bi-droplet"></i> Water</span></td>
+                                                <td>West Reservoir</td>
+                                                <td><span class="status-badge badge-success">Online</span></td>
+                                                <td>180 ML/day</td>
+                                                <td>
+                                                    <div class="capacity-indicator">
+                                                        <div class="capacity-bar">
+                                                            <div class="capacity-fill" style="width: 58%"></div>
+                                                        </div>
+                                                        58%
+                                                    </div>
+                                                </td>
+                                                <td>4 mins ago</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary"
+                                                        onclick="viewStation('WTR-W-008')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="station-power">
+                                                <td><strong>PWR-C-005</strong></td>
+                                                <td><span class="station-badge power-badge"><i
+                                                            class="bi bi-lightning-charge"></i> Power</span></td>
+                                                <td>Central Grid Hub</td>
+                                                <td><span class="status-badge badge-danger">Maintenance</span></td>
+                                                <td>0 MW</td>
+                                                <td>
+                                                    <div class="capacity-indicator">
+                                                        <div class="capacity-bar">
+                                                            <div class="capacity-fill" style="width: 0%"></div>
+                                                        </div>
+                                                        0%
+                                                    </div>
+                                                </td>
+                                                <td>12 mins ago</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary"
+                                                        onclick="viewStation('PWR-C-005')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Main Content Goes Here -->
-            <div class="content-body">
-
-            
-
+            <!-- Alert Settings Modal -->
+            <div class="modal fade" id="alertSettingsModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Alert Settings</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="alertSettingsForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Power Threshold (%)</label>
+                                    <input type="range" class="form-range" min="50" max="100" value="85"
+                                        id="powerThreshold">
+                                    <div class="d-flex justify-content-between">
+                                        <span>50%</span>
+                                        <span id="powerThresholdValue">85%</span>
+                                        <span>100%</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Water Pressure Threshold (PSI)</label>
+                                    <input type="range" class="form-range" min="20" max="100" value="40"
+                                        id="waterThreshold">
+                                    <div class="d-flex justify-content-between">
+                                        <span>20</span>
+                                        <span id="waterThresholdValue">40</span>
+                                        <span>100</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email Notifications</label>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="emailNotif" checked>
+                                        <label class="form-check-label" for="emailNotif">Send email alerts</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">SMS Notifications</label>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="smsNotif" checked>
+                                        <label class="form-check-label" for="smsNotif">Send SMS alerts</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="saveAlertSettings()">Save
+                                Settings</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -173,7 +779,7 @@
 
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/utilities.js"></script>
 
 </body>
 
