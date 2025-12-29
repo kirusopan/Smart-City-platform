@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart City Platform - Dashboard</title>
+    <title>Smart City - Citizen Portal</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,867 +13,282 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/waste.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
 
 <body>
 
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="logo-container">
-                <i class="bi bi-building"></i>
-                <span class="logo-text">SmartCity</span>
+    <!-- Top Navigation Bar -->
+    <nav class="citizen-navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="navbar-brand">
+                    <i class="bi bi-building"></i>
+                    <span class="brand-text">SmartCity</span>
+                    <span class="brand-badge">Citizen</span>
+                </div>
             </div>
-            <button class="sidebar-toggle d-lg-none" id="sidebarClose">
+
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search services, complaints, or help...">
+                </div>
+            </div>
+
+            <div class="navbar-right">
+                <button class="nav-btn" id="themeToggle" title="Toggle Dark Mode">
+                    <i class="bi bi-moon-stars"></i>
+                </button>
+
+                <div class="notification-dropdown">
+                    <button class="nav-btn" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end notification-menu">
+                        <div class="dropdown-header">
+                            <h6>Notifications</h6>
+                            <a href="#" class="mark-all-read">Mark all as read</a>
+                        </div>
+                        <div class="notification-list">
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon bg-success">
+                                    <i class="bi bi-check-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Complaint Resolved</div>
+                                    <div class="notification-text">Your complaint #1245 has been resolved</div>
+                                    <div class="notification-time">2 hours ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item">
+                                <div class="notification-icon bg-warning">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Road Closure Alert</div>
+                                    <div class="notification-text">Main St closed until 6 PM today</div>
+                                    <div class="notification-time">5 hours ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item">
+                                <div class="notification-icon bg-info">
+                                    <i class="bi bi-info-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">New Announcement</div>
+                                    <div class="notification-text">City Marathon scheduled for Sunday</div>
+                                    <div class="notification-time">1 day ago</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="dropdown-footer">
+                            <a href="#" class="view-all">View All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown">
+                    <button class="user-btn" data-bs-toggle="dropdown">
+                        <div class="user-avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <span class="user-name">John Smith</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li class="dropdown-header">
+                            <div class="user-info-dropdown">
+                                <strong>John Smith</strong>
+                                <small>john.smith@email.com</small>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-chat-left-text"></i> My Complaints</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle"></i> Help & Support</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right"></i>
+                                Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Navigation -->
+    <aside class="citizen-sidebar" id="citizenSidebar">
+        <div class="sidebar-header">
+            <h6 class="sidebar-title">Main Menu</h6>
+            <button class="sidebar-close d-lg-none" id="sidebarClose">
                 <i class="bi bi-x-lg"></i>
             </button>
         </div>
 
-        <div class="sidebar-menu">
-            <div class="menu-section">
-                <div class="menu-label">Main</div>
-                <a href="dashboard.html" class="menu-item active">
-                    <i class="bi bi-speedometer2"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="traffic.html" class="menu-item">
-                    <i class="bi bi-car-front"></i>
-                    <span>Traffic & Transport</span>
-                </a>
-                <a href="utilities.html" class="menu-item">
-                    <i class="bi bi-lightning-charge"></i>
-                    <span>Utilities & Energy</span>
-                </a>
-                <a href="waste.html" class="menu-item">
-                    <i class="bi bi-trash3"></i>
-                    <span>Waste Management</span>
-                </a>
-            </div>
+        <nav class="sidebar-nav">
+            <a href="citizen-dashboard.html" class="nav-link active">
+                <i class="bi bi-house-door"></i>
+                <span>Dashboard</span>
+            </a>
 
-            <div class="menu-section">
-                <div class="menu-label">Services</div>
-                <a href="feedback.html" class="menu-item">
-                    <i class="bi bi-chat-left-text"></i>
-                    <span>Citizen Feedback</span>
-                </a>
-                <a href="iot.html" class="menu-item">
-                    <i class="bi bi-hdd-network"></i>
-                    <span>IoT Devices</span>
-                </a>
-                <a href="reports.html" class="menu-item">
-                    <i class="bi bi-file-earmark-bar-graph"></i>
-                    <span>Reports & Analytics</span>
-                </a>
-            </div>
+            <a href="report-issue.html" class="nav-link">
+                <i class="bi bi-plus-circle"></i>
+                <span>Report Issue</span>
+            </a>
 
-            <div class="menu-section">
-                <div class="menu-label">System</div>
-                <a href="settings.html" class="menu-item">
-                    <i class="bi bi-gear"></i>
-                    <span>Settings</span>
-                </a>
-            </div>
-        </div>
+            <a href="my-complaints.html" class="nav-link">
+                <i class="bi bi-chat-left-text"></i>
+                <span>My Complaints</span>
+                <span class="nav-badge">2</span>
+            </a>
 
-        <div class="sidebar-footer">
-            <div class="user-profile">
-                <div class="user-avatar">
-                    <i class="bi bi-person-circle"></i>
-                </div>
-                <div class="user-info">
-                    <div class="user-name">Admin User</div>
-                    <div class="user-role">City Authority</div>
-                </div>
-            </div>
-        </div>
-    </div>
+            <a href="track-status.html" class="nav-link">
+                <i class="bi bi-search"></i>
+                <span>Track Status</span>
+            </a>
 
-    <!-- Main Content Area -->
-    <div class="main-content">
-        <!-- Top Navigation Bar -->
-        <nav class="topbar">
-            <div class="topbar-left">
-                <button class="sidebar-toggle" id="sidebarToggle">
-                    <i class="bi bi-list"></i>
-                </button>
-                <div class="breadcrumb-container">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
+            <div class="nav-divider"></div>
 
-            <div class="topbar-right">
-                <div class="search-box">
-                    <i class="bi bi-search"></i>
-                    <input type="text" placeholder="Search...">
-                </div>
+            <div class="nav-section-title">City Services</div>
 
-                <button class="topbar-btn" id="themeToggle" title="Toggle Dark Mode">
-                    <i class="bi bi-moon-stars"></i>
-                </button>
+            <a href="traffic-info.html" class="nav-link">
+                <i class="bi bi-car-front"></i>
+                <span>Traffic & Transit</span>
+            </a>
 
-                <div class="notification-btn">
-                    <button class="topbar-btn">
-                        <i class="bi bi-bell"></i>
-                        <span class="notification-badge">3</span>
-                    </button>
-                </div>
+            <a href="waste-schedule.html" class="nav-link">
+                <i class="bi bi-calendar-check"></i>
+                <span>Waste Schedule</span>
+            </a>
 
-                <div class="dropdown">
-                    <button class="topbar-btn profile-btn" data-bs-toggle="dropdown">
-                        <i class="bi bi-person-circle"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
-                    </ul>
-                </div>
-            </div>
+            <a href="city-alerts.html" class="nav-link">
+                <i class="bi bi-exclamation-triangle"></i>
+                <span>City Alerts</span>
+                <span class="nav-badge badge-warning">3</span>
+            </a>
+
+            <a href="announcements.html" class="nav-link">
+                <i class="bi bi-megaphone"></i>
+                <span>Announcements</span>
+            </a>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-section-title">Account</div>
+
+            <a href="profile.html" class="nav-link">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="notifications.html" class="nav-link">
+                <i class="bi bi-bell"></i>
+                <span>Notifications</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
         </nav>
 
-        <!-- Page Content -->
-        <div class="page-content">
-
-            <div class="page-content">
-                <!-- Page Header -->
-                <div class="page-header">
-                    <div>
-                        <h1 class="page-title">Waste Management</h1>
-                        <p class="page-subtitle">Collection routes, schedules, and waste tracking system</p>
-                    </div>
-                    <div class="page-actions">
-                        <button class="btn btn-outline-primary" onclick="exportWasteReport()">
-                            <i class="bi bi-download"></i> Export Report
-                        </button>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scheduleRouteModal">
-                            <i class="bi bi-plus-lg"></i> Schedule Route
-                        </button>
-                    </div>
+        <div class="sidebar-footer">
+            <div class="help-card">
+                <div class="help-icon">
+                    <i class="bi bi-question-circle"></i>
                 </div>
-
-                <!-- Quick Stats Row -->
-                <div class="row g-4 mb-4">
-                    <div class="col-xl-3 col-md-6">
-                        <div class="waste-stat-card stat-collected">
-                            <div class="stat-icon-wrapper">
-                                <div class="stat-icon">
-                                    <i class="bi bi-trash-fill"></i>
-                                </div>
-                                <div class="stat-badge badge-success">
-                                    <i class="bi bi-check-circle-fill"></i> On Track
-                                </div>
-                            </div>
-                            <div class="stat-value" id="wasteCollected">1,245</div>
-                            <div class="stat-label">Tons Collected Today</div>
-                            <div class="stat-footer">
-                                <span class="trend-up"><i class="bi bi-arrow-up"></i> 12%</span>
-                                <span class="vs-text">vs yesterday</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-md-6">
-                        <div class="waste-stat-card stat-routes">
-                            <div class="stat-icon-wrapper">
-                                <div class="stat-icon">
-                                    <i class="bi bi-truck"></i>
-                                </div>
-                                <div class="stat-badge badge-primary">
-                                    <i class="bi bi-geo-alt-fill"></i> Active
-                                </div>
-                            </div>
-                            <div class="stat-value">24/28</div>
-                            <div class="stat-label">Active Routes</div>
-                            <div class="stat-footer">
-                                <span class="completion-text">86% Complete</span>
-                                <div class="mini-progress">
-                                    <div class="mini-progress-fill" style="width: 86%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-md-6">
-                        <div class="waste-stat-card stat-recycling">
-                            <div class="stat-icon-wrapper">
-                                <div class="stat-icon">
-                                    <i class="bi bi-recycle"></i>
-                                </div>
-                                <div class="stat-badge badge-success">
-                                    <i class="bi bi-arrow-up-circle-fill"></i> High
-                                </div>
-                            </div>
-                            <div class="stat-value">68%</div>
-                            <div class="stat-label">Recycling Rate</div>
-                            <div class="stat-footer">
-                                <span class="trend-up"><i class="bi bi-arrow-up"></i> 5.2%</span>
-                                <span class="vs-text">vs last month</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-md-6">
-                        <div class="waste-stat-card stat-vehicles">
-                            <div class="stat-icon-wrapper">
-                                <div class="stat-icon">
-                                    <i class="bi bi-fuel-pump"></i>
-                                </div>
-                                <div class="stat-badge badge-warning">
-                                    <i class="bi bi-exclamation-triangle-fill"></i> 3 Issues
-                                </div>
-                            </div>
-                            <div class="stat-value">32</div>
-                            <div class="stat-label">Fleet Vehicles</div>
-                            <div class="stat-footer">
-                                <span class="vehicle-status">29 Active, 3 Maintenance</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Collection Routes Map & Schedule -->
-                <div class="row g-4 mb-4">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">
-                                    <i class="bi bi-map text-success"></i> Live Collection Routes
-                                </h5>
-                                <div class="d-flex gap-2">
-                                    <button class="btn btn-sm btn-outline-secondary" onclick="toggleRouteLayer()">
-                                        <i class="bi bi-layers"></i> Show All Routes
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-secondary" onclick="refreshRouteMap()">
-                                        <i class="bi bi-arrow-clockwise"></i> Refresh
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div id="wasteRouteMap"></div>
-                                <div class="route-legend mt-3">
-                                    <div class="legend-item">
-                                        <span class="legend-marker completed"></span>
-                                        <span>Completed</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <span class="legend-marker in-progress"></span>
-                                        <span>In Progress</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <span class="legend-marker scheduled"></span>
-                                        <span>Scheduled</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <span class="legend-marker delayed"></span>
-                                        <span>Delayed</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Today's Schedule</h5>
-                            </div>
-                            <div class="card-body schedule-list">
-                                <div class="schedule-item status-completed">
-                                    <div class="schedule-time">
-                                        <i class="bi bi-clock"></i>
-                                        <span>06:00 AM</span>
-                                    </div>
-                                    <div class="schedule-content">
-                                        <div class="schedule-route">Route A - Zone 1</div>
-                                        <div class="schedule-vehicle">Truck #TRK-001</div>
-                                        <div class="schedule-progress">
-                                            <div class="progress-bar-mini">
-                                                <div class="progress-fill completed" style="width: 100%"></div>
-                                            </div>
-                                            <span class="progress-text">100%</span>
-                                        </div>
-                                    </div>
-                                    <div class="schedule-status">
-                                        <span class="status-badge badge-success">
-                                            <i class="bi bi-check-circle-fill"></i> Completed
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-item status-active">
-                                    <div class="schedule-time">
-                                        <i class="bi bi-clock"></i>
-                                        <span>08:30 AM</span>
-                                    </div>
-                                    <div class="schedule-content">
-                                        <div class="schedule-route">Route B - Zone 2</div>
-                                        <div class="schedule-vehicle">Truck #TRK-005</div>
-                                        <div class="schedule-progress">
-                                            <div class="progress-bar-mini">
-                                                <div class="progress-fill active" style="width: 65%"></div>
-                                            </div>
-                                            <span class="progress-text">65%</span>
-                                        </div>
-                                    </div>
-                                    <div class="schedule-status">
-                                        <span class="status-badge badge-primary">
-                                            <i class="bi bi-arrow-repeat"></i> In Progress
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-item status-scheduled">
-                                    <div class="schedule-time">
-                                        <i class="bi bi-clock"></i>
-                                        <span>11:00 AM</span>
-                                    </div>
-                                    <div class="schedule-content">
-                                        <div class="schedule-route">Route C - Zone 3</div>
-                                        <div class="schedule-vehicle">Truck #TRK-012</div>
-                                        <div class="schedule-progress">
-                                            <div class="progress-bar-mini">
-                                                <div class="progress-fill scheduled" style="width: 0%"></div>
-                                            </div>
-                                            <span class="progress-text">0%</span>
-                                        </div>
-                                    </div>
-                                    <div class="schedule-status">
-                                        <span class="status-badge badge-info">
-                                            <i class="bi bi-calendar-check"></i> Scheduled
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-item status-delayed">
-                                    <div class="schedule-time">
-                                        <i class="bi bi-clock"></i>
-                                        <span>01:30 PM</span>
-                                    </div>
-                                    <div class="schedule-content">
-                                        <div class="schedule-route">Route D - Zone 4</div>
-                                        <div class="schedule-vehicle">Truck #TRK-008</div>
-                                        <div class="schedule-progress">
-                                            <div class="progress-bar-mini">
-                                                <div class="progress-fill delayed" style="width: 35%"></div>
-                                            </div>
-                                            <span class="progress-text">35%</span>
-                                        </div>
-                                    </div>
-                                    <div class="schedule-status">
-                                        <span class="status-badge badge-warning">
-                                            <i class="bi bi-exclamation-triangle-fill"></i> Delayed
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-item status-scheduled">
-                                    <div class="schedule-time">
-                                        <i class="bi bi-clock"></i>
-                                        <span>03:00 PM</span>
-                                    </div>
-                                    <div class="schedule-content">
-                                        <div class="schedule-route">Route E - Zone 5</div>
-                                        <div class="schedule-vehicle">Truck #TRK-015</div>
-                                        <div class="schedule-progress">
-                                            <div class="progress-bar-mini">
-                                                <div class="progress-fill scheduled" style="width: 0%"></div>
-                                            </div>
-                                            <span class="progress-text">0%</span>
-                                        </div>
-                                    </div>
-                                    <div class="schedule-status">
-                                        <span class="status-badge badge-info">
-                                            <i class="bi bi-calendar-check"></i> Scheduled
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Waste Collection Analytics -->
-                <div class="row g-4 mb-4">
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Waste Collection Trends</h5>
-                                <select class="form-select form-select-sm" style="width: auto;"
-                                    onchange="updateCollectionChart(this.value)">
-                                    <option value="week">Last 7 Days</option>
-                                    <option value="month">Last 30 Days</option>
-                                    <option value="year">Last 12 Months</option>
-                                </select>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="wasteCollectionChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Waste Type Distribution</h5>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="wasteTypeChart"></canvas>
-                                <div class="waste-type-stats mt-3">
-                                    <div class="waste-type-item">
-                                        <span class="type-color" style="background: #10b981;"></span>
-                                        <span class="type-name">Recyclable</span>
-                                        <span class="type-value">42%</span>
-                                    </div>
-                                    <div class="waste-type-item">
-                                        <span class="type-color" style="background: #2563eb;"></span>
-                                        <span class="type-name">Organic</span>
-                                        <span class="type-value">28%</span>
-                                    </div>
-                                    <div class="waste-type-item">
-                                        <span class="type-color" style="background: #f59e0b;"></span>
-                                        <span class="type-name">General</span>
-                                        <span class="type-value">22%</span>
-                                    </div>
-                                    <div class="waste-type-item">
-                                        <span class="type-color" style="background: #ef4444;"></span>
-                                        <span class="type-name">Hazardous</span>
-                                        <span class="type-value">8%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fleet Management & Zone Coverage -->
-                <div class="row g-4 mb-4">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">
-                                    <i class="bi bi-truck text-primary"></i> Fleet Status
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="fleet-list">
-                                    <div class="fleet-item status-active">
-                                        <div class="fleet-icon">
-                                            <i class="bi bi-truck"></i>
-                                        </div>
-                                        <div class="fleet-info">
-                                            <div class="fleet-id">Truck #TRK-001</div>
-                                            <div class="fleet-driver">Driver: John Smith</div>
-                                            <div class="fleet-location">
-                                                <i class="bi bi-geo-alt"></i> Zone 1, Main Street
-                                            </div>
-                                        </div>
-                                        <div class="fleet-metrics">
-                                            <div class="metric-item">
-                                                <span class="metric-label">Load</span>
-                                                <div class="load-indicator">
-                                                    <div class="load-bar">
-                                                        <div class="load-fill" style="width: 85%"></div>
-                                                    </div>
-                                                    <span class="load-value">85%</span>
-                                                </div>
-                                            </div>
-                                            <div class="metric-item">
-                                                <span class="metric-label">Fuel</span>
-                                                <span class="metric-value text-success">78%</span>
-                                            </div>
-                                        </div>
-                                        <div class="fleet-status">
-                                            <span class="status-badge badge-success">Active</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="fleet-item status-active">
-                                        <div class="fleet-icon">
-                                            <i class="bi bi-truck"></i>
-                                        </div>
-                                        <div class="fleet-info">
-                                            <div class="fleet-id">Truck #TRK-005</div>
-                                            <div class="fleet-driver">Driver: Maria Garcia</div>
-                                            <div class="fleet-location">
-                                                <i class="bi bi-geo-alt"></i> Zone 2, Oak Avenue
-                                            </div>
-                                        </div>
-                                        <div class="fleet-metrics">
-                                            <div class="metric-item">
-                                                <span class="metric-label">Load</span>
-                                                <div class="load-indicator">
-                                                    <div class="load-bar">
-                                                        <div class="load-fill" style="width: 62%"></div>
-                                                    </div>
-                                                    <span class="load-value">62%</span>
-                                                </div>
-                                            </div>
-                                            <div class="metric-item">
-                                                <span class="metric-label">Fuel</span>
-                                                <span class="metric-value text-success">65%</span>
-                                            </div>
-                                        </div>
-                                        <div class="fleet-status">
-                                            <span class="status-badge badge-success">Active</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="fleet-item status-maintenance">
-                                        <div class="fleet-icon">
-                                            <i class="bi bi-truck"></i>
-                                        </div>
-                                        <div class="fleet-info">
-                                            <div class="fleet-id">Truck #TRK-008</div>
-                                            <div class="fleet-driver">Driver: --</div>
-                                            <div class="fleet-location">
-                                                <i class="bi bi-wrench"></i> Service Center
-                                            </div>
-                                        </div>
-                                        <div class="fleet-metrics">
-                                            <div class="metric-item">
-                                                <span class="metric-label">Load</span>
-                                                <div class="load-indicator">
-                                                    <div class="load-bar">
-                                                        <div class="load-fill" style="width: 0%"></div>
-                                                    </div>
-                                                    <span class="load-value">0%</span>
-                                                </div>
-                                            </div>
-                                            <div class="metric-item">
-                                                <span class="metric-label">Fuel</span>
-                                                <span class="metric-value text-muted">--</span>
-                                            </div>
-                                        </div>
-                                        <div class="fleet-status">
-                                            <span class="status-badge badge-warning">Maintenance</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="fleet-item status-idle">
-                                        <div class="fleet-icon">
-                                            <i class="bi bi-truck"></i>
-                                        </div>
-                                        <div class="fleet-info">
-                                            <div class="fleet-id">Truck #TRK-012</div>
-                                            <div class="fleet-driver">Driver: David Lee</div>
-                                            <div class="fleet-location">
-                                                <i class="bi bi-house"></i> Depot
-                                            </div>
-                                        </div>
-                                        <div class="fleet-metrics">
-                                            <div class="metric-item">
-                                                <span class="metric-label">Load</span>
-                                                <div class="load-indicator">
-                                                    <div class="load-bar">
-                                                        <div class="load-fill" style="width: 0%"></div>
-                                                    </div>
-                                                    <span class="load-value">0%</span>
-                                                </div>
-                                            </div>
-                                            <div class="metric-item">
-                                                <span class="metric-label">Fuel</span>
-                                                <span class="metric-value text-success">92%</span>
-                                            </div>
-                                        </div>
-                                        <div class="fleet-status">
-                                            <span class="status-badge badge-secondary">Idle</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Zone Coverage Status</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="zone-coverage-list">
-                                    <div class="zone-coverage-item">
-                                        <div class="zone-header">
-                                            <div class="zone-name">
-                                                <i class="bi bi-geo-alt-fill"></i> Zone 1 - North District
-                                            </div>
-                                            <span class="coverage-percentage text-success">100%</span>
-                                        </div>
-                                        <div class="zone-details">
-                                            <div class="detail-item">
-                                                <span class="detail-label">Coverage:</span>
-                                                <div class="coverage-bar">
-                                                    <div class="coverage-fill completed" style="width: 100%"></div>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <span class="detail-label">Last Collected:</span>
-                                                <span class="detail-value">Today, 07:45 AM</span>
-                                            </div>
-                                            <div class="detail-item">
-                                                <span class="detail-label">Next Schedule:</span>
-                                                <span class="detail-value">Tomorrow, 06:00 AM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="zone-coverage-item">
-                                        <div class="zone-header">
-                                            <div class="zone-name">
-                                                <i class="bi bi-geo-alt-fill"></i> Zone 2 - South District
-                                            </div>
-                                            <span class="coverage-percentage text-primary">65%</span>
-                                        </div>
-                                        <div class="zone-details">
-                                            <div class="detail-item">
-                                                <span class="detail-label">Coverage:</span>
-                                                <div class="coverage-bar">
-                                                    <div class="coverage-fill active" style="width: 65%"></div>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <span class="detail-label">In Progress:</span>
-                                                <span class="detail-value">Truck #TRK-005</span>
-                                            </div>
-                                            <div class="detail-item">
-                                                <span class="detail-label">Est. Completion:</span>
-                                                <span class="detail-value">Today, 12:30 PM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="zone-coverage-item">
-                                        <div class="zone-header">
-                                            <div class="zone-name">
-                                                <i class="bi bi-geo-alt-fill"></i> Zone 3 - East District
-                                            </div>
-                                            <span class="coverage-percentage text-secondary">0%</span>
-                                        </div>
-                                        <div class="zone-details">
-                                            <div class="detail-item">
-                                                <span class="detail-label">Coverage:</span>
-                                                <div class="coverage-bar">
-                                                    <div class="coverage-fill scheduled" style="width: 0%"></div>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <span class="detail-label">Status:</span>
-                                                <span class="detail-value">Scheduled</span>
-                                            </div>
-                                            <div class="detail-item">
-                                                <span class="detail-label">Start Time:</span>
-                                                <span class="detail-value">Today, 11:00 AM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="zone-coverage-item">
-                                        <div class="zone-header">
-                                            <div class="zone-name">
-                                                <i class="bi bi-geo-alt-fill"></i> Zone 4 - West District
-                                            </div>
-                                            <span class="coverage-percentage text-warning">35%</span>
-                                        </div>
-                                        <div class="zone-details">
-                                            <div class="detail-item">
-                                                <span class="detail-label">Coverage:</span>
-                                                <div class="coverage-bar">
-                                                    <div class="coverage-fill delayed" style="width: 35%"></div>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <span class="detail-label">Status:</span>
-                                                <span class="detail-value text-warning">Delayed - Traffic</span>
-                                            </div>
-                                            <div class="detail-item">
-                                                <span class="detail-label">New Est.:</span>
-                                                <span class="detail-value">Today, 03:15 PM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Collection Points & Performance -->
-                <div class="row g-4">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Collection Points Status</h5>
-                                <div class="d-flex gap-2">
-                                    <button class="btn btn-sm btn-outline-primary"
-                                        onclick="filterPoints('all')">All</button>
-                                    <button class="btn btn-sm btn-outline-success"
-                                        onclick="filterPoints('collected')">Collected</button>
-                                    <button class="btn btn-sm btn-outline-warning"
-                                        onclick="filterPoints('pending')">Pending</button>
-                                    <button class="btn btn-sm btn-outline-danger"
-                                        onclick="filterPoints('overdue')">Overdue</button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table collection-table">
-                                        <thead>
-                                            <tr>
-                                                <td>Yesterday</td>
-                                                <td>Today, 01:30 PM</td>
-                                                <td><span class="status-badge badge-warning">Pending</span></td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-outline-primary"
-                                                        onclick="viewPoint('CP-031')">
-                                                        <i class="bi bi-eye"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr class="point-collected">
-                                                <td><strong>CP-042</strong></td>
-                                                <td>Beach Road</td>
-                                                <td>Zone 5</td>
-                                                <td><span class="type-badge type-mixed"><i class="bi bi-trash"></i>
-                                                        Mixed</span></td>
-                                                <td>
-                                                    <div class="capacity-display">
-                                                        <div class="capacity-bar">
-                                                            <div class="capacity-fill low" style="width: 30%"></div>
-                                                        </div>
-                                                        30%
-                                                    </div>
-                                                </td>
-                                                <td>Today, 06:45 AM</td>
-                                                <td>Tomorrow, 06:00 AM</td>
-                                                <td><span class="status-badge badge-success">Collected</span></td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-outline-primary"
-                                                        onclick="viewPoint('CP-042')">
-                                                        <i class="bi bi-eye"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h6 class="help-title">Need Help?</h6>
+                <p class="help-text">Contact our support team</p>
+                <button class="btn btn-sm btn-primary w-100">
+                    <i class="bi bi-headset"></i> Get Support
+                </button>
             </div>
+        </div>
+    </aside>
 
-            <!-- Schedule Route Modal -->
-            <div class="modal fade" id="scheduleRouteModal" tabindex="-1">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Schedule Collection Route</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="scheduleRouteForm">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Route Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter route name" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Zone</label>
-                                        <select class="form-select" required>
-                                            <option value="">Select zone...</option>
-                                            <option value="zone1">Zone 1 - North District</option>
-                                            <option value="zone2">Zone 2 - South District</option>
-                                            <option value="zone3">Zone 3 - East District</option>
-                                            <option value="zone4">Zone 4 - West District</option>
-                                            <option value="zone5">Zone 5 - Central District</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Vehicle</label>
-                                        <select class="form-select" required>
-                                            <option value="">Select vehicle...</option>
-                                            <option value="trk001">Truck #TRK-001</option>
-                                            <option value="trk005">Truck #TRK-005</option>
-                                            <option value="trk012">Truck #TRK-012</option>
-                                            <option value="trk015">Truck #TRK-015</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Driver</label>
-                                        <select class="form-select" required>
-                                            <option value="">Select driver...</option>
-                                            <option value="driver1">John Smith</option>
-                                            <option value="driver2">Maria Garcia</option>
-                                            <option value="driver3">David Lee</option>
-                                            <option value="driver4">Sarah Johnson</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Schedule Date</label>
-                                        <input type="date" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Start Time</label>
-                                        <input type="time" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label class="form-label">Waste Type</label>
-                                        <div class="d-flex gap-3">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="mixedWaste">
-                                                <label class="form-check-label" for="mixedWaste">Mixed</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="recyclingWaste">
-                                                <label class="form-check-label" for="recyclingWaste">Recycling</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="organicWaste">
-                                                <label class="form-check-label" for="organicWaste">Organic</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="hazardousWaste">
-                                                <label class="form-check-label" for="hazardousWaste">Hazardous</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label class="form-label">Notes</label>
-                                        <textarea class="form-control" rows="3"
-                                            placeholder="Add any additional notes..."></textarea>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary" onclick="submitScheduleRoute()">Schedule
-                                Route</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Main Content Area -->
+    <main class="citizen-main-content">
+        <div class="content-wrapper">
+
 
 
         </div>
+
+        <!-- Footer -->
+        <footer class="citizen-footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 SmartCity. All rights reserved.</p>
+                </div>
+                <div class="footer-center">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="footer-right">
+                    <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Quick Action Button (Floating) -->
+    <button class="quick-action-btn" data-bs-toggle="modal" data-bs-target="#quickReportModal">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+
+    <!-- Quick Report Modal -->
+    <div class="modal fade" id="quickReportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Quick Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted mb-3">What would you like to do?</p>
+                    <div class="quick-actions">
+                        <button class="quick-action-item" onclick="navigateTo('report-issue')">
+                            <i class="bi bi-exclamation-circle"></i>
+                            <span>Report Issue</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('track-status')">
+                            <i class="bi bi-search"></i>
+                            <span>Track Status</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('traffic-info')">
+                            <i class="bi bi-car-front"></i>
+                            <span>Check Traffic</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('waste-schedule')">
+                            <i class="bi bi-calendar-check"></i>
+                            <span>Waste Schedule</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Bootstrap 5 JS Bundle -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/waste.js"></script>
+    <script src="assets/js/dashboard.js"></script>
 
 </body>
 
