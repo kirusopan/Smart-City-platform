@@ -14,7 +14,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/settings.css">
 </head>
 
 <body>
@@ -143,37 +143,1033 @@
 
         <!-- Page Content -->
         <div class="page-content">
-            <!-- Page Header -->
-            <div class="page-header">
-                <div>
-                    <h1 class="page-title">Dashboard Overview</h1>
-                    <p class="page-subtitle">Monitor and manage your city operations</p>
-                </div>
-                <div class="page-actions">
-                    <button class="btn btn-outline-primary">
-                        <i class="bi bi-download"></i> Export Report
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="bi bi-plus-lg"></i> Add New
-                    </button>
-                </div>
-            </div>
 
             <!-- Main Content Goes Here -->
             <div class="content-body">
 
-            
+                <div class="page-content">
+                    <!-- Page Header -->
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Profile & Settings</h1>
+                            <p class="page-subtitle">Manage your account and system preferences</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-outline-secondary" onclick="resetSettings()">
+                                <i class="bi bi-arrow-counterclockwise"></i> Reset to Default
+                            </button>
+                            <button class="btn btn-primary" onclick="saveAllSettings()">
+                                <i class="bi bi-check-lg"></i> Save All Changes
+                            </button>
+                        </div>
+                    </div>
 
+                    <!-- Settings Navigation Tabs -->
+                    <div class="row g-4">
+                        <div class="col-lg-3">
+                            <div class="settings-sidebar">
+                                <div class="settings-nav">
+                                    <a href="#profile" class="settings-nav-item active"
+                                        onclick="switchTab(event, 'profile')">
+                                        <i class="bi bi-person"></i>
+                                        <span>Profile Information</span>
+                                    </a>
+                                    <a href="#account" class="settings-nav-item" onclick="switchTab(event, 'account')">
+                                        <i class="bi bi-shield-lock"></i>
+                                        <span>Account Security</span>
+                                    </a>
+                                    <a href="#preferences" class="settings-nav-item"
+                                        onclick="switchTab(event, 'preferences')">
+                                        <i class="bi bi-sliders"></i>
+                                        <span>Preferences</span>
+                                    </a>
+                                    <a href="#notifications" class="settings-nav-item"
+                                        onclick="switchTab(event, 'notifications')">
+                                        <i class="bi bi-bell"></i>
+                                        <span>Notifications</span>
+                                    </a>
+                                    <a href="#appearance" class="settings-nav-item"
+                                        onclick="switchTab(event, 'appearance')">
+                                        <i class="bi bi-palette"></i>
+                                        <span>Appearance</span>
+                                    </a>
+                                    <a href="#team" class="settings-nav-item" onclick="switchTab(event, 'team')">
+                                        <i class="bi bi-people"></i>
+                                        <span>Team Management</span>
+                                    </a>
+                                    <a href="#system" class="settings-nav-item" onclick="switchTab(event, 'system')">
+                                        <i class="bi bi-gear"></i>
+                                        <span>System Settings</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-9">
+                            <div class="settings-content">
+
+                                <!-- PROFILE INFORMATION TAB -->
+                                <div id="profile" class="settings-tab active">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Personal Information</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- Profile Photo Section -->
+                                            <div class="profile-photo-section mb-4">
+                                                <div class="profile-photo-container">
+                                                    <div class="profile-photo-large">
+                                                        <i class="bi bi-person-circle"></i>
+                                                    </div>
+                                                    <div class="profile-photo-actions">
+                                                        <button class="btn btn-sm btn-primary">
+                                                            <i class="bi bi-upload"></i> Upload Photo
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-danger">
+                                                            <i class="bi bi-trash"></i> Remove
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="profile-photo-info">
+                                                    <h6>Profile Photo</h6>
+                                                    <p class="text-muted mb-2">Upload a professional photo for your
+                                                        profile</p>
+                                                    <small class="text-muted">JPG, PNG or GIF. Max size 2MB</small>
+                                                </div>
+                                            </div>
+
+                                            <!-- Personal Details Form -->
+                                            <form id="profileForm">
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">First Name</label>
+                                                        <input type="text" class="form-control" value="John" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Last Name</label>
+                                                        <input type="text" class="form-control" value="Smith" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Email Address</label>
+                                                        <input type="email" class="form-control"
+                                                            value="john.smith@smartcity.gov" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Phone Number</label>
+                                                        <input type="tel" class="form-control" value="+1 (555) 123-4567"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Job Title</label>
+                                                        <input type="text" class="form-control"
+                                                            value="System Administrator">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Department</label>
+                                                        <select class="form-select">
+                                                            <option>IT Department</option>
+                                                            <option>Traffic Management</option>
+                                                            <option>Utilities</option>
+                                                            <option>Administration</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label class="form-label">Bio</label>
+                                                        <textarea class="form-control" rows="3"
+                                                            placeholder="Tell us about yourself...">Senior system administrator with 10 years of experience in smart city operations.</textarea>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="card-footer text-end">
+                                            <button class="btn btn-primary" onclick="saveProfile()">
+                                                <i class="bi bi-check-lg"></i> Save Changes
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Contact Information -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Contact Information</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Address</label>
+                                                    <input type="text" class="form-control" value="123 Main Street">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">City</label>
+                                                    <input type="text" class="form-control" value="Metro City">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">State/Province</label>
+                                                    <input type="text" class="form-control" value="CA">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">ZIP/Postal Code</label>
+                                                    <input type="text" class="form-control" value="90001">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Country</label>
+                                                    <select class="form-select">
+                                                        <option>United States</option>
+                                                        <option>Canada</option>
+                                                        <option>United Kingdom</option>
+                                                        <option>Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ACCOUNT SECURITY TAB -->
+                                <div id="account" class="settings-tab">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Change Password</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form id="passwordForm">
+                                                <div class="row g-3">
+                                                    <div class="col-12">
+                                                        <label class="form-label">Current Password</label>
+                                                        <input type="password" class="form-control" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">New Password</label>
+                                                        <input type="password" class="form-control" id="newPassword"
+                                                            required>
+                                                        <small class="text-muted">Min. 8 characters with uppercase,
+                                                            lowercase, number</small>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Confirm New Password</label>
+                                                        <input type="password" class="form-control" id="confirmPassword"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <div class="password-strength mt-3">
+                                                    <label class="form-label d-block">Password Strength</label>
+                                                    <div class="progress" style="height: 8px;">
+                                                        <div class="progress-bar bg-danger" id="strengthBar"
+                                                            style="width: 0%"></div>
+                                                    </div>
+                                                    <small class="text-muted" id="strengthText">Enter a password</small>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="card-footer text-end">
+                                            <button class="btn btn-primary" onclick="changePassword()">
+                                                <i class="bi bi-shield-check"></i> Update Password
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Two-Factor Authentication -->
+                                    <div class="card mb-4">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title mb-0">Two-Factor Authentication</h5>
+                                            <span class="badge bg-success">Enabled</span>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="text-muted">Add an extra layer of security to your account by
+                                                requiring a verification code in addition to your password.</p>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-outline-danger" onclick="disable2FA()">
+                                                    <i class="bi bi-shield-x"></i> Disable 2FA
+                                                </button>
+                                                <button class="btn btn-outline-primary" onclick="reconfigure2FA()">
+                                                    <i class="bi bi-gear"></i> Reconfigure
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Active Sessions -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Active Sessions</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="session-list">
+                                                <div class="session-item">
+                                                    <div class="session-icon">
+                                                        <i class="bi bi-laptop"></i>
+                                                    </div>
+                                                    <div class="session-info">
+                                                        <div class="session-device">Windows Desktop - Chrome</div>
+                                                        <div class="session-details">
+                                                            <span class="text-muted">Metro City, CA</span>
+                                                            <span class="badge bg-success ms-2">Current Session</span>
+                                                        </div>
+                                                        <div class="session-time text-muted">Active now</div>
+                                                    </div>
+                                                    <button class="btn btn-sm btn-outline-danger" disabled>
+                                                        <i class="bi bi-x-circle"></i>
+                                                    </button>
+                                                </div>
+
+                                                <div class="session-item">
+                                                    <div class="session-icon">
+                                                        <i class="bi bi-phone"></i>
+                                                    </div>
+                                                    <div class="session-info">
+                                                        <div class="session-device">iPhone 14 - Safari</div>
+                                                        <div class="session-details">
+                                                            <span class="text-muted">Metro City, CA</span>
+                                                        </div>
+                                                        <div class="session-time text-muted">2 hours ago</div>
+                                                    </div>
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        onclick="terminateSession(2)">
+                                                        <i class="bi bi-x-circle"></i>
+                                                    </button>
+                                                </div>
+
+                                                <div class="session-item">
+                                                    <div class="session-icon">
+                                                        <i class="bi bi-tablet"></i>
+                                                    </div>
+                                                    <div class="session-info">
+                                                        <div class="session-device">iPad Pro - Safari</div>
+                                                        <div class="session-details">
+                                                            <span class="text-muted">Metro City, CA</span>
+                                                        </div>
+                                                        <div class="session-time text-muted">1 day ago</div>
+                                                    </div>
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        onclick="terminateSession(3)">
+                                                        <i class="bi bi-x-circle"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-outline-danger w-100 mt-3"
+                                                onclick="terminateAllSessions()">
+                                                <i class="bi bi-x-circle"></i> Terminate All Other Sessions
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- PREFERENCES TAB -->
+                                <div id="preferences" class="settings-tab">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">General Preferences</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="preference-item">
+                                                <div class="preference-info">
+                                                    <h6>Language</h6>
+                                                    <p class="text-muted mb-0">Select your preferred language</p>
+                                                </div>
+                                                <select class="form-select" style="width: auto;">
+                                                    <option selected>English (US)</option>
+                                                    <option>Spanish</option>
+                                                    <option>French</option>
+                                                    <option>German</option>
+                                                    <option>Chinese</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="preference-item">
+                                                <div class="preference-info">
+                                                    <h6>Time Zone</h6>
+                                                    <p class="text-muted mb-0">Automatically set based on location</p>
+                                                </div>
+                                                <select class="form-select" style="width: auto;">
+                                                    <option selected>UTC-08:00 (Pacific Time)</option>
+                                                    <option>UTC-05:00 (Eastern Time)</option>
+                                                    <option>UTC+00:00 (GMT)</option>
+                                                    <option>UTC+01:00 (Central European)</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="preference-item">
+                                                <div class="preference-info">
+                                                    <h6>Date Format</h6>
+                                                    <p class="text-muted mb-0">Choose how dates are displayed</p>
+                                                </div>
+                                                <select class="form-select" style="width: auto;">
+                                                    <option selected>MM/DD/YYYY</option>
+                                                    <option>DD/MM/YYYY</option>
+                                                    <option>YYYY-MM-DD</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="preference-item">
+                                                <div class="preference-info">
+                                                    <h6>Time Format</h6>
+                                                    <p class="text-muted mb-0">12-hour or 24-hour format</p>
+                                                </div>
+                                                <select class="form-select" style="width: auto;">
+                                                    <option selected>12-hour (AM/PM)</option>
+                                                    <option>24-hour</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Dashboard Preferences -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Dashboard Preferences</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="preference-item">
+                                                <div class="preference-info">
+                                                    <h6>Default Dashboard View</h6>
+                                                    <p class="text-muted mb-0">Page to display after login</p>
+                                                </div>
+                                                <select class="form-select" style="width: auto;">
+                                                    <option selected>Overview Dashboard</option>
+                                                    <option>Traffic Management</option>
+                                                    <option>Utilities</option>
+                                                    <option>Feedback</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="preference-item">
+                                                <div class="preference-info">
+                                                    <h6>Auto-Refresh Data</h6>
+                                                    <p class="text-muted mb-0">Automatically refresh dashboard data</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="autoRefresh"
+                                                        checked>
+                                                    <label class="form-check-label" for="autoRefresh">Enable
+                                                        auto-refresh</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="preference-item">
+                                                <div class="preference-info">
+                                                    <h6>Refresh Interval</h6>
+                                                    <p class="text-muted mb-0">How often to update data (in seconds)</p>
+                                                </div>
+                                                <input type="number" class="form-control" style="width: 100px;"
+                                                    value="30" min="10" max="300">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- NOTIFICATIONS TAB -->
+                                <div id="notifications" class="settings-tab">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Email Notifications</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="notification-item">
+                                                <div class="notification-info">
+                                                    <h6>System Alerts</h6>
+                                                    <p class="text-muted mb-0">Critical system notifications and alerts
+                                                    </p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="emailAlerts"
+                                                        checked>
+                                                </div>
+                                            </div>
+
+                                            <div class="notification-item">
+                                                <div class="notification-info">
+                                                    <h6>Citizen Feedback</h6>
+                                                    <p class="text-muted mb-0">New feedback and complaint submissions
+                                                    </p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="emailFeedback"
+                                                        checked>
+                                                </div>
+                                            </div>
+
+                                            <div class="notification-item">
+                                                <div class="notification-info">
+                                                    <h6>Traffic Incidents</h6>
+                                                    <p class="text-muted mb-0">New traffic incidents and updates</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="emailTraffic"
+                                                        checked>
+                                                </div>
+                                            </div>
+
+                                            <div class="notification-item">
+                                                <div class="notification-info">
+                                                    <h6>Weekly Reports</h6>
+                                                    <p class="text-muted mb-0">Summary reports sent every week</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="emailReports"
+                                                        checked>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Push Notifications -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Push Notifications</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="notification-item">
+                                                <div class="notification-info">
+                                                    <h6>Browser Notifications</h6>
+                                                    <p class="text-muted mb-0">Show desktop notifications</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="pushBrowser"
+                                                        checked>
+                                                </div>
+                                            </div>
+
+                                            <div class="notification-item">
+                                                <div class="notification-info">
+                                                    <h6>Urgent Alerts Only</h6>
+                                                    <p class="text-muted mb-0">Only show high-priority notifications</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="pushUrgent">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- SMS Notifications -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">SMS Notifications</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="notification-item">
+                                                <div class="notification-info">
+                                                    <h6>Critical Alerts</h6>
+                                                    <p class="text-muted mb-0">Urgent notifications via SMS</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="smsCritical"
+                                                        checked>
+                                                </div>
+                                            </div>
+
+                                            <div class="notification-item">
+                                                <div class="notification-info">
+                                                    <h6>Emergency Updates</h6>
+                                                    <p class="text-muted mb-0">Emergency situation updates</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="smsEmergency"
+                                                        checked>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- APPEARANCE TAB -->
+                                <div id="appearance" class="settings-tab">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Theme Settings</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <label class="form-label fw-semibold mb-3">Choose Theme</label>
+                                            <div class="theme-selector">
+                                                <div class="theme-option active" onclick="selectTheme('light')">
+                                                    <div class="theme-preview theme-light">
+                                                        <div class="theme-preview-header"></div>
+                                                        <div class="theme-preview-body">
+                                                            <div class="theme-preview-sidebar"></div>
+                                                            <div class="theme-preview-content"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="theme-name">Light</div>
+                                                    <i class="bi bi-check-circle-fill theme-check"></i>
+                                                </div>
+
+                                                <div class="theme-option" onclick="selectTheme('dark')">
+                                                    <div class="theme-preview theme-dark">
+                                                        <div class="theme-preview-header"></div>
+                                                        <div class="theme-preview-body">
+                                                            <div class="theme-preview-sidebar"></div>
+                                                            <div class="theme-preview-content"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="theme-name">Dark</div>
+                                                    <i class="bi bi-check-circle-fill theme-check"></i>
+                                                </div>
+
+                                                <div class="theme-option" onclick="selectTheme('auto')">
+                                                    <div class="theme-preview theme-auto">
+                                                        <div class="theme-preview-header"></div>
+                                                        <div class="theme-preview-body">
+                                                            <div class="theme-preview-sidebar half-light"></div>
+                                                            <div class="theme-preview-content half-dark"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="theme-name">Auto</div>
+                                                    <i class="bi bi-check-circle-fill theme-check"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Color Scheme -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Accent Color</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <label class="form-label fw-semibold mb-3">Choose Primary Color</label>
+                                            <div class="color-selector">
+                                                <div class="color-option active" style="background: #2563eb;"
+                                                    onclick="selectColor('#2563eb')">
+                                                    <i class="bi bi-check"></i>
+                                                </div>
+                                                <div class="color-option" style="background: #7c3aed;"
+                                                    onclick="selectColor('#7c3aed')">
+                                                    <i class="bi bi-check"></i>
+                                                </div>
+                                                <div class="color-option" style="background: #10b981;"
+                                                    onclick="selectColor('#10b981')">
+                                                    <i class="bi bi-check"></i>
+                                                </div>
+                                                <div class="color-option" style="background: #f59e0b;"
+                                                    onclick="selectColor('#f59e0b')">
+                                                    <i class="bi bi-check"></i>
+                                                </div>
+                                                <div class="color-option" style="background: #ef4444;"
+                                                    onclick="selectColor('#ef4444')">
+                                                    <i class="bi bi-check"></i>
+                                                </div>
+                                                <div class="color-option" style="background: #06b6d4;"
+                                                    onclick="selectColor('#06b6d4')">
+                                                    <i class="bi bi-check"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Display Options -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Display Options</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="preference-item">
+                                                <div class="preference-info">
+                                                    <h6>Compact Mode</h6>
+                                                    <p class="text-muted mb-0">Reduce spacing and padding</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="compactMode">
+                                                </div>
+                                            </div>
+
+                                            <div class="preference-item">
+                                                <div class="preference-info">
+                                                    <h6>Sidebar Collapsed</h6>
+                                                    <p class="text-muted mb-0">Start with sidebar minimized</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="sidebarCollapsed">
+                                                </div>
+                                            </div>
+
+                                            <div class="preference-item">
+                                                <div class="preference-info">
+                                                    <h6>Show Animations</h6>
+                                                    <p class="text-muted mb-0">Enable smooth transitions and effects</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="showAnimations"
+                                                        checked>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- TEAM MANAGEMENT TAB -->
+                                <div id="team" class="settings-tab">
+                                    <div class="card mb-4">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title mb-0">Team Members</h5>
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#inviteModal">
+                                                <i class="bi bi-person-plus"></i> Invite Member
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table team-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Member</th>
+                                                            <th>Role</th>
+                                                            <th>Department</th>
+                                                            <th>Status</th>
+                                                            <th>Last Active</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="team-member">
+                                                                    <div class="member-avatar">JS</div>
+                                                                    <div>
+                                                                        <div class="member-email">
+                                                                            john.smith@smartcity.gov</div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td><span class="role-badge badge-admin">Admin</span></td>
+                                                            <td>IT Department</td>
+                                                            <td><span class="status-badge badge-online">Online</span>
+                                                            </td>
+                                                            <td>Active now</td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-outline-primary" disabled>
+                                                                    <i class="bi bi-pencil"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="team-member">
+                                                                    <div class="member-avatar">SJ</div>
+                                                                    <div>
+                                                                        <div class="member-name">Sarah Johnson</div>
+                                                                        <div class="member-email">sarah.j@smartcity.gov
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td><span class="role-badge badge-manager">Manager</span>
+                                                            </td>
+                                                            <td>Traffic Dept</td>
+                                                            <td><span class="status-badge badge-online">Online</span>
+                                                            </td>
+                                                            <td>5 mins ago</td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-outline-primary"
+                                                                    onclick="editMember(2)">
+                                                                    <i class="bi bi-pencil"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="team-member">
+                                                                    <div class="member-avatar">MB</div>
+                                                                    <div>
+                                                                        <div class="member-name">Michael Brown</div>
+                                                                        <div class="member-email">
+                                                                            michael.b@smartcity.gov</div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td><span class="role-badge badge-staff">Staff</span></td>
+                                                            <td>Utilities</td>
+                                                            <td><span class="status-badge badge-away">Away</span></td>
+                                                            <td>2 hours ago</td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-outline-primary"
+                                                                    onclick="editMember(3)">
+                                                                    <i class="bi bi-pencil"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="team-member">
+                                                                    <div class="member-avatar">EW</div>
+                                                                    <div>
+                                                                        <div class="member-name">Emma Wilson</div>
+                                                                        <div class="member-email">emma.w@smartcity.gov
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td><span class="role-badge badge-staff">Staff</span></td>
+                                                            <td>Waste Mgmt</td>
+                                                            <td><span class="status-badge badge-offline">Offline</span>
+                                                            </td>
+                                                            <td>1 day ago</td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-outline-primary"
+                                                                    onclick="editMember(4)">
+                                                                    <i class="bi bi-pencil"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Role Permissions -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Role Permissions</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="permission-matrix">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Permission</th>
+                                                            <th class="text-center">Admin</th>
+                                                            <th class="text-center">Manager</th>
+                                                            <th class="text-center">Staff</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>View Dashboard</td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-check-circle-fill text-success"></i>
+                                                            </td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-check-circle-fill text-success"></i>
+                                                            </td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-check-circle-fill text-success"></i>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Manage Feedback</td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-check-circle-fill text-success"></i>
+                                                            </td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-check-circle-fill text-success"></i>
+                                                            </td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-check-circle-fill text-success"></i>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Generate Reports</td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-check-circle-fill text-success"></i>
+                                                            </td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-check-circle-fill text-success"></i>
+                                                            </td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-x-circle-fill text-danger"></i></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>User Management</td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-check-circle-fill text-success"></i>
+                                                            </td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-x-circle-fill text-danger"></i></td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-x-circle-fill text-danger"></i></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>System Settings</td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-check-circle-fill text-success"></i>
+                                                            </td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-x-circle-fill text-danger"></i></td>
+                                                            <td class="text-center"><i
+                                                                    class="bi bi-x-circle-fill text-danger"></i></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SYSTEM SETTINGS TAB -->
+                                <div id="system" class="settings-tab">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">System Information</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="system-info-item">
+                                                        <label>Platform Version</label>
+                                                        <div class="info-value">v2.5.1</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="system-info-item">
+                                                        <label>Last Updated</label>
+                                                        <div class="info-value">Dec 15, 2024</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="system-info-item">
+                                                        <label>License Type</label>
+                                                        <div class="info-value">Enterprise</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="system-info-item">
+                                                        <label>Active Users</label>
+                                                        <div class="info-value">24 / 100</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Data Management -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Data Management</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="data-action-item">
+                                                <div>
+                                                    <h6>Export All Data</h6>
+                                                    <p class="text-muted mb-0">Download all system data as JSON or CSV
+                                                    </p>
+                                                </div>
+                                                <button class="btn btn-outline-primary" onclick="exportAllData()">
+                                                    <i class="bi bi-download"></i> Export
+                                                </button>
+                                            </div>
+
+                                            <div class="data-action-item">
+                                                <div>
+                                                    <h6>Backup Database</h6>
+                                                    <p class="text-muted mb-0">Create a complete backup of the database
+                                                    </p>
+                                                </div>
+                                                <button class="btn btn-outline-primary" onclick="backupDatabase()">
+                                                    <i class="bi bi-hdd"></i> Backup Now
+                                                </button>
+                                            </div>
+
+                                            <div class="data-action-item">
+                                                <div>
+                                                    <h6>Clear Cache</h6>
+                                                    <p class="text-muted mb-0">Clear system cache to improve performance
+                                                    </p>
+                                                </div>
+                                                <button class="btn btn-outline-warning" onclick="clearCache()">
+                                                    <i class="bi bi-trash"></i> Clear Cache
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Danger Zone -->
+                                    <div class="card border-danger">
+                                        <div class="card-header bg-danger bg-opacity-10">
+                                            <h5 class="card-title mb-0 text-danger">Danger Zone</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="data-action-item">
+                                                <div>
+                                                    <h6>Reset All Settings</h6>
+                                                    <p class="text-muted mb-0">Reset all settings to factory defaults
+                                                    </p>
+                                                </div>
+                                                <button class="btn btn-outline-danger" onclick="resetAllSettings()">
+                                                    <i class="bi bi-arrow-counterclockwise"></i> Reset
+                                                </button>
+                                            </div>
+
+                                            <div class="data-action-item">
+                                                <div>
+                                                    <h6>Delete Account</h6>
+                                                    <p class="text-muted mb-0">Permanently delete your account and all
+                                                        data</p>
+                                                </div>
+                                                <button class="btn btn-danger" onclick="deleteAccount()">
+                                                    <i class="bi bi-trash"></i> Delete Account
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Invite Team Member Modal -->
+                <div class="modal fade" id="inviteModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Invite Team Member</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="inviteForm">
+                                    <div class="mb-3">
+                                        <label class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" placeholder="colleague@smartcity.gov"
+                                            required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Role</label>
+                                        <select class="form-select" required>
+                                            <option value="">Select role...</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="manager">Manager</option>
+                                            <option value="staff">Staff</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Department</label>
+                                        <select class="form-select" required>
+                                            <option value="">Select department...</option>
+                                            <option value="it">IT Department</option>
+                                            <option value="traffic">Traffic Management</option>
+                                            <option value="utilities">Utilities</option>
+                                            <option value="waste">Waste Management</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Personal Message (Optional)</label>
+                                        <textarea class="form-control" rows="3"
+                                            placeholder="Add a welcome message..."></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="sendInvite()">
+                                    <i class="bi bi-send"></i> Send Invitation
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap 5 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
 
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/settings.js"></script>
 
 </body>
 
