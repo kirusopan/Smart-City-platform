@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart City - Citizen Portal</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="citizen-navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="navbar-brand">
+                    <i class="bi bi-building"></i>
+                    <span class="brand-text">SmartCity</span>
+                    <span class="brand-badge">Citizen</span>
+                </div>
+            </div>
+
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search services, complaints, or help...">
+                </div>
+            </div>
+
+            <div class="navbar-right">
+                <button class="nav-btn" id="themeToggle" title="Toggle Dark Mode">
+                    <i class="bi bi-moon-stars"></i>
+                </button>
+
+                <div class="notification-dropdown">
+                    <button class="nav-btn" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end notification-menu">
+                        <div class="dropdown-header">
+                            <h6>Notifications</h6>
+                            <a href="#" class="mark-all-read">Mark all as read</a>
+                        </div>
+                        <div class="notification-list">
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon bg-success">
+                                    <i class="bi bi-check-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Complaint Resolved</div>
+                                    <div class="notification-text">Your complaint #1245 has been resolved</div>
+                                    <div class="notification-time">2 hours ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item">
+                                <div class="notification-icon bg-warning">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Road Closure Alert</div>
+                                    <div class="notification-text">Main St closed until 6 PM today</div>
+                                    <div class="notification-time">5 hours ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item">
+                                <div class="notification-icon bg-info">
+                                    <i class="bi bi-info-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">New Announcement</div>
+                                    <div class="notification-text">City Marathon scheduled for Sunday</div>
+                                    <div class="notification-time">1 day ago</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="dropdown-footer">
+                            <a href="#" class="view-all">View All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown">
+                    <button class="user-btn" data-bs-toggle="dropdown">
+                        <div class="user-avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <span class="user-name">John Smith</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li class="dropdown-header">
+                            <div class="user-info-dropdown">
+                                <strong>John Smith</strong>
+                                <small>john.smith@email.com</small>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-chat-left-text"></i> My Complaints</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle"></i> Help & Support</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right"></i>
+                                Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Navigation -->
+    <aside class="citizen-sidebar" id="citizenSidebar">
+        <div class="sidebar-header">
+            <h6 class="sidebar-title">Main Menu</h6>
+            <button class="sidebar-close d-lg-none" id="sidebarClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="citizen-dashboard.html" class="nav-link active">
+                <i class="bi bi-house-door"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="report-issue.html" class="nav-link">
+                <i class="bi bi-plus-circle"></i>
+                <span>Report Issue</span>
+            </a>
+
+            <a href="my-complaints.html" class="nav-link">
+                <i class="bi bi-chat-left-text"></i>
+                <span>My Complaints</span>
+                <span class="nav-badge">2</span>
+            </a>
+
+            <a href="track-status.html" class="nav-link">
+                <i class="bi bi-search"></i>
+                <span>Track Status</span>
+            </a>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-section-title">City Services</div>
+
+            <a href="traffic-info.html" class="nav-link">
+                <i class="bi bi-car-front"></i>
+                <span>Traffic & Transit</span>
+            </a>
+
+            <a href="waste-schedule.html" class="nav-link">
+                <i class="bi bi-calendar-check"></i>
+                <span>Waste Schedule</span>
+            </a>
+
+            <a href="city-alerts.html" class="nav-link">
+                <i class="bi bi-exclamation-triangle"></i>
+                <span>City Alerts</span>
+                <span class="nav-badge badge-warning">3</span>
+            </a>
+
+            <a href="announcements.html" class="nav-link">
+                <i class="bi bi-megaphone"></i>
+                <span>Announcements</span>
+            </a>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-section-title">Account</div>
+
+            <a href="profile.html" class="nav-link">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="notifications.html" class="nav-link">
+                <i class="bi bi-bell"></i>
+                <span>Notifications</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="help-card">
+                <div class="help-icon">
+                    <i class="bi bi-question-circle"></i>
+                </div>
+                <h6 class="help-title">Need Help?</h6>
+                <p class="help-text">Contact our support team</p>
+                <button class="btn btn-sm btn-primary w-100">
+                    <i class="bi bi-headset"></i> Get Support
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="citizen-main-content">
+        <div class="content-wrapper">
+
+            <!-- Citizen Dashboard Page Content -->
+            <!-- This is the citizen-facing dashboard -->
+
+            <div class="page-content citizen-panel">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="welcome-content">
+                        <div class="welcome-text">
+                            <h1 class="welcome-title">Welcome back, John!</h1>
+                            <p class="welcome-subtitle">Here's what's happening in your city today</p>
+                        </div>
+                        <div class="welcome-actions">
+                            <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#reportIssueModal">
+                                <i class="bi bi-plus-circle"></i> Report Issue
+                            </button>
+                            <button class="btn btn-outline-light" onclick="viewNotifications()">
+                                <i class="bi bi-bell"></i> Notifications
+                                <span class="notification-count">3</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Services -->
+                <div class="row g-4 mb-4">
+                    <div class="col-12">
+                        <h5 class="section-title">Quick Services</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="service-card" onclick="navigateTo('report-issue')">
+                            <div class="service-icon service-icon-primary">
+                                <i class="bi bi-exclamation-circle"></i>
+                            </div>
+                            <div class="service-content">
+                                <h6 class="service-title">Report Issue</h6>
+                                <p class="service-desc">Report problems in your area</p>
+                            </div>
+                            <i class="bi bi-chevron-right service-arrow"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="service-card" onclick="navigateTo('track-complaint')">
+                            <div class="service-icon service-icon-success">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div class="service-content">
+                                <h6 class="service-title">Track Status</h6>
+                                <p class="service-desc">Check complaint status</p>
+                            </div>
+                            <i class="bi bi-chevron-right service-arrow"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="service-card" onclick="navigateTo('traffic-info')">
+                            <div class="service-icon service-icon-warning">
+                                <i class="bi bi-car-front"></i>
+                            </div>
+                            <div class="service-content">
+                                <h6 class="service-title">Traffic Info</h6>
+                                <p class="service-desc">Real-time traffic updates</p>
+                            </div>
+                            <i class="bi bi-chevron-right service-arrow"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="service-card" onclick="navigateTo('waste-schedule')">
+                            <div class="service-icon service-icon-info">
+                                <i class="bi bi-calendar-check"></i>
+                            </div>
+                            <div class="service-content">
+                                <h6 class="service-title">Waste Schedule</h6>
+                                <p class="service-desc">View collection dates</p>
+                            </div>
+                            <i class="bi bi-chevron-right service-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Activity & City Updates -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">My Recent Activity</h5>
+                                <a href="#" class="text-primary text-decoration-none">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list">
+                                    <!-- Activity Item 1 -->
+                                    <div class="citizen-activity-item">
+                                        <div class="activity-icon-wrapper">
+                                            <div class="activity-icon bg-success">
+                                                <i class="bi bi-check-circle"></i>
+                                            </div>
+                                            <div class="activity-line"></div>
+                                        </div>
+                                        <div class="activity-details">
+                                            <div class="activity-header">
+                                                <h6 class="activity-title">Complaint Resolved</h6>
+                                                <span class="activity-time">2 hours ago</span>
+                                            </div>
+                                            <p class="activity-description">Your complaint #1245 about broken street
+                                                light has been resolved.</p>
+                                            <div class="activity-footer">
+                                                <span class="badge bg-success-subtle text-success">Resolved</span>
+                                                <a href="#" class="activity-link">View Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Activity Item 2 -->
+                                    <div class="citizen-activity-item">
+                                        <div class="activity-icon-wrapper">
+                                            <div class="activity-icon bg-warning">
+                                                <i class="bi bi-clock-history"></i>
+                                            </div>
+                                            <div class="activity-line"></div>
+                                        </div>
+                                        <div class="activity-details">
+                                            <div class="activity-header">
+                                                <h6 class="activity-title">Complaint In Progress</h6>
+                                                <span class="activity-time">1 day ago</span>
+                                            </div>
+                                            <p class="activity-description">Your report about road maintenance is being
+                                                reviewed by the team.</p>
+                                            <div class="activity-footer">
+                                                <span class="badge bg-warning-subtle text-warning">In Progress</span>
+                                                <a href="#" class="activity-link">View Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Activity Item 3 -->
+                                    <div class="citizen-activity-item">
+                                        <div class="activity-icon-wrapper">
+                                            <div class="activity-icon bg-primary">
+                                                <i class="bi bi-plus-circle"></i>
+                                            </div>
+                                        </div>
+                                        <div class="activity-details">
+                                            <div class="activity-header">
+                                                <h6 class="activity-title">New Complaint Submitted</h6>
+                                                <span class="activity-time">3 days ago</span>
+                                            </div>
+                                            <p class="activity-description">You reported an issue about garbage
+                                                collection delay.</p>
+                                            <div class="activity-footer">
+                                                <span class="badge bg-primary-subtle text-primary">New</span>
+                                                <a href="#" class="activity-link">View Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <!-- City Alerts -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">City Alerts</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert-list">
+                                    <div class="city-alert alert-warning">
+                                        <div class="alert-icon">
+                                            <i class="bi bi-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="alert-content">
+                                            <div class="alert-title">Road Closure</div>
+                                            <div class="alert-text">Main St closed until 6 PM</div>
+                                            <div class="alert-time">Updated 30 mins ago</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="city-alert alert-info">
+                                        <div class="alert-icon">
+                                            <i class="bi bi-info-circle"></i>
+                                        </div>
+                                        <div class="alert-content">
+                                            <div class="alert-title">Event Notice</div>
+                                            <div class="alert-text">City Marathon this Sunday</div>
+                                            <div class="alert-time">Posted 2 hours ago</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="city-alert alert-success">
+                                        <div class="alert-icon">
+                                            <i class="bi bi-check-circle"></i>
+                                        </div>
+                                        <div class="alert-content">
+                                            <div class="alert-title">Service Restored</div>
+                                            <div class="alert-text">Water supply back to normal</div>
+                                            <div class="alert-time">Posted 5 hours ago</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">My Statistics</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="citizen-stats">
+                                    <div class="citizen-stat-item">
+                                        <div class="stat-icon-small">
+                                            <i class="bi bi-chat-left-text"></i>
+                                        </div>
+                                        <div class="stat-info">
+                                            <div class="stat-value">8</div>
+                                            <div class="stat-label">Total Reports</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="citizen-stat-item">
+                                        <div class="stat-icon-small">
+                                            <i class="bi bi-check-circle"></i>
+                                        </div>
+                                        <div class="stat-info">
+                                            <div class="stat-value">6</div>
+                                            <div class="stat-label">Resolved</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="citizen-stat-item">
+                                        <div class="stat-icon-small">
+                                            <i class="bi bi-hourglass-split"></i>
+                                        </div>
+                                        <div class="stat-info">
+                                            <div class="stat-value">2</div>
+                                            <div class="stat-label">Pending</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- City Services Info -->
+                <div class="row g-4 mb-4">
+                    <div class="col-12">
+                        <h5 class="section-title">City Information</h5>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <i class="bi bi-car-front"></i>
+                            </div>
+                            <div class="info-content">
+                                <h6 class="info-title">Traffic Status</h6>
+                                <div class="info-value">Normal Flow</div>
+                                <div class="info-badge badge-success">All Clear</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <i class="bi bi-droplet"></i>
+                            </div>
+                            <div class="info-content">
+                                <h6 class="info-title">Water Quality</h6>
+                                <div class="info-value">Excellent</div>
+                                <div class="info-badge badge-success">Safe</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <i class="bi bi-wind"></i>
+                            </div>
+                            <div class="info-content">
+                                <h6 class="info-title">Air Quality</h6>
+                                <div class="info-value">Good</div>
+                                <div class="info-badge badge-success">AQI: 45</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <i class="bi bi-trash3"></i>
+                            </div>
+                            <div class="info-content">
+                                <h6 class="info-title">Next Collection</h6>
+                                <div class="info-value">Tomorrow</div>
+                                <div class="info-badge badge-primary">8:00 AM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcements & News -->
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">City Announcements</h5>
+                                <a href="#" class="text-primary text-decoration-none">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="announcement-list">
+                                    <div class="announcement-item">
+                                        <div class="announcement-date">
+                                            <div class="date-day">28</div>
+                                            <div class="date-month">Dec</div>
+                                        </div>
+                                        <div class="announcement-content">
+                                            <h6 class="announcement-title">New Year Celebration Event</h6>
+                                            <p class="announcement-text">Join us for the city's New Year celebration at
+                                                Central Park. Fireworks start at midnight!</p>
+                                            <a href="#" class="announcement-link">Read More <i
+                                                    class="bi bi-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="announcement-item">
+                                        <div class="announcement-date">
+                                            <div class="date-day">25</div>
+                                            <div class="date-month">Dec</div>
+                                        </div>
+                                        <div class="announcement-content">
+                                            <h6 class="announcement-title">Public Transportation Schedule Update</h6>
+                                            <p class="announcement-text">Holiday schedules for buses and metro services
+                                                are now available online.</p>
+                                            <a href="#" class="announcement-link">Read More <i
+                                                    class="bi bi-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Emergency Contacts</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="emergency-contacts">
+                                    <div class="emergency-item">
+                                        <div class="emergency-icon emergency-red">
+                                            <i class="bi bi-telephone"></i>
+                                        </div>
+                                        <div class="emergency-info">
+                                            <div class="emergency-title">Emergency Services</div>
+                                            <div class="emergency-number">911</div>
+                                        </div>
+                                        <button class="btn btn-sm btn-danger" onclick="callEmergency('911')">
+                                            <i class="bi bi-telephone-fill"></i> Call
+                                        </button>
+                                    </div>
+
+                                    <div class="emergency-item">
+                                        <div class="emergency-icon emergency-blue">
+                                            <i class="bi bi-hospital"></i>
+                                        </div>
+                                        <div class="emergency-info">
+                                            <div class="emergency-title">City Hospital</div>
+                                            <div class="emergency-number">(555) 123-4567</div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary"
+                                            onclick="callEmergency('555-123-4567')">
+                                            <i class="bi bi-telephone"></i> Call
+                                        </button>
+                                    </div>
+
+                                    <div class="emergency-item">
+                                        <div class="emergency-icon emergency-orange">
+                                            <i class="bi bi-gear"></i>
+                                        </div>
+                                        <div class="emergency-info">
+                                            <div class="emergency-title">City Services</div>
+                                            <div class="emergency-number">(555) 765-4321</div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary"
+                                            onclick="callEmergency('555-765-4321')">
+                                            <i class="bi bi-telephone"></i> Call
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Issue Modal -->
+            <div class="modal fade" id="reportIssueModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Report an Issue</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="reportIssueForm">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label">Issue Category</label>
+                                        <select class="form-select" required>
+                                            <option value="">Select category...</option>
+                                            <option value="roads">Roads & Infrastructure</option>
+                                            <option value="streetlight">Street Lighting</option>
+                                            <option value="waste">Waste Collection</option>
+                                            <option value="water">Water Supply</option>
+                                            <option value="electricity">Electricity</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Location</label>
+                                        <input type="text" class="form-control" placeholder="Enter location or address"
+                                            required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Subject</label>
+                                        <input type="text" class="form-control" placeholder="Brief description"
+                                            required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Description</label>
+                                        <textarea class="form-control" rows="4"
+                                            placeholder="Provide detailed information about the issue..."
+                                            required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Upload Photos (Optional)</label>
+                                        <input type="file" class="form-control" multiple accept="image/*">
+                                        <small class="text-muted">You can upload up to 3 photos</small>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Your Contact Number</label>
+                                        <input type="tel" class="form-control" placeholder="Enter your phone number"
+                                            required>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="submitReport()">
+                                <i class="bi bi-send"></i> Submit Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="citizen-footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 SmartCity. All rights reserved.</p>
+                </div>
+                <div class="footer-center">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="footer-right">
+                    <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Quick Action Button (Floating) -->
+    <button class="quick-action-btn" data-bs-toggle="modal" data-bs-target="#quickReportModal">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+
+    <!-- Quick Report Modal -->
+    <div class="modal fade" id="quickReportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Quick Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted mb-3">What would you like to do?</p>
+                    <div class="quick-actions">
+                        <button class="quick-action-item" onclick="navigateTo('report-issue')">
+                            <i class="bi bi-exclamation-circle"></i>
+                            <span>Report Issue</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('track-status')">
+                            <i class="bi bi-search"></i>
+                            <span>Track Status</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('traffic-info')">
+                            <i class="bi bi-car-front"></i>
+                            <span>Check Traffic</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('waste-schedule')">
+                            <i class="bi bi-calendar-check"></i>
+                            <span>Waste Schedule</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/dashboard.js"></script>
+
+</body>
+
+</html>

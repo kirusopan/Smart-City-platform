@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart City - Citizen Portal</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/complaints.css">
+</head>
+
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="citizen-navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="navbar-brand">
+                    <i class="bi bi-building"></i>
+                    <span class="brand-text">SmartCity</span>
+                    <span class="brand-badge">Citizen</span>
+                </div>
+            </div>
+
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search services, complaints, or help...">
+                </div>
+            </div>
+
+            <div class="navbar-right">
+                <button class="nav-btn" id="themeToggle" title="Toggle Dark Mode">
+                    <i class="bi bi-moon-stars"></i>
+                </button>
+
+                <div class="notification-dropdown">
+                    <button class="nav-btn" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end notification-menu">
+                        <div class="dropdown-header">
+                            <h6>Notifications</h6>
+                            <a href="#" class="mark-all-read">Mark all as read</a>
+                        </div>
+                        <div class="notification-list">
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon bg-success">
+                                    <i class="bi bi-check-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Complaint Resolved</div>
+                                    <div class="notification-text">Your complaint #1245 has been resolved</div>
+                                    <div class="notification-time">2 hours ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item">
+                                <div class="notification-icon bg-warning">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Road Closure Alert</div>
+                                    <div class="notification-text">Main St closed until 6 PM today</div>
+                                    <div class="notification-time">5 hours ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item">
+                                <div class="notification-icon bg-info">
+                                    <i class="bi bi-info-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">New Announcement</div>
+                                    <div class="notification-text">City Marathon scheduled for Sunday</div>
+                                    <div class="notification-time">1 day ago</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="dropdown-footer">
+                            <a href="#" class="view-all">View All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown">
+                    <button class="user-btn" data-bs-toggle="dropdown">
+                        <div class="user-avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <span class="user-name">John Smith</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li class="dropdown-header">
+                            <div class="user-info-dropdown">
+                                <strong>John Smith</strong>
+                                <small>john.smith@email.com</small>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-chat-left-text"></i> My Complaints</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle"></i> Help & Support</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right"></i>
+                                Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Navigation -->
+    <aside class="citizen-sidebar" id="citizenSidebar">
+        <div class="sidebar-header">
+            <h6 class="sidebar-title">Main Menu</h6>
+            <button class="sidebar-close d-lg-none" id="sidebarClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="citizen-dashboard.html" class="nav-link active">
+                <i class="bi bi-house-door"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="report-issue.html" class="nav-link">
+                <i class="bi bi-plus-circle"></i>
+                <span>Report Issue</span>
+            </a>
+
+            <a href="my-complaints.html" class="nav-link">
+                <i class="bi bi-chat-left-text"></i>
+                <span>My Complaints</span>
+                <span class="nav-badge">2</span>
+            </a>
+
+            <a href="track-status.html" class="nav-link">
+                <i class="bi bi-search"></i>
+                <span>Track Status</span>
+            </a>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-section-title">City Services</div>
+
+            <a href="traffic-info.html" class="nav-link">
+                <i class="bi bi-car-front"></i>
+                <span>Traffic & Transit</span>
+            </a>
+
+            <a href="waste-schedule.html" class="nav-link">
+                <i class="bi bi-calendar-check"></i>
+                <span>Waste Schedule</span>
+            </a>
+
+            <a href="city-alerts.html" class="nav-link">
+                <i class="bi bi-exclamation-triangle"></i>
+                <span>City Alerts</span>
+                <span class="nav-badge badge-warning">3</span>
+            </a>
+
+            <a href="announcements.html" class="nav-link">
+                <i class="bi bi-megaphone"></i>
+                <span>Announcements</span>
+            </a>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-section-title">Account</div>
+
+            <a href="profile.html" class="nav-link">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="notifications.html" class="nav-link">
+                <i class="bi bi-bell"></i>
+                <span>Notifications</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="help-card">
+                <div class="help-icon">
+                    <i class="bi bi-question-circle"></i>
+                </div>
+                <h6 class="help-title">Need Help?</h6>
+                <p class="help-text">Contact our support team</p>
+                <button class="btn btn-sm btn-primary w-100">
+                    <i class="bi bi-headset"></i> Get Support
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="citizen-main-content">
+        <div class="content-wrapper">
+
+            <!-- My Complaints Page Content -->
+            <!-- Replace the .page-content section in citizen base template -->
+
+            <div class="page-content citizen-panel">
+                <!-- Page Header -->
+                <div class="page-header-citizen">
+                    <div class="header-left">
+                        <h1 class="page-title-citizen">My Complaints</h1>
+                        <p class="page-subtitle-citizen">Track and manage all your submitted complaints</p>
+                    </div>
+                    <div class="header-right">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#trackComplaintModal">
+                            <i class="bi bi-search"></i> Track by ID
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Overview -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="complaint-stat-card stat-total">
+                            <div class="stat-icon">
+                                <i class="bi bi-chat-left-text"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">8</div>
+                                <div class="stat-label">Total Complaints</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6">
+                        <div class="complaint-stat-card stat-pending">
+                            <div class="stat-icon">
+                                <i class="bi bi-clock-history"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">2</div>
+                                <div class="stat-label">Pending</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6">
+                        <div class="complaint-stat-card stat-progress">
+                            <div class="stat-icon">
+                                <i class="bi bi-arrow-repeat"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">0</div>
+                                <div class="stat-label">In Progress</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6">
+                        <div class="complaint-stat-card stat-resolved">
+                            <div class="stat-icon">
+                                <i class="bi bi-check-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">6</div>
+                                <div class="stat-label">Resolved</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter & Search -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Search</label>
+                                <div class="search-input-group">
+                                    <i class="bi bi-search"></i>
+                                    <input type="text" class="form-control" id="complaintSearch"
+                                        placeholder="Search by ID, subject, or location...">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Status</label>
+                                <select class="form-select" id="filterStatus" onchange="applyComplaintFilters()">
+                                    <option value="all">All Status</option>
+                                    <option value="new">New</option>
+                                    <option value="in-progress">In Progress</option>
+                                    <option value="resolved">Resolved</option>
+                                    <option value="closed">Closed</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" id="filterCategory" onchange="applyComplaintFilters()">
+                                    <option value="all">All Categories</option>
+                                    <option value="roads">Roads</option>
+                                    <option value="streetlight">Street Light</option>
+                                    <option value="waste">Waste</option>
+                                    <option value="water">Water</option>
+                                    <option value="electricity">Electricity</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Sort By</label>
+                                <select class="form-select" id="sortBy" onchange="sortComplaints(this.value)">
+                                    <option value="newest">Newest First</option>
+                                    <option value="oldest">Oldest First</option>
+                                    <option value="status">By Status</option>
+                                    <option value="category">By Category</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">&nbsp;</label>
+                                <button class="btn btn-outline-secondary w-100" onclick="resetComplaintFilters()">
+                                    <i class="bi bi-arrow-clockwise"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complaints List -->
+                <div class="complaints-list">
+
+                    <!-- Complaint Card 1 - Pending -->
+                    <div class="complaint-card" data-status="new" data-category="streetlight">
+                        <div class="complaint-header">
+                            <div class="complaint-id-section">
+                                <div class="complaint-id">#1247</div>
+                                <div class="complaint-category">
+                                    <i class="bi bi-lightbulb"></i> Street Light
+                                </div>
+                            </div>
+                            <div class="complaint-status-section">
+                                <span class="status-badge status-new">
+                                    <i class="bi bi-circle-fill"></i> New
+                                </span>
+                                <div class="complaint-date">Submitted 2 days ago</div>
+                            </div>
+                        </div>
+
+                        <div class="complaint-body">
+                            <h5 class="complaint-title">Broken Street Light on Main Street</h5>
+                            <p class="complaint-description">The street light near the intersection of Main St and 5th
+                                Ave has been non-functional for the past week. This creates a safety hazard for
+                                pedestrians at night.</p>
+
+                            <div class="complaint-meta">
+                                <span class="meta-item">
+                                    <i class="bi bi-geo-alt"></i> Main St & 5th Ave
+                                </span>
+                                <span class="meta-item">
+                                    <i class="bi bi-calendar"></i> Dec 26, 2025
+                                </span>
+                                <span class="meta-item">
+                                    <i class="bi bi-clock"></i> 10:30 AM
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="complaint-footer">
+                            <div class="complaint-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="viewComplaintDetails(1247)">
+                                    <i class="bi bi-eye"></i> View Details
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="shareComplaint(1247)">
+                                    <i class="bi bi-share"></i> Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Complaint Card 2 - Pending -->
+                    <div class="complaint-card" data-status="new" data-category="waste">
+                        <div class="complaint-header">
+                            <div class="complaint-id-section">
+                                <div class="complaint-id">#1246</div>
+                                <div class="complaint-category">
+                                    <i class="bi bi-trash"></i> Waste Collection
+                                </div>
+                            </div>
+                            <div class="complaint-status-section">
+                                <span class="status-badge status-new">
+                                    <i class="bi bi-circle-fill"></i> New
+                                </span>
+                                <div class="complaint-date">Submitted 3 days ago</div>
+                            </div>
+                        </div>
+
+                        <div class="complaint-body">
+                            <h5 class="complaint-title">Missed Garbage Collection</h5>
+                            <p class="complaint-description">Our street was skipped during yesterday's scheduled garbage
+                                collection. Multiple bins are overflowing and need immediate attention.</p>
+
+                            <div class="complaint-meta">
+                                <span class="meta-item">
+                                    <i class="bi bi-geo-alt"></i> Oak Street, Block 5
+                                </span>
+                                <span class="meta-item">
+                                    <i class="bi bi-calendar"></i> Dec 25, 2025
+                                </span>
+                                <span class="meta-item">
+                                    <i class="bi bi-clock"></i> 2:15 PM
+                                </span>
+                            </div>
+
+                            <div class="complaint-attachments">
+                                <div class="attachment-label">
+                                    <i class="bi bi-paperclip"></i> Attachments (2)
+                                </div>
+                                <div class="attachment-list">
+                                    <div class="attachment-item">
+                                        <i class="bi bi-image"></i>
+                                        <span>photo_1.jpg</span>
+                                    </div>
+                                    <div class="attachment-item">
+                                        <i class="bi bi-image"></i>
+                                        <span>photo_2.jpg</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="complaint-footer">
+                            <div class="complaint-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="viewComplaintDetails(1246)">
+                                    <i class="bi bi-eye"></i> View Details
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="shareComplaint(1246)">
+                                    <i class="bi bi-share"></i> Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Complaint Card 3 - Resolved -->
+                    <div class="complaint-card complaint-resolved" data-status="resolved" data-category="streetlight">
+                        <div class="complaint-header">
+                            <div class="complaint-id-section">
+                                <div class="complaint-id">#1245</div>
+                                <div class="complaint-category">
+                                    <i class="bi bi-lightbulb"></i> Street Light
+                                </div>
+                            </div>
+                            <div class="complaint-status-section">
+                                <span class="status-badge status-resolved">
+                                    <i class="bi bi-check-circle-fill"></i> Resolved
+                                </span>
+                                <div class="complaint-date">Resolved 1 day ago</div>
+                            </div>
+                        </div>
+
+                        <div class="complaint-body">
+                            <h5 class="complaint-title">Street Light Not Working in Park Area</h5>
+                            <p class="complaint-description">The street light pole #45 in Central Park has been repaired
+                                and is now functioning properly.</p>
+
+                            <div class="complaint-meta">
+                                <span class="meta-item">
+                                    <i class="bi bi-geo-alt"></i> Central Park, Pole #45
+                                </span>
+                                <span class="meta-item">
+                                    <i class="bi bi-calendar"></i> Dec 20, 2025
+                                </span>
+                            </div>
+
+                            <div class="resolution-info">
+                                <div class="resolution-icon">
+                                    <i class="bi bi-check-circle"></i>
+                                </div>
+                                <div class="resolution-content">
+                                    <div class="resolution-title">Resolution Details</div>
+                                    <div class="resolution-text">The street light has been repaired by our maintenance
+                                        team. Bulb replaced and tested successfully.</div>
+                                    <div class="resolution-date">Resolved on Dec 27, 2025</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="complaint-footer">
+                            <div class="complaint-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="viewComplaintDetails(1245)">
+                                    <i class="bi bi-eye"></i> View Details
+                                </button>
+                                <button class="btn btn-sm btn-success" onclick="rateComplaint(1245)">
+                                    <i class="bi bi-star"></i> Rate Service
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Complaint Card 4 - Resolved -->
+                    <div class="complaint-card complaint-resolved" data-status="resolved" data-category="roads">
+                        <div class="complaint-header">
+                            <div class="complaint-id-section">
+                                <div class="complaint-id">#1244</div>
+                                <div class="complaint-category">
+                                    <i class="bi bi-cone-striped"></i> Road Repair
+                                </div>
+                            </div>
+                            <div class="complaint-status-section">
+                                <span class="status-badge status-resolved">
+                                    <i class="bi bi-check-circle-fill"></i> Resolved
+                                </span>
+                                <div class="complaint-date">Resolved 3 days ago</div>
+                            </div>
+                        </div>
+
+                        <div class="complaint-body">
+                            <h5 class="complaint-title">Pothole on Highway Access Road</h5>
+                            <p class="complaint-description">Large pothole causing vehicle damage has been filled and
+                                road surface leveled.</p>
+
+                            <div class="complaint-meta">
+                                <span class="meta-item">
+                                    <i class="bi bi-geo-alt"></i> Highway 101 Access, Mile 5
+                                </span>
+                                <span class="meta-item">
+                                    <i class="bi bi-calendar"></i> Dec 15, 2025
+                                </span>
+                            </div>
+
+                            <div class="resolution-info">
+                                <div class="resolution-icon">
+                                    <i class="bi bi-check-circle"></i>
+                                </div>
+                                <div class="resolution-content">
+                                    <div class="resolution-title">Resolution Details</div>
+                                    <div class="resolution-text">Road maintenance crew filled the pothole with asphalt
+                                        and compacted the surface. Area marked for 24-hour curing.</div>
+                                    <div class="resolution-date">Resolved on Dec 24, 2025</div>
+                                </div>
+                            </div>
+
+                            <!-- User Rating -->
+                            <div class="user-rating">
+                                <div class="rating-label">Your Rating:</div>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <div class="rating-comment">"Excellent work! Quick resolution and quality repair."</div>
+                            </div>
+                        </div>
+
+                        <div class="complaint-footer">
+                            <div class="complaint-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="viewComplaintDetails(1244)">
+                                    <i class="bi bi-eye"></i> View Details
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" disabled>
+                                    <i class="bi bi-star-fill"></i> Rated
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Complaint Card 5 - Resolved -->
+                    <div class="complaint-card complaint-resolved" data-status="resolved" data-category="water">
+                        <div class="complaint-header">
+                            <div class="complaint-id-section">
+                                <div class="complaint-id">#1243</div>
+                                <div class="complaint-category">
+                                    <i class="bi bi-droplet"></i> Water Supply
+                                </div>
+                            </div>
+                            <div class="complaint-status-section">
+                                <span class="status-badge status-resolved">
+                                    <i class="bi bi-check-circle-fill"></i> Resolved
+                                </span>
+                                <div class="complaint-date">Resolved 5 days ago</div>
+                            </div>
+                        </div>
+
+                        <div class="complaint-body">
+                            <h5 class="complaint-title">Low Water Pressure Issue</h5>
+                            <p class="complaint-description">Water pressure problem in residential area has been fixed.
+                                Valve adjusted and pressure restored to normal levels.</p>
+
+                            <div class="complaint-meta">
+                                <span class="meta-item">
+                                    <i class="bi bi-geo-alt"></i> Riverside Apartments, Block C
+                                </span>
+                                <span class="meta-item">
+                                    <i class="bi bi-calendar"></i> Dec 18, 2025
+                                </span>
+                            </div>
+
+                            <div class="resolution-info">
+                                <div class="resolution-icon">
+                                    <i class="bi bi-check-circle"></i>
+                                </div>
+                                <div class="resolution-content">
+                                    <div class="resolution-title">Resolution Details</div>
+                                    <div class="resolution-text">Utilities team adjusted the main valve and cleared
+                                        mineral deposits. Water pressure now at optimal levels.</div>
+                                    <div class="resolution-date">Resolved on Dec 23, 2025</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="complaint-footer">
+                            <div class="complaint-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="viewComplaintDetails(1243)">
+                                    <i class="bi bi-eye"></i> View Details
+                                </button>
+                                <button class="btn btn-sm btn-success" onclick="rateComplaint(1243)">
+                                    <i class="bi bi-star"></i> Rate Service
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-wrapper">
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Empty State (hidden by default, show when no results) -->
+                <div class="empty-state" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="bi bi-inbox"></i>
+                    </div>
+                    <h5 class="empty-title">No Complaints Found</h5>
+                    <p class="empty-text">You haven't submitted any complaints yet, or no complaints match your filters.
+                    </p>
+                    <button class="btn btn-primary" onclick="navigateTo('report-issue')">
+                        <i class="bi bi-plus-circle"></i> Report an Issue
+                    </button>
+                </div>
+            </div>
+
+            <!-- Track by ID Modal -->
+            <div class="modal fade" id="trackComplaintModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Track Complaint by ID</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-muted mb-3">Enter your complaint ID to track its status</p>
+                            <div class="mb-3">
+                                <label class="form-label">Complaint ID</label>
+                                <input type="text" class="form-control" id="trackComplaintId"
+                                    placeholder="e.g., 1247 or #1247">
+                                <small class="text-muted">You can find this ID in your email confirmation</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="trackComplaintById()">
+                                <i class="bi bi-search"></i> Track Complaint
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rate Service Modal -->
+            <div class="modal fade" id="rateServiceModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Rate Our Service</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-muted mb-3">How satisfied are you with the resolution?</p>
+
+                            <div class="rating-section mb-4">
+                                <div class="star-rating-input">
+                                    <i class="bi bi-star" data-rating="1"></i>
+                                    <i class="bi bi-star" data-rating="2"></i>
+                                    <i class="bi bi-star" data-rating="3"></i>
+                                    <i class="bi bi-star" data-rating="4"></i>
+                                    <i class="bi bi-star" data-rating="5"></i>
+                                </div>
+                                <div class="rating-text-display">Click to rate</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Additional Comments (Optional)</label>
+                                <textarea class="form-control" rows="3" id="ratingComment"
+                                    placeholder="Share your experience..."></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="submitRating()">
+                                <i class="bi bi-check"></i> Submit Rating
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="citizen-footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 SmartCity. All rights reserved.</p>
+                </div>
+                <div class="footer-center">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="footer-right">
+                    <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Quick Action Button (Floating) -->
+    <button class="quick-action-btn" data-bs-toggle="modal" data-bs-target="#quickReportModal">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+
+    <!-- Quick Report Modal -->
+    <div class="modal fade" id="quickReportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Quick Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted mb-3">What would you like to do?</p>
+                    <div class="quick-actions">
+                        <button class="quick-action-item" onclick="navigateTo('report-issue')">
+                            <i class="bi bi-exclamation-circle"></i>
+                            <span>Report Issue</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('track-status')">
+                            <i class="bi bi-search"></i>
+                            <span>Track Status</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('traffic-info')">
+                            <i class="bi bi-car-front"></i>
+                            <span>Check Traffic</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('waste-schedule')">
+                            <i class="bi bi-calendar-check"></i>
+                            <span>Waste Schedule</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/complaints.js"></script>
+
+</body>
+
+</html>

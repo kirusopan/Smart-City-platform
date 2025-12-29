@@ -1,0 +1,519 @@
+/* ============================================
+   MY COMPLAINTS PAGE - CUSTOM CSS
+   Add this after citizen-base.css
+   ============================================ */
+
+/* Page Header */
+.page-header-citizen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.page-title-citizen {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.page-subtitle-citizen {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Complaint Stat Cards */
+.complaint-stat-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.complaint-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+}
+
+.complaint-stat-card.stat-total::before { background: var(--primary-color); }
+.complaint-stat-card.stat-pending::before { background: var(--warning-color); }
+.complaint-stat-card.stat-progress::before { background: var(--info-color); }
+.complaint-stat-card.stat-resolved::before { background: var(--success-color); }
+
+.complaint-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.complaint-stat-card .stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.stat-total .stat-icon {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.2));
+    color: var(--primary-color);
+}
+
+.stat-pending .stat-icon {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.2));
+    color: var(--warning-color);
+}
+
+.stat-progress .stat-icon {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.2));
+    color: var(--info-color);
+}
+
+.stat-resolved .stat-icon {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.2));
+    color: var(--success-color);
+}
+
+.complaint-stat-card .stat-content {
+    flex: 1;
+}
+
+.complaint-stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.complaint-stat-card .stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Search Input Group */
+.search-input-group {
+    position: relative;
+}
+
+.search-input-group i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    pointer-events: none;
+}
+
+.search-input-group input {
+    padding-left: 2.75rem;
+}
+
+/* Complaints List */
+.complaints-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Complaint Card */
+.complaint-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all var(--transition-base);
+    border-left: 4px solid var(--warning-color);
+}
+
+.complaint-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+}
+
+.complaint-card.complaint-resolved {
+    border-left-color: var(--success-color);
+    opacity: 0.95;
+}
+
+.complaint-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.complaint-id-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.complaint-id {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: 'Courier New', monospace;
+}
+
+.complaint-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.complaint-status-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.status-badge i {
+    font-size: 0.7rem;
+}
+
+.status-badge.status-new {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+.status-badge.status-progress {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--info-color);
+}
+
+.status-badge.status-resolved {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.complaint-date {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+}
+
+/* Complaint Body */
+.complaint-body {
+    padding: 1.5rem;
+}
+
+.complaint-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.complaint-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.complaint-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.meta-item i {
+    color: var(--text-tertiary);
+}
+
+/* Attachments */
+.complaint-attachments {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+}
+
+.attachment-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.attachment-list {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.attachment-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.attachment-item i {
+    color: var(--primary-color);
+}
+
+/* Resolution Info */
+.resolution-info {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.resolution-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--success-color);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.resolution-content {
+    flex: 1;
+}
+
+.resolution-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.resolution-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.resolution-date {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+
+/* User Rating */
+.user-rating {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+}
+
+.rating-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.stars {
+    display: flex;
+    gap: 0.25rem;
+    color: var(--warning-color);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.rating-comment {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Complaint Footer */
+.complaint-footer {
+    padding: 1rem 1.5rem;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+.complaint-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* Pagination */
+.pagination-wrapper {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.pagination .page-link {
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 0.875rem;
+    margin: 0 0.25rem;
+    border-radius: 8px;
+    transition: all var(--transition-fast);
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #ffffff;
+}
+
+.pagination .page-link:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary-color);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--text-tertiary);
+}
+
+.empty-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.empty-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Star Rating Input */
+.star-rating-input {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 2rem;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+}
+
+.star-rating-input i {
+    color: var(--border-color);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.star-rating-input i:hover,
+.star-rating-input i.active {
+    color: var(--warning-color);
+    transform: scale(1.1);
+}
+
+.rating-text-display {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header-citizen {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .page-title-citizen {
+        font-size: 1.5rem;
+    }
+    
+    .complaint-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .complaint-meta {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .complaint-actions {
+        width: 100%;
+    }
+    
+    .complaint-actions .btn {
+        flex: 1;
+    }
+}
