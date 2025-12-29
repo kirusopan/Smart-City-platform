@@ -14,7 +14,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/iot.css">
 </head>
 
 <body>
@@ -143,26 +143,672 @@
 
         <!-- Page Content -->
         <div class="page-content">
-            <!-- Page Header -->
-            <div class="page-header">
-                <div>
-                    <h1 class="page-title">Dashboard Overview</h1>
-                    <p class="page-subtitle">Monitor and manage your city operations</p>
-                </div>
-                <div class="page-actions">
-                    <button class="btn btn-outline-primary">
-                        <i class="bi bi-download"></i> Export Report
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="bi bi-plus-lg"></i> Add New
-                    </button>
-                </div>
-            </div>
 
             <!-- Main Content Goes Here -->
             <div class="content-body">
 
-            
+                <div class="page-content">
+                    <!-- Page Header -->
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">IoT Devices & Sensors</h1>
+                            <p class="page-subtitle">Monitor and manage smart city infrastructure devices</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-outline-primary" onclick="bulkAction()">
+                                <i class="bi bi-lightning"></i> Bulk Action
+                            </button>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDeviceModal">
+                                <i class="bi bi-plus-lg"></i> Add Device
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Device Stats Overview -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="device-stat-card stat-primary">
+                                <div class="stat-icon-wrapper">
+                                    <div class="stat-icon">
+                                        <i class="bi bi-hdd-network"></i>
+                                    </div>
+                                    <div class="stat-status">
+                                        <span class="status-dot status-active"></span>
+                                    </div>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value" id="totalDevices">1,543</div>
+                                    <div class="stat-label">Total Devices</div>
+                                    <div class="stat-detail">
+                                        <span class="text-success"><i class="bi bi-arrow-up"></i> 45</span>
+                                        <span class="text-muted">new this month</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="device-stat-card stat-success">
+                                <div class="stat-icon-wrapper">
+                                    <div class="stat-icon">
+                                        <i class="bi bi-check-circle"></i>
+                                    </div>
+                                    <div class="stat-status">
+                                        <span class="status-dot status-active"></span>
+                                    </div>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">1,468</div>
+                                    <div class="stat-label">Active Devices</div>
+                                    <div class="stat-detail">
+                                        <span class="text-success">95.1%</span>
+                                        <span class="text-muted">uptime rate</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="device-stat-card stat-warning">
+                                <div class="stat-icon-wrapper">
+                                    <div class="stat-icon">
+                                        <i class="bi bi-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="stat-status">
+                                        <span class="status-dot status-warning"></span>
+                                    </div>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">52</div>
+                                    <div class="stat-label">Needs Attention</div>
+                                    <div class="stat-detail">
+                                        <span class="text-warning">3.4%</span>
+                                        <span class="text-muted">of total</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="device-stat-card stat-danger">
+                                <div class="stat-icon-wrapper">
+                                    <div class="stat-icon">
+                                        <i class="bi bi-x-circle"></i>
+                                    </div>
+                                    <div class="stat-status">
+                                        <span class="status-dot status-offline"></span>
+                                    </div>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">23</div>
+                                    <div class="stat-label">Offline Devices</div>
+                                    <div class="stat-detail">
+                                        <span class="text-danger">1.5%</span>
+                                        <span class="text-muted">of total</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter & Search Bar -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row g-3 align-items-end">
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-semibold">Search Devices</label>
+                                            <div class="search-input-group">
+                                                <i class="bi bi-search"></i>
+                                                <input type="text" class="form-control" id="deviceSearch"
+                                                    placeholder="Search by ID, name, or location...">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label fw-semibold">Status</label>
+                                            <select class="form-select" id="filterStatus"
+                                                onchange="applyDeviceFilters()">
+                                                <option value="all">All Status</option>
+                                                <option value="active">Active</option>
+                                                <option value="warning">Warning</option>
+                                                <option value="offline">Offline</option>
+                                                <option value="maintenance">Maintenance</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label fw-semibold">Type</label>
+                                            <select class="form-select" id="filterType" onchange="applyDeviceFilters()">
+                                                <option value="all">All Types</option>
+                                                <option value="sensor">Sensor</option>
+                                                <option value="camera">Camera</option>
+                                                <option value="gateway">Gateway</option>
+                                                <option value="controller">Controller</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label fw-semibold">Location</label>
+                                            <select class="form-select" id="filterLocation"
+                                                onchange="applyDeviceFilters()">
+                                                <option value="all">All Locations</option>
+                                                <option value="downtown">Downtown</option>
+                                                <option value="north">North District</option>
+                                                <option value="south">South District</option>
+                                                <option value="east">East District</option>
+                                                <option value="west">West District</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-outline-secondary w-100"
+                                                onclick="resetDeviceFilters()">
+                                                <i class="bi bi-arrow-clockwise"></i> Reset
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Device Map & Analytics -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Device Distribution Map</h5>
+                                    <div class="d-flex gap-2">
+                                        <div class="map-legend">
+                                            <span class="legend-item"><span class="legend-dot bg-success"></span>
+                                                Active</span>
+                                            <span class="legend-item"><span class="legend-dot bg-warning"></span>
+                                                Warning</span>
+                                            <span class="legend-item"><span class="legend-dot bg-danger"></span>
+                                                Offline</span>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="refreshDeviceMap()">
+                                            <i class="bi bi-arrow-clockwise"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="deviceMap"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Device Types</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="deviceTypeChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Network Health</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="network-stats">
+                                        <div class="network-stat-item">
+                                            <div class="network-icon">
+                                                <i class="bi bi-wifi"></i>
+                                            </div>
+                                            <div class="network-info">
+                                                <div class="network-label">Signal Strength</div>
+                                                <div class="network-value">-42 dBm</div>
+                                            </div>
+                                            <span class="status-badge badge-success">Excellent</span>
+                                        </div>
+
+                                        <div class="network-stat-item">
+                                            <div class="network-icon">
+                                                <i class="bi bi-speedometer2"></i>
+                                            </div>
+                                            <div class="network-info">
+                                                <div class="network-label">Avg Response</div>
+                                                <div class="network-value">24 ms</div>
+                                            </div>
+                                            <span class="status-badge badge-success">Good</span>
+                                        </div>
+
+                                        <div class="network-stat-item">
+                                            <div class="network-icon">
+                                                <i class="bi bi-server"></i>
+                                            </div>
+                                            <div class="network-info">
+                                                <div class="network-label">Data Rate</div>
+                                                <div class="network-value">2.4 MB/s</div>
+                                            </div>
+                                            <span class="status-badge badge-success">Normal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Device List & Details -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Device Management</h5>
+                                    <div class="d-flex gap-2">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary active"
+                                                onclick="switchDeviceView('grid')">
+                                                <i class="bi bi-grid-3x3"></i> Grid
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                onclick="switchDeviceView('list')">
+                                                <i class="bi bi-list-ul"></i> List
+                                            </button>
+                                        </div>
+                                        <select class="form-select form-select-sm" style="width: auto;"
+                                            onchange="sortDevices(this.value)">
+                                            <option value="name">Sort by Name</option>
+                                            <option value="status">Sort by Status</option>
+                                            <option value="type">Sort by Type</option>
+                                            <option value="location">Sort by Location</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="deviceGridView" class="device-grid">
+
+                                        <!-- Device Card 1 -->
+                                        <div class="device-card device-active" data-status="active" data-type="sensor"
+                                            data-location="downtown">
+                                            <div class="device-card-header">
+                                                <div class="device-icon device-icon-sensor">
+                                                    <i class="bi bi-thermometer-half"></i>
+                                                </div>
+                                                <div class="device-menu">
+                                                    <button class="btn btn-sm btn-link" onclick="deviceMenu(event)">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-body">
+                                                <div class="device-name">Temperature Sensor #A101</div>
+                                                <div class="device-id">ID: DEV-TS-001</div>
+                                                <div class="device-location">
+                                                    <i class="bi bi-geo-alt"></i> Downtown Plaza
+                                                </div>
+                                            </div>
+                                            <div class="device-card-metrics">
+                                                <div class="metric-item">
+                                                    <div class="metric-label">Temperature</div>
+                                                    <div class="metric-value">23.5°C</div>
+                                                </div>
+                                                <div class="metric-item">
+                                                    <div class="metric-label">Battery</div>
+                                                    <div class="metric-value">
+                                                        <div class="battery-indicator battery-high">
+                                                            <div class="battery-level" style="width: 85%"></div>
+                                                        </div>
+                                                        85%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-footer">
+                                                <span class="device-status status-active">
+                                                    <span class="status-dot"></span> Active
+                                                </span>
+                                                <span class="device-uptime">99.8% uptime</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Device Card 2 -->
+                                        <div class="device-card device-active" data-status="active" data-type="camera"
+                                            data-location="north">
+                                            <div class="device-card-header">
+                                                <div class="device-icon device-icon-camera">
+                                                    <i class="bi bi-camera-video"></i>
+                                                </div>
+                                                <div class="device-menu">
+                                                    <button class="btn btn-sm btn-link" onclick="deviceMenu(event)">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-body">
+                                                <div class="device-name">Traffic Camera #B205</div>
+                                                <div class="device-id">ID: DEV-TC-002</div>
+                                                <div class="device-location">
+                                                    <i class="bi bi-geo-alt"></i> Highway 101 North
+                                                </div>
+                                            </div>
+                                            <div class="device-card-metrics">
+                                                <div class="metric-item">
+                                                    <div class="metric-label">Stream</div>
+                                                    <div class="metric-value">1080p @ 30fps</div>
+                                                </div>
+                                                <div class="metric-item">
+                                                    <div class="metric-label">Storage</div>
+                                                    <div class="metric-value">
+                                                        <div class="storage-bar">
+                                                            <div class="storage-fill" style="width: 62%"></div>
+                                                        </div>
+                                                        62%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-footer">
+                                                <span class="device-status status-active">
+                                                    <span class="status-dot"></span> Active
+                                                </span>
+                                                <span class="device-uptime">98.2% uptime</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Device Card 3 -->
+                                        <div class="device-card device-warning" data-status="warning" data-type="sensor"
+                                            data-location="south">
+                                            <div class="device-card-header">
+                                                <div class="device-icon device-icon-sensor">
+                                                    <i class="bi bi-droplet"></i>
+                                                </div>
+                                                <div class="device-menu">
+                                                    <button class="btn btn-sm btn-link" onclick="deviceMenu(event)">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-body">
+                                                <div class="device-name">Water Quality Sensor #C312</div>
+                                                <div class="device-id">ID: DEV-WQ-003</div>
+                                                <div class="device-location">
+                                                    <i class="bi bi-geo-alt"></i> Water Treatment Plant
+                                                </div>
+                                            </div>
+                                            <div class="device-card-metrics">
+                                                <div class="metric-item">
+                                                    <div class="metric-label">pH Level</div>
+                                                    <div class="metric-value">7.2</div>
+                                                </div>
+                                                <div class="metric-item">
+                                                    <div class="metric-label">Battery</div>
+                                                    <div class="metric-value">
+                                                        <div class="battery-indicator battery-medium">
+                                                            <div class="battery-level" style="width: 45%"></div>
+                                                        </div>
+                                                        45%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-footer">
+                                                <span class="device-status status-warning">
+                                                    <span class="status-dot"></span> Low Battery
+                                                </span>
+                                                <span class="device-uptime">96.5% uptime</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Device Card 4 -->
+                                        <div class="device-card device-active" data-status="active" data-type="gateway"
+                                            data-location="east">
+                                            <div class="device-card-header">
+                                                <div class="device-icon device-icon-gateway">
+                                                    <i class="bi bi-broadcast"></i>
+                                                </div>
+                                                <div class="device-menu">
+                                                    <button class="btn btn-sm btn-link" onclick="deviceMenu(event)">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-body">
+                                                <div class="device-name">Network Gateway #D408</div>
+                                                <div class="device-id">ID: DEV-NG-004</div>
+                                                <div class="device-location">
+                                                    <i class="bi bi-geo-alt"></i> East District Hub
+                                                </div>
+                                            </div>
+                                            <div class="device-card-metrics">
+                                                <div class="metric-item">
+                                                    <div class="metric-label">Connected</div>
+                                                    <div class="metric-value">48 devices</div>
+                                                </div>
+                                                <div class="metric-item">
+                                                    <div class="metric-label">Bandwidth</div>
+                                                    <div class="metric-value">
+                                                        <div class="storage-bar">
+                                                            <div class="storage-fill" style="width: 35%"></div>
+                                                        </div>
+                                                        35%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-footer">
+                                                <span class="device-status status-active">
+                                                    <span class="status-dot"></span> Active
+                                                </span>
+                                                <span class="device-uptime">99.5% uptime</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Device Card 5 -->
+                                        <div class="device-card device-offline" data-status="offline" data-type="sensor"
+                                            data-location="west">
+                                            <div class="device-card-header">
+                                                <div class="device-icon device-icon-sensor">
+                                                    <i class="bi bi-speedometer"></i>
+                                                </div>
+                                                <div class="device-menu">
+                                                    <button class="btn btn-sm btn-link" onclick="deviceMenu(event)">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-body">
+                                                <div class="device-name">Traffic Flow Sensor #E512</div>
+                                                <div class="device-id">ID: DEV-TF-005</div>
+                                                <div class="device-location">
+                                                    <i class="bi bi-geo-alt"></i> West Avenue Bridge
+                                                </div>
+                                            </div>
+                                            <div class="device-card-metrics">
+                                                <div class="metric-item">
+                                                    <div class="metric-label">Last Reading</div>
+                                                    <div class="metric-value text-muted">2h ago</div>
+                                                </div>
+                                                <div class="metric-item">
+                                                    <div class="metric-label">Battery</div>
+                                                    <div class="metric-value">
+                                                        <div class="battery-indicator battery-critical">
+                                                            <div class="battery-level" style="width: 5%"></div>
+                                                        </div>
+                                                        5%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-footer">
+                                                <span class="device-status status-offline">
+                                                    <span class="status-dot"></span> Offline
+                                                </span>
+                                                <span class="device-uptime">89.2% uptime</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Device Card 6 -->
+                                        <div class="device-card device-active" data-status="active"
+                                            data-type="controller" data-location="downtown">
+                                            <div class="device-card-header">
+                                                <div class="device-icon device-icon-controller">
+                                                    <i class="bi bi-cpu"></i>
+                                                </div>
+                                                <div class="device-menu">
+                                                    <button class="btn btn-sm btn-link" onclick="deviceMenu(event)">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-body">
+                                                <div class="device-name">Smart Light Controller #F620</div>
+                                                <div class="device-id">ID: DEV-SL-006</div>
+                                                <div class="device-location">
+                                                    <i class="bi bi-geo-alt"></i> Main Street
+                                                </div>
+                                            </div>
+                                            <div class="device-card-metrics">
+                                                <div class="metric-item">
+                                                    <div class="metric-label">Lights</div>
+                                                    <div class="metric-value">24 units</div>
+                                                </div>
+                                                <div class="metric-item">
+                                                    <div class="metric-label">Power</div>
+                                                    <div class="metric-value">
+                                                        <div class="storage-bar">
+                                                            <div class="storage-fill" style="width: 78%"></div>
+                                                        </div>
+                                                        78%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="device-card-footer">
+                                                <span class="device-status status-active">
+                                                    <span class="status-dot"></span> Active
+                                                </span>
+                                                <span class="device-uptime">97.8% uptime</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Pagination -->
+                                    <div class="pagination-container">
+                                        <nav>
+                                            <ul class="pagination justify-content-center mb-0">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#"><i
+                                                            class="bi bi-chevron-right"></i></a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analytics Row -->
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Device Activity Timeline</h5>
+                                    <select class="form-select form-select-sm" style="width: auto;"
+                                        onchange="updateActivityChart(this.value)">
+                                        <option value="24h" selected>Last 24 Hours</option>
+                                        <option value="7d">Last 7 Days</option>
+                                        <option value="30d">Last 30 Days</option>
+                                    </select>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="activityChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Device Performance Metrics</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="performanceMetricsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Device Modal -->
+                <div class="modal fade" id="addDeviceModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add New IoT Device</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="deviceForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Device Name</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="e.g., Temperature Sensor #101" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Device ID</label>
+                                            <input type="text" class="form-control" placeholder="e.g., DEV-TS-101"
+                                                required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Device Type</label>
+                                            <select class="form-select" required>
+                                                <option value="">Select type...</option>
+                                                <option value="sensor">Sensor</option>
+                                                <option value="camera">Camera</option>
+                                                <option value="gateway">Gateway</option>
+                                                <option value="controller">Controller</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Location</label>
+                                            <select class="form-select" required>
+                                                <option value="">Select location...</option>
+                                                <option value="downtown">Downtown</option>
+                                                <option value="north">North District</option>
+                                                <option value="south">South District</option>
+                                                <option value="east">East District</option>
+                                                <option value="west">West District</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">MAC Address</label>
+                                            <input type="text" class="form-control" placeholder="00:1B:44:11:3A:B7"
+                                                required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">IP Address</label>
+                                            <input type="text" class="form-control" placeholder="192.168.1.100"
+                                                required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Physical Address</label>
+                                            <input type="text" class="form-control" placeholder="Enter exact location"
+                                                required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Description (Optional)</label>
+                                            <textarea class="form-control" rows="3"
+                                                placeholder="Add device details..."></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="addNewDevice()">
+                                    <i class="bi bi-plus-lg"></i> Add Device
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -173,7 +819,7 @@
 
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/iot.js"></script>
 
 </body>
 
