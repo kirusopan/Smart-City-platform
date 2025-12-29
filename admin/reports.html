@@ -14,7 +14,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/report.css">
 </head>
 
 <body>
@@ -143,26 +143,687 @@
 
         <!-- Page Content -->
         <div class="page-content">
-            <!-- Page Header -->
-            <div class="page-header">
-                <div>
-                    <h1 class="page-title">Dashboard Overview</h1>
-                    <p class="page-subtitle">Monitor and manage your city operations</p>
-                </div>
-                <div class="page-actions">
-                    <button class="btn btn-outline-primary">
-                        <i class="bi bi-download"></i> Export Report
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="bi bi-plus-lg"></i> Add New
-                    </button>
-                </div>
-            </div>
 
             <!-- Main Content Goes Here -->
             <div class="content-body">
 
-            
+                <div class="page-content">
+                    <!-- Page Header -->
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Reports & Analytics</h1>
+                            <p class="page-subtitle">Comprehensive data insights and performance metrics</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-outline-primary" onclick="scheduleReport()">
+                                <i class="bi bi-clock"></i> Schedule Report
+                            </button>
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#generateReportModal">
+                                <i class="bi bi-file-earmark-plus"></i> Generate Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Date Range & Quick Filters -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row g-3 align-items-end">
+                                        <div class="col-md-3">
+                                            <label class="form-label fw-semibold">Report Type</label>
+                                            <select class="form-select" id="reportType"
+                                                onchange="changeReportType(this.value)">
+                                                <option value="overview">City Overview</option>
+                                                <option value="traffic">Traffic & Transport</option>
+                                                <option value="utilities">Utilities & Energy</option>
+                                                <option value="waste">Waste Management</option>
+                                                <option value="feedback">Citizen Feedback</option>
+                                                <option value="iot">IoT Devices</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label fw-semibold">From Date</label>
+                                            <input type="date" class="form-control" id="dateFrom" value="2025-01-01">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label fw-semibold">To Date</label>
+                                            <input type="date" class="form-control" id="dateTo" value="2025-01-27">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label fw-semibold">Quick Range</label>
+                                            <div class="btn-group w-100" role="group">
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    onclick="setQuickRange('today')">Today</button>
+                                                <button type="button" class="btn btn-outline-secondary active"
+                                                    onclick="setQuickRange('week')">Week</button>
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    onclick="setQuickRange('month')">Month</button>
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    onclick="setQuickRange('year')">Year</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-primary w-100" onclick="applyDateFilter()">
+                                                <i class="bi bi-funnel"></i> Apply Filter
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KPI Summary Cards -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="kpi-card kpi-primary">
+                                <div class="kpi-header">
+                                    <div class="kpi-icon">
+                                        <i class="bi bi-graph-up-arrow"></i>
+                                    </div>
+                                    <div class="kpi-menu">
+                                        <button class="btn btn-sm btn-link"><i
+                                                class="bi bi-three-dots-vertical"></i></button>
+                                    </div>
+                                </div>
+                                <div class="kpi-body">
+                                    <div class="kpi-value" id="kpiEfficiency">94.2%</div>
+                                    <div class="kpi-label">Overall Efficiency</div>
+                                    <div class="kpi-trend">
+                                        <span class="trend-indicator trend-up">
+                                            <i class="bi bi-arrow-up"></i> 3.2%
+                                        </span>
+                                        <span class="trend-text">vs last period</span>
+                                    </div>
+                                </div>
+                                <div class="kpi-footer">
+                                    <div class="kpi-mini-chart">
+                                        <canvas id="miniChart1"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="kpi-card kpi-success">
+                                <div class="kpi-header">
+                                    <div class="kpi-icon">
+                                        <i class="bi bi-check-circle"></i>
+                                    </div>
+                                    <div class="kpi-menu">
+                                        <button class="btn btn-sm btn-link"><i
+                                                class="bi bi-three-dots-vertical"></i></button>
+                                    </div>
+                                </div>
+                                <div class="kpi-body">
+                                    <div class="kpi-value">87.5%</div>
+                                    <div class="kpi-label">Service Uptime</div>
+                                    <div class="kpi-trend">
+                                        <span class="trend-indicator trend-up">
+                                            <i class="bi bi-arrow-up"></i> 1.8%
+                                        </span>
+                                        <span class="trend-text">vs last period</span>
+                                    </div>
+                                </div>
+                                <div class="kpi-footer">
+                                    <div class="kpi-mini-chart">
+                                        <canvas id="miniChart2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="kpi-card kpi-warning">
+                                <div class="kpi-header">
+                                    <div class="kpi-icon">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+                                    <div class="kpi-menu">
+                                        <button class="btn btn-sm btn-link"><i
+                                                class="bi bi-three-dots-vertical"></i></button>
+                                    </div>
+                                </div>
+                                <div class="kpi-body">
+                                    <div class="kpi-value">4.3/5</div>
+                                    <div class="kpi-label">Citizen Satisfaction</div>
+                                    <div class="kpi-trend">
+                                        <span class="trend-indicator trend-up">
+                                            <i class="bi bi-arrow-up"></i> 0.5
+                                        </span>
+                                        <span class="trend-text">vs last period</span>
+                                    </div>
+                                </div>
+                                <div class="kpi-footer">
+                                    <div class="kpi-mini-chart">
+                                        <canvas id="miniChart3"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="kpi-card kpi-info">
+                                <div class="kpi-header">
+                                    <div class="kpi-icon">
+                                        <i class="bi bi-currency-dollar"></i>
+                                    </div>
+                                    <div class="kpi-menu">
+                                        <button class="btn btn-sm btn-link"><i
+                                                class="bi bi-three-dots-vertical"></i></button>
+                                    </div>
+                                </div>
+                                <div class="kpi-body">
+                                    <div class="kpi-value">$2.4M</div>
+                                    <div class="kpi-label">Cost Savings</div>
+                                    <div class="kpi-trend">
+                                        <span class="trend-indicator trend-up">
+                                            <i class="bi bi-arrow-up"></i> $180K
+                                        </span>
+                                        <span class="trend-text">vs last period</span>
+                                    </div>
+                                </div>
+                                <div class="kpi-footer">
+                                    <div class="kpi-mini-chart">
+                                        <canvas id="miniChart4"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Analytics Charts -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Performance Trends</h5>
+                                    <div class="d-flex gap-2">
+                                        <select class="form-select form-select-sm" style="width: auto;"
+                                            onchange="updatePerformanceChart(this.value)">
+                                            <option value="daily">Daily</option>
+                                            <option value="weekly" selected>Weekly</option>
+                                            <option value="monthly">Monthly</option>
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-secondary"
+                                            onclick="downloadChart('performance')">
+                                            <i class="bi bi-download"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="performanceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Department Performance</h5>
+                                    <button class="btn btn-sm btn-outline-secondary"
+                                        onclick="downloadChart('department')">
+                                        <i class="bi bi-download"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="departmentChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Secondary Charts Row -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Resource Utilization</h5>
+                                    <button class="btn btn-sm btn-outline-secondary"
+                                        onclick="downloadChart('resource')">
+                                        <i class="bi bi-download"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="resourceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Response Time Analysis</h5>
+                                    <button class="btn btn-sm btn-outline-secondary"
+                                        onclick="downloadChart('response')">
+                                        <i class="bi bi-download"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="responseTimeChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Cost Breakdown</h5>
+                                    <button class="btn btn-sm btn-outline-secondary" onclick="downloadChart('cost')">
+                                        <i class="bi bi-download"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="costChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Tables & Export Section -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Detailed Metrics Table</h5>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-success" onclick="exportToExcel()">
+                                            <i class="bi bi-file-earmark-excel"></i> Excel
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" onclick="exportToPDF()">
+                                            <i class="bi bi-file-earmark-pdf"></i> PDF
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="exportToCSV()">
+                                            <i class="bi bi-filetype-csv"></i> CSV
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover metrics-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Department</th>
+                                                    <th>Incidents</th>
+                                                    <th>Resolved</th>
+                                                    <th>Avg Response</th>
+                                                    <th>Efficiency</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dept-cell">
+                                                            <i class="bi bi-car-front text-primary"></i>
+                                                            <span>Traffic & Transport</span>
+                                                        </div>
+                                                    </td>
+                                                    <td><strong>245</strong></td>
+                                                    <td><strong>228</strong></td>
+                                                    <td>2.3 hrs</td>
+                                                    <td>
+                                                        <div class="efficiency-bar">
+                                                            <div class="efficiency-fill" style="width: 93%"></div>
+                                                        </div>
+                                                        <span class="efficiency-text">93%</span>
+                                                    </td>
+                                                    <td><span class="status-badge badge-success">Excellent</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dept-cell">
+                                                            <i class="bi bi-lightning-charge text-warning"></i>
+                                                            <span>Utilities & Energy</span>
+                                                        </div>
+                                                    </td>
+                                                    <td><strong>189</strong></td>
+                                                    <td><strong>178</strong></td>
+                                                    <td>1.8 hrs</td>
+                                                    <td>
+                                                        <div class="efficiency-bar">
+                                                            <div class="efficiency-fill" style="width: 94%"></div>
+                                                        </div>
+                                                        <span class="efficiency-text">94%</span>
+                                                    </td>
+                                                    <td><span class="status-badge badge-success">Excellent</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dept-cell">
+                                                            <i class="bi bi-trash3 text-success"></i>
+                                                            <span>Waste Management</span>
+                                                        </div>
+                                                    </td>
+                                                    <td><strong>156</strong></td>
+                                                    <td><strong>142</strong></td>
+                                                    <td>3.1 hrs</td>
+                                                    <td>
+                                                        <div class="efficiency-bar">
+                                                            <div class="efficiency-fill" style="width: 91%"></div>
+                                                        </div>
+                                                        <span class="efficiency-text">91%</span>
+                                                    </td>
+                                                    <td><span class="status-badge badge-success">Good</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dept-cell">
+                                                            <i class="bi bi-shield-check text-danger"></i>
+                                                            <span>Safety & Security</span>
+                                                        </div>
+                                                    </td>
+                                                    <td><strong>123</strong></td>
+                                                    <td><strong>115</strong></td>
+                                                    <td>1.2 hrs</td>
+                                                    <td>
+                                                        <div class="efficiency-bar">
+                                                            <div class="efficiency-fill" style="width: 93.5%"></div>
+                                                        </div>
+                                                        <span class="efficiency-text">93.5%</span>
+                                                    </td>
+                                                    <td><span class="status-badge badge-success">Excellent</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dept-cell">
+                                                            <i class="bi bi-hdd-network text-info"></i>
+                                                            <span>IoT Infrastructure</span>
+                                                        </div>
+                                                    </td>
+                                                    <td><strong>87</strong></td>
+                                                    <td><strong>79</strong></td>
+                                                    <td>4.5 hrs</td>
+                                                    <td>
+                                                        <div class="efficiency-bar">
+                                                            <div class="efficiency-fill" style="width: 91%"></div>
+                                                        </div>
+                                                        <span class="efficiency-text">91%</span>
+                                                    </td>
+                                                    <td><span class="status-badge badge-warning">Fair</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Reports Sidebar -->
+                        <div class="col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Recent Reports</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="reports-list">
+                                        <div class="report-item">
+                                            <div class="report-icon">
+                                                <i class="bi bi-file-earmark-text"></i>
+                                            </div>
+                                            <div class="report-info">
+                                                <div class="report-name">Monthly Summary Report</div>
+                                                <div class="report-meta">
+                                                    <span>PDF</span>
+                                                    <span>•</span>
+                                                    <span>2.4 MB</span>
+                                                    <span>•</span>
+                                                    <span>Jan 2025</span>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary"
+                                                onclick="downloadReport('monthly-jan')">
+                                                <i class="bi bi-download"></i>
+                                            </button>
+                                        </div>
+
+                                        <div class="report-item">
+                                            <div class="report-icon">
+                                                <i class="bi bi-file-earmark-spreadsheet"></i>
+                                            </div>
+                                            <div class="report-info">
+                                                <div class="report-name">Traffic Analysis Q4</div>
+                                                <div class="report-meta">
+                                                    <span>Excel</span>
+                                                    <span>•</span>
+                                                    <span>1.8 MB</span>
+                                                    <span>•</span>
+                                                    <span>Dec 2024</span>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary"
+                                                onclick="downloadReport('traffic-q4')">
+                                                <i class="bi bi-download"></i>
+                                            </button>
+                                        </div>
+
+                                        <div class="report-item">
+                                            <div class="report-icon">
+                                                <i class="bi bi-file-earmark-bar-graph"></i>
+                                            </div>
+                                            <div class="report-info">
+                                                <div class="report-name">Energy Consumption Report</div>
+                                                <div class="report-meta">
+                                                    <span>PDF</span>
+                                                    <span>•</span>
+                                                    <span>3.1 MB</span>
+                                                    <span>•</span>
+                                                    <span>Dec 2024</span>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary"
+                                                onclick="downloadReport('energy-dec')">
+                                                <i class="bi bi-download"></i>
+                                            </button>
+                                        </div>
+
+                                        <div class="report-item">
+                                            <div class="report-icon">
+                                                <i class="bi bi-file-earmark-pdf"></i>
+                                            </div>
+                                            <div class="report-info">
+                                                <div class="report-name">Annual Performance Review</div>
+                                                <div class="report-meta">
+                                                    <span>PDF</span>
+                                                    <span>•</span>
+                                                    <span>5.6 MB</span>
+                                                    <span>•</span>
+                                                    <span>2024</span>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary"
+                                                onclick="downloadReport('annual-2024')">
+                                                <i class="bi bi-download"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Scheduled Reports -->
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Scheduled Reports</h5>
+                                    <button class="btn btn-sm btn-link" onclick="manageSchedules()">
+                                        <i class="bi bi-gear"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="scheduled-reports">
+                                        <div class="scheduled-item">
+                                            <div class="scheduled-info">
+                                                <div class="scheduled-name">Weekly Summary</div>
+                                                <div class="scheduled-freq">Every Monday at 9:00 AM</div>
+                                            </div>
+                                            <span class="status-badge badge-success">Active</span>
+                                        </div>
+
+                                        <div class="scheduled-item">
+                                            <div class="scheduled-info">
+                                                <div class="scheduled-name">Monthly Analytics</div>
+                                                <div class="scheduled-freq">1st of each month</div>
+                                            </div>
+                                            <span class="status-badge badge-success">Active</span>
+                                        </div>
+
+                                        <div class="scheduled-item">
+                                            <div class="scheduled-info">
+                                                <div class="scheduled-name">Quarterly Review</div>
+                                                <div class="scheduled-freq">Every 3 months</div>
+                                            </div>
+                                            <span class="status-badge badge-warning">Paused</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison & Benchmarks -->
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Year-over-Year Comparison</h5>
+                                    <select class="form-select form-select-sm" style="width: auto;"
+                                        onchange="updateComparisonChart(this.value)">
+                                        <option value="2024-2025">2024 vs 2025</option>
+                                        <option value="2023-2024">2023 vs 2024</option>
+                                        <option value="2022-2023">2022 vs 2023</option>
+                                    </select>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="comparisonChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generate Report Modal -->
+                <div class="modal fade" id="generateReportModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Generate Custom Report</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="reportForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Report Name</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="e.g., January Traffic Report" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Report Type</label>
+                                            <select class="form-select" required>
+                                                <option value="">Select type...</option>
+                                                <option value="summary">Summary Report</option>
+                                                <option value="detailed">Detailed Analysis</option>
+                                                <option value="comparison">Comparison Report</option>
+                                                <option value="custom">Custom Report</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Date Range From</label>
+                                            <input type="date" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Date Range To</label>
+                                            <input type="date" class="form-control" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Include Departments</label>
+                                            <div class="row g-2">
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="deptTraffic"
+                                                            checked>
+                                                        <label class="form-check-label" for="deptTraffic">Traffic &
+                                                            Transport</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="deptUtilities" checked>
+                                                        <label class="form-check-label" for="deptUtilities">Utilities &
+                                                            Energy</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="deptWaste"
+                                                            checked>
+                                                        <label class="form-check-label" for="deptWaste">Waste
+                                                            Management</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="deptSafety">
+                                                        <label class="form-check-label" for="deptSafety">Safety &
+                                                            Security</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="deptIoT">
+                                                        <label class="form-check-label" for="deptIoT">IoT
+                                                            Infrastructure</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="deptFeedback">
+                                                        <label class="form-check-label" for="deptFeedback">Citizen
+                                                            Feedback</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Export Format</label>
+                                            <div class="d-flex gap-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="format"
+                                                        id="formatPDF" checked>
+                                                    <label class="form-check-label" for="formatPDF">PDF</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="format"
+                                                        id="formatExcel">
+                                                    <label class="form-check-label" for="formatExcel">Excel</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="format"
+                                                        id="formatCSV">
+                                                    <label class="form-check-label" for="formatCSV">CSV</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Additional Notes (Optional)</label>
+                                            <textarea class="form-control" rows="3"
+                                                placeholder="Add any notes or special requirements..."></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="generateCustomReport()">
+                                    <i class="bi bi-file-earmark-plus"></i> Generate Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -171,9 +832,13 @@
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+        <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/report.js"></script>
 
 </body>
 
