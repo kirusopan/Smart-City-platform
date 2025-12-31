@@ -143,26 +143,820 @@
 
         <!-- Page Content -->
         <div class="page-content">
-            <!-- Page Header -->
-            <div class="page-header">
-                <div>
-                    <h1 class="page-title">Dashboard Overview</h1>
-                    <p class="page-subtitle">Monitor and manage your city operations</p>
-                </div>
-                <div class="page-actions">
-                    <button class="btn btn-outline-primary">
-                        <i class="bi bi-download"></i> Export Report
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="bi bi-plus-lg"></i> Add New
-                    </button>
-                </div>
-            </div>
 
             <!-- Main Content Goes Here -->
             <div class="content-body">
 
-            
+
+                <div class="page-content">
+                    <!-- Page Header -->
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Users Management</h1>
+                            <p class="page-subtitle">Manage system users, roles, and permissions</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-outline-primary" onclick="exportUsers()">
+                                <i class="bi bi-download"></i> Export Users
+                            </button>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                                <i class="bi bi-person-plus"></i> Add User
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Row -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="user-stat-card stat-primary">
+                                <div class="stat-icon">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value" id="totalUsers">156</div>
+                                    <div class="stat-label">Total Users</div>
+                                    <div class="stat-detail">
+                                        <span class="text-success"><i class="bi bi-arrow-up"></i> 12</span>
+                                        <span class="text-muted">this month</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="user-stat-card stat-success">
+                                <div class="stat-icon">
+                                    <i class="bi bi-person-check"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">128</div>
+                                    <div class="stat-label">Active Users</div>
+                                    <div class="stat-detail">
+                                        <span class="text-success">82%</span>
+                                        <span class="text-muted">of total</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="user-stat-card stat-warning">
+                                <div class="stat-icon">
+                                    <i class="bi bi-clock-history"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">18</div>
+                                    <div class="stat-label">Pending Invites</div>
+                                    <div class="stat-detail">
+                                        <span class="text-warning">Awaiting</span>
+                                        <span class="text-muted">response</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="user-stat-card stat-danger">
+                                <div class="stat-icon">
+                                    <i class="bi bi-person-x"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">10</div>
+                                    <div class="stat-label">Suspended</div>
+                                    <div class="stat-detail">
+                                        <span class="text-danger">6%</span>
+                                        <span class="text-muted">of total</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filters & Search -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row g-3 align-items-end">
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-semibold">Search Users</label>
+                                            <div class="search-input-group">
+                                                <i class="bi bi-search"></i>
+                                                <input type="text" class="form-control" id="userSearch"
+                                                    placeholder="Search by name, email, or department...">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label fw-semibold">Role</label>
+                                            <select class="form-select" id="filterRole" onchange="applyUserFilters()">
+                                                <option value="all">All Roles</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="manager">Manager</option>
+                                                <option value="staff">Staff</option>
+                                                <option value="viewer">Viewer</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label fw-semibold">Status</label>
+                                            <select class="form-select" id="filterStatus" onchange="applyUserFilters()">
+                                                <option value="all">All Status</option>
+                                                <option value="active">Active</option>
+                                                <option value="inactive">Inactive</option>
+                                                <option value="suspended">Suspended</option>
+                                                <option value="pending">Pending</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label fw-semibold">Department</label>
+                                            <select class="form-select" id="filterDepartment"
+                                                onchange="applyUserFilters()">
+                                                <option value="all">All Departments</option>
+                                                <option value="it">IT</option>
+                                                <option value="traffic">Traffic</option>
+                                                <option value="utilities">Utilities</option>
+                                                <option value="waste">Waste Mgmt</option>
+                                                <option value="admin">Administration</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-outline-secondary w-100"
+                                                onclick="resetUserFilters()">
+                                                <i class="bi bi-arrow-clockwise"></i> Reset
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Users Table -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="card-title mb-0">All Users</h5>
+                                        <small class="text-muted">Showing <span id="showingCount">10</span> of <span
+                                                id="totalCount">156</span> users</small>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <div class="btn-group" role="group">
+                                            <button class="btn btn-sm btn-outline-secondary"
+                                                onclick="bulkAction('activate')">
+                                                <i class="bi bi-check-circle"></i> Activate
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary"
+                                                onclick="bulkAction('suspend')">
+                                                <i class="bi bi-x-circle"></i> Suspend
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger"
+                                                onclick="bulkAction('delete')">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table users-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="selectAll" onchange="toggleSelectAll(this)">
+                                                        </div>
+                                                    </th>
+                                                    <th>User</th>
+                                                    <th>Role</th>
+                                                    <th>Department</th>
+                                                    <th>Status</th>
+                                                    <th>Last Active</th>
+                                                    <th>Joined</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="usersTableBody">
+                                                <!-- User 1 -->
+                                                <tr class="user-row" data-role="admin" data-status="active"
+                                                    data-department="it">
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input user-checkbox"
+                                                                type="checkbox" value="1">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="user-info">
+                                                            <div class="user-avatar avatar-admin">JS</div>
+                                                            <div>
+                                                                <div class="user-name">John Smith</div>
+                                                                <div class="user-email">john.smith@smartcity.gov</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="role-badge badge-admin">Admin</span></td>
+                                                    <td>IT Department</td>
+                                                    <td><span class="status-badge badge-active"><span
+                                                                class="status-dot"></span> Active</span></td>
+                                                    <td>
+                                                        <span class="text-success"><i class="bi bi-circle-fill"
+                                                                style="font-size: 0.5rem;"></i> Online</span>
+                                                    </td>
+                                                    <td>Jan 15, 2023</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                onclick="viewUser(1)" title="View Details">
+                                                                <i class="bi bi-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-secondary"
+                                                                onclick="editUser(1)" title="Edit User">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </button>
+                                                            <div class="btn-group">
+                                                                <button
+                                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <i class="bi bi-three-dots"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="resetPassword(1)"><i
+                                                                                class="bi bi-key"></i> Reset
+                                                                            Password</a></li>
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="viewActivity(1)"><i
+                                                                                class="bi bi-clock-history"></i> View
+                                                                            Activity</a></li>
+                                                                    <li>
+                                                                        <hr class="dropdown-divider">
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-danger" href="#"
+                                                                            onclick="deleteUser(1)"><i
+                                                                                class="bi bi-trash"></i> Delete User</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- User 2 -->
+                                                <tr class="user-row" data-role="manager" data-status="active"
+                                                    data-department="traffic">
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input user-checkbox"
+                                                                type="checkbox" value="2">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="user-info">
+                                                            <div class="user-avatar avatar-manager">SJ</div>
+                                                            <div>
+                                                                <div class="user-name">Sarah Johnson</div>
+                                                                <div class="user-email">sarah.j@smartcity.gov</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="role-badge badge-manager">Manager</span></td>
+                                                    <td>Traffic Dept</td>
+                                                    <td><span class="status-badge badge-active"><span
+                                                                class="status-dot"></span> Active</span></td>
+                                                    <td>2 hours ago</td>
+                                                    <td>Mar 22, 2023</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                onclick="viewUser(2)" title="View Details">
+                                                                <i class="bi bi-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-secondary"
+                                                                onclick="editUser(2)" title="Edit User">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </button>
+                                                            <div class="btn-group">
+                                                                <button
+                                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <i class="bi bi-three-dots"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="resetPassword(2)"><i
+                                                                                class="bi bi-key"></i> Reset
+                                                                            Password</a></li>
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="viewActivity(2)"><i
+                                                                                class="bi bi-clock-history"></i> View
+                                                                            Activity</a></li>
+                                                                    <li>
+                                                                        <hr class="dropdown-divider">
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-danger" href="#"
+                                                                            onclick="deleteUser(2)"><i
+                                                                                class="bi bi-trash"></i> Delete User</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- User 3 -->
+                                                <tr class="user-row" data-role="staff" data-status="active"
+                                                    data-department="utilities">
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input user-checkbox"
+                                                                type="checkbox" value="3">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="user-info">
+                                                            <div class="user-avatar avatar-staff">MB</div>
+                                                            <div>
+                                                                <div class="user-name">Michael Brown</div>
+                                                                <div class="user-email">michael.b@smartcity.gov</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="role-badge badge-staff">Staff</span></td>
+                                                    <td>Utilities</td>
+                                                    <td><span class="status-badge badge-active"><span
+                                                                class="status-dot"></span> Active</span></td>
+                                                    <td>1 day ago</td>
+                                                    <td>Jun 10, 2023</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                onclick="viewUser(3)" title="View Details">
+                                                                <i class="bi bi-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-secondary"
+                                                                onclick="editUser(3)" title="Edit User">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </button>
+                                                            <div class="btn-group">
+                                                                <button
+                                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <i class="bi bi-three-dots"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="resetPassword(3)"><i
+                                                                                class="bi bi-key"></i> Reset
+                                                                            Password</a></li>
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="viewActivity(3)"><i
+                                                                                class="bi bi-clock-history"></i> View
+                                                                            Activity</a></li>
+                                                                    <li>
+                                                                        <hr class="dropdown-divider">
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-danger" href="#"
+                                                                            onclick="deleteUser(3)"><i
+                                                                                class="bi bi-trash"></i> Delete User</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- User 4 -->
+                                                <tr class="user-row" data-role="staff" data-status="suspended"
+                                                    data-department="waste">
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input user-checkbox"
+                                                                type="checkbox" value="4">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="user-info">
+                                                            <div class="user-avatar avatar-staff">EW</div>
+                                                            <div>
+                                                                <div class="user-name">Emma Wilson</div>
+                                                                <div class="user-email">emma.w@smartcity.gov</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="role-badge badge-staff">Staff</span></td>
+                                                    <td>Waste Mgmt</td>
+                                                    <td><span class="status-badge badge-suspended"><span
+                                                                class="status-dot"></span> Suspended</span></td>
+                                                    <td>2 weeks ago</td>
+                                                    <td>Aug 5, 2023</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                onclick="viewUser(4)" title="View Details">
+                                                                <i class="bi bi-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-secondary"
+                                                                onclick="editUser(4)" title="Edit User">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </button>
+                                                            <div class="btn-group">
+                                                                <button
+                                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <i class="bi bi-three-dots"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                    <li><a class="dropdown-item text-success" href="#"
+                                                                            onclick="activateUser(4)"><i
+                                                                                class="bi bi-check-circle"></i> Activate
+                                                                            User</a></li>
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="resetPassword(4)"><i
+                                                                                class="bi bi-key"></i> Reset
+                                                                            Password</a></li>
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="viewActivity(4)"><i
+                                                                                class="bi bi-clock-history"></i> View
+                                                                            Activity</a></li>
+                                                                    <li>
+                                                                        <hr class="dropdown-divider">
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-danger" href="#"
+                                                                            onclick="deleteUser(4)"><i
+                                                                                class="bi bi-trash"></i> Delete User</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- User 5 -->
+                                                <tr class="user-row" data-role="viewer" data-status="pending"
+                                                    data-department="admin">
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input user-checkbox"
+                                                                type="checkbox" value="5">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="user-info">
+                                                            <div class="user-avatar avatar-viewer">RD</div>
+                                                            <div>
+                                                                <div class="user-name">Robert Davis</div>
+                                                                <div class="user-email">robert.d@smartcity.gov</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="role-badge badge-viewer">Viewer</span></td>
+                                                    <td>Administration</td>
+                                                    <td><span class="status-badge badge-pending"><span
+                                                                class="status-dot"></span> Pending</span></td>
+                                                    <td>Never</td>
+                                                    <td>Dec 20, 2024</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                onclick="viewUser(5)" title="View Details">
+                                                                <i class="bi bi-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-warning"
+                                                                onclick="resendInvite(5)" title="Resend Invite">
+                                                                <i class="bi bi-send"></i>
+                                                            </button>
+                                                            <div class="btn-group">
+                                                                <button
+                                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <i class="bi bi-three-dots"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="resendInvite(5)"><i
+                                                                                class="bi bi-send"></i> Resend
+                                                                            Invitation</a></li>
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="editUser(5)"><i
+                                                                                class="bi bi-pencil"></i> Edit
+                                                                            Details</a></li>
+                                                                    <li>
+                                                                        <hr class="dropdown-divider">
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-danger" href="#"
+                                                                            onclick="cancelInvite(5)"><i
+                                                                                class="bi bi-x-circle"></i> Cancel
+                                                                            Invitation</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- User 6 -->
+                                                <tr class="user-row" data-role="manager" data-status="inactive"
+                                                    data-department="traffic">
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input user-checkbox"
+                                                                type="checkbox" value="6">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="user-info">
+                                                            <div class="user-avatar avatar-manager">AL</div>
+                                                            <div>
+                                                                <div class="user-name">Amanda Lee</div>
+                                                                <div class="user-email">amanda.l@smartcity.gov</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="role-badge badge-manager">Manager</span></td>
+                                                    <td>Traffic Dept</td>
+                                                    <td><span class="status-badge badge-inactive"><span
+                                                                class="status-dot"></span> Inactive</span></td>
+                                                    <td>3 months ago</td>
+                                                    <td>Feb 3, 2023</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                onclick="viewUser(6)" title="View Details">
+                                                                <i class="bi bi-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-secondary"
+                                                                onclick="editUser(6)" title="Edit User">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </button>
+                                                            <div class="btn-group">
+                                                                <button
+                                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <i class="bi bi-three-dots"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="resetPassword(6)"><i
+                                                                                class="bi bi-key"></i> Reset
+                                                                            Password</a></li>
+                                                                    <li><a class="dropdown-item" href="#"
+                                                                            onclick="viewActivity(6)"><i
+                                                                                class="bi bi-clock-history"></i> View
+                                                                            Activity</a></li>
+                                                                    <li>
+                                                                        <hr class="dropdown-divider">
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-danger" href="#"
+                                                                            onclick="deleteUser(6)"><i
+                                                                                class="bi bi-trash"></i> Delete User</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Pagination -->
+                                    <div class="pagination-container">
+                                        <div class="pagination-info">
+                                            <select class="form-select form-select-sm" style="width: auto;"
+                                                onchange="changePageSize(this.value)">
+                                                <option value="10" selected>10 per page</option>
+                                                <option value="25">25 per page</option>
+                                                <option value="50">50 per page</option>
+                                                <option value="100">100 per page</option>
+                                            </select>
+                                        </div>
+                                        <nav>
+                                            <ul class="pagination justify-content-center mb-0">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#"><i
+                                                            class="bi bi-chevron-right"></i></a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity & Statistics -->
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">User Growth</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="userGrowthChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Role Distribution</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="roleDistributionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add User Modal -->
+                <div class="modal fade" id="addUserModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add New User</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addUserForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" class="form-control" placeholder="Enter first name"
+                                                required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" placeholder="Enter last name"
+                                                required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" placeholder="user@smartcity.gov"
+                                                required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" placeholder="+1 (555) 000-0000">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Role</label>
+                                            <select class="form-select" required>
+                                                <option value="">Select role...</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="manager">Manager</option>
+                                                <option value="staff">Staff</option>
+                                                <option value="viewer">Viewer</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Department</label>
+                                            <select class="form-select" required>
+                                                <option value="">Select department...</option>
+                                                <option value="it">IT Department</option>
+                                                <option value="traffic">Traffic Management</option>
+                                                <option value="utilities">Utilities</option>
+                                                <option value="waste">Waste Management</option>
+                                                <option value="admin">Administration</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Job Title</label>
+                                            <input type="text" class="form-control" placeholder="Enter job title">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Status</label>
+                                            <select class="form-select" required>
+                                                <option value="active" selected>Active</option>
+                                                <option value="inactive">Inactive</option>
+                                                <option value="pending">Pending Activation</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="sendWelcomeEmail"
+                                                    checked>
+                                                <label class="form-check-label" for="sendWelcomeEmail">
+                                                    Send welcome email with login credentials
+                                                    <label class="form-check-label" for="sendWelcomeEmail">
+                                                        Send welcome email with login credentials
+                                                        </label< /parameter>
+                                                        <parameter name="new_str"> <label class="form-check-label"
+                                                                for="sendWelcomeEmail">
+                                                                Send welcome email with login credentials
+                                                            </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="addNewUser()">
+                                    <i class="bi bi-person-plus"></i> Add User
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- View User Modal -->
+                <div class="modal fade" id="viewUserModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">User Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="user-detail-view">
+                                    <div class="user-detail-header">
+                                        <div class="user-avatar-large">JS</div>
+                                        <div>
+                                            <h4>John Smith</h4>
+                                            <p class="text-muted">john.smith@smartcity.gov</p>
+                                            <div class="d-flex gap-2">
+                                                <span class="role-badge badge-admin">Admin</span>
+                                                <span class="status-badge badge-active"><span class="status-dot"></span>
+                                                    Active</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="user-detail-info">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="detail-label">Department</label>
+                                                <div class="detail-value">IT Department</div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="detail-label">Job Title</label>
+                                                <div class="detail-value">System Administrator</div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="detail-label">Phone</label>
+                                                <div class="detail-value">+1 (555) 123-4567</div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="detail-label">Joined Date</label>
+                                                <div class="detail-value">January 15, 2023</div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="detail-label">Last Active</label>
+                                                <div class="detail-value text-success">Online now</div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="detail-label">Total Sessions</label>
+                                                <div class="detail-value">1,247</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="user-detail-section">
+                                        <h6>Recent Activity</h6>
+                                        <div class="activity-list-small">
+                                            <div class="activity-item-small">
+                                                <i class="bi bi-clock-history text-primary"></i>
+                                                <div>
+                                                    <div class="activity-text">Logged in from Desktop</div>
+                                                    <div class="activity-time">2 hours ago</div>
+                                                </div>
+                                            </div>
+                                            <div class="activity-item-small">
+                                                <i class="bi bi-person-check text-success"></i>
+                                                <div>
+                                                    <div class="activity-text">Updated profile information</div>
+                                                    <div class="activity-time">1 day ago</div>
+                                                </div>
+                                            </div>
+                                            <div class="activity-item-small">
+                                                <i class="bi bi-file-text text-info"></i>
+                                                <div>
+                                                    <div class="activity-text">Generated system report</div>
+                                                    <div class="activity-time">3 days ago</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="editUser(1)">
+                                    <i class="bi bi-pencil"></i> Edit User
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
