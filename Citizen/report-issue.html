@@ -14,6 +14,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/report.css">
 </head>
 
 <body>
@@ -221,7 +222,359 @@
     <main class="citizen-main-content">
         <div class="content-wrapper">
 
+            <!-- REPORT ISSUE PAGE - MAIN CONTENT ONLY -->
+            <!-- Insert this inside .page-content div after page-header -->
 
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Report an Issue</h1>
+                    <p class="page-subtitle">Help us improve your city by reporting problems</p>
+                </div>
+            </div>
+
+            <!-- Main Form Row -->
+            <div class="row g-4 mb-4">
+                <!-- Report Form -->
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Issue Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="reportIssueForm">
+                                <!-- Category Selection -->
+                                <div class="mb-4">
+                                    <label class="form-label">Issue Category <span class="text-danger">*</span></label>
+                                    <div class="row g-3">
+                                        <div class="col-md-4 col-sm-6">
+                                            <input type="radio" class="btn-check" name="category" id="cat1"
+                                                value="road_repair" autocomplete="off" required>
+                                            <label class="btn btn-outline-primary w-100 category-card" for="cat1">
+                                                <i class="bi bi-cone-striped d-block mb-2" style="font-size: 2rem;"></i>
+                                                Road Repair
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <input type="radio" class="btn-check" name="category" id="cat2"
+                                                value="street_light" autocomplete="off">
+                                            <label class="btn btn-outline-primary w-100 category-card" for="cat2">
+                                                <i class="bi bi-lightbulb d-block mb-2" style="font-size: 2rem;"></i>
+                                                Street Light
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <input type="radio" class="btn-check" name="category" id="cat3"
+                                                value="waste" autocomplete="off">
+                                            <label class="btn btn-outline-primary w-100 category-card" for="cat3">
+                                                <i class="bi bi-trash3 d-block mb-2" style="font-size: 2rem;"></i>
+                                                Waste Collection
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <input type="radio" class="btn-check" name="category" id="cat4"
+                                                value="water" autocomplete="off">
+                                            <label class="btn btn-outline-primary w-100 category-card" for="cat4">
+                                                <i class="bi bi-droplet d-block mb-2" style="font-size: 2rem;"></i>
+                                                Water Supply
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <input type="radio" class="btn-check" name="category" id="cat5"
+                                                value="traffic" autocomplete="off">
+                                            <label class="btn btn-outline-primary w-100 category-card" for="cat5">
+                                                <i class="bi bi-traffic-cone d-block mb-2" style="font-size: 2rem;"></i>
+                                                Traffic Signal
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <input type="radio" class="btn-check" name="category" id="cat6"
+                                                value="noise" autocomplete="off">
+                                            <label class="btn btn-outline-primary w-100 category-card" for="cat6">
+                                                <i class="bi bi-volume-up d-block mb-2" style="font-size: 2rem;"></i>
+                                                Noise Complaint
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <input type="radio" class="btn-check" name="category" id="cat7" value="park"
+                                                autocomplete="off">
+                                            <label class="btn btn-outline-primary w-100 category-card" for="cat7">
+                                                <i class="bi bi-tree d-block mb-2" style="font-size: 2rem;"></i>
+                                                Park Maintenance
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <input type="radio" class="btn-check" name="category" id="cat8"
+                                                value="graffiti" autocomplete="off">
+                                            <label class="btn btn-outline-primary w-100 category-card" for="cat8">
+                                                <i class="bi bi-paint-bucket d-block mb-2" style="font-size: 2rem;"></i>
+                                                Graffiti Removal
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <input type="radio" class="btn-check" name="category" id="cat9"
+                                                value="other" autocomplete="off">
+                                            <label class="btn btn-outline-primary w-100 category-card" for="cat9">
+                                                <i class="bi bi-three-dots d-block mb-2" style="font-size: 2rem;"></i>
+                                                Other
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Issue Title -->
+                                <div class="mb-4">
+                                    <label for="issueTitle" class="form-label">Issue Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="issueTitle"
+                                        placeholder="Brief description of the issue" required>
+                                </div>
+
+                                <!-- Issue Description -->
+                                <div class="mb-4">
+                                    <label for="issueDescription" class="form-label">Detailed Description <span
+                                            class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="issueDescription" rows="5"
+                                        placeholder="Provide detailed information about the issue..."
+                                        required></textarea>
+                                    <small class="text-muted">Minimum 20 characters</small>
+                                </div>
+
+                                <!-- Priority Level -->
+                                <div class="mb-4">
+                                    <label class="form-label">Priority Level <span class="text-danger">*</span></label>
+                                    <div class="btn-group w-100" role="group">
+                                        <input type="radio" class="btn-check" name="priority" id="priority1" value="low"
+                                            autocomplete="off" checked>
+                                        <label class="btn btn-outline-info" for="priority1">
+                                            <i class="bi bi-info-circle"></i> Low
+                                        </label>
+
+                                        <input type="radio" class="btn-check" name="priority" id="priority2"
+                                            value="medium" autocomplete="off">
+                                        <label class="btn btn-outline-warning" for="priority2">
+                                            <i class="bi bi-exclamation-circle"></i> Medium
+                                        </label>
+
+                                        <input type="radio" class="btn-check" name="priority" id="priority3"
+                                            value="high" autocomplete="off">
+                                        <label class="btn btn-outline-danger" for="priority3">
+                                            <i class="bi bi-exclamation-triangle"></i> High
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Location Information -->
+                                <div class="mb-4">
+                                    <label for="issueLocation" class="form-label">Location <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control mb-2" id="issueLocation"
+                                        placeholder="Street address or landmark" required>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" id="useMyLocation">
+                                        <i class="bi bi-geo-alt"></i> Use My Current Location
+                                    </button>
+                                </div>
+
+                                <!-- Map Preview -->
+                                <div class="mb-4">
+                                    <label class="form-label">Location on Map</label>
+                                    <div id="locationMap"
+                                        style="height: 300px; background: var(--bg-secondary); border: 2px dashed var(--border-color); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-tertiary);">
+                                        <div class="text-center">
+                                            <i class="bi bi-geo-alt" style="font-size: 3rem;"></i>
+                                            <p class="mb-0 mt-2">Click "Use My Current Location" or enter address</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Photo Upload -->
+                                <div class="mb-4">
+                                    <label for="issuePhotos" class="form-label">Upload Photos (Optional)</label>
+                                    <input type="file" class="form-control" id="issuePhotos" accept="image/*" multiple>
+                                    <small class="text-muted">You can upload up to 5 photos (Max 5MB each)</small>
+                                    <div id="photoPreview" class="mt-3 d-flex flex-wrap gap-2"></div>
+                                </div>
+
+                                <!-- Contact Information -->
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <label for="contactName" class="form-label">Your Name <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="contactName" value="John Citizen"
+                                            required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="contactPhone" class="form-label">Phone Number <span
+                                                class="text-danger">*</span></label>
+                                        <input type="tel" class="form-control" id="contactPhone"
+                                            placeholder="+1 (555) 123-4567" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="contactEmail" class="form-label">Email Address <span
+                                            class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="contactEmail" value="john@example.com"
+                                        required>
+                                </div>
+
+                                <!-- Anonymous Option -->
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="anonymousReport">
+                                        <label class="form-check-label" for="anonymousReport">
+                                            Submit as anonymous (Your contact details will be hidden)
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Terms Agreement -->
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                                        <label class="form-check-label" for="agreeTerms">
+                                            I agree that the information provided is accurate and true <span
+                                                class="text-danger">*</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Form Actions -->
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-send"></i> Submit Report
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary" id="saveDraftBtn">
+                                        <i class="bi bi-save"></i> Save as Draft
+                                    </button>
+                                    <button type="reset" class="btn btn-outline-danger">
+                                        <i class="bi bi-x-circle"></i> Clear Form
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar: Guidelines & Recent Reports -->
+                <div class="col-lg-4">
+                    <!-- Guidelines Card -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title">Reporting Guidelines</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="guideline-item">
+                                <div class="guideline-icon">
+                                    <i class="bi bi-check-circle text-success"></i>
+                                </div>
+                                <div class="guideline-content">
+                                    <strong>Be Specific</strong>
+                                    <p>Provide detailed information about the issue location and problem</p>
+                                </div>
+                            </div>
+
+                            <div class="guideline-item">
+                                <div class="guideline-icon">
+                                    <i class="bi bi-camera text-primary"></i>
+                                </div>
+                                <div class="guideline-content">
+                                    <strong>Add Photos</strong>
+                                    <p>Clear photos help us understand and resolve issues faster</p>
+                                </div>
+                            </div>
+
+                            <div class="guideline-item">
+                                <div class="guideline-icon">
+                                    <i class="bi bi-geo-alt text-danger"></i>
+                                </div>
+                                <div class="guideline-content">
+                                    <strong>Accurate Location</strong>
+                                    <p>Precise location helps our teams reach the site quickly</p>
+                                </div>
+                            </div>
+
+                            <div class="guideline-item">
+                                <div class="guideline-icon">
+                                    <i class="bi bi-shield-check text-warning"></i>
+                                </div>
+                                <div class="guideline-content">
+                                    <strong>Emergency Issues</strong>
+                                    <p>For urgent emergencies, call 911 immediately</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Response Time Card -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title">Expected Response Times</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="response-time-item">
+                                <span class="badge badge-danger">High Priority</span>
+                                <span class="time">24 hours</span>
+                            </div>
+                            <div class="response-time-item">
+                                <span class="badge badge-warning">Medium Priority</span>
+                                <span class="time">3-5 days</span>
+                            </div>
+                            <div class="response-time-item">
+                                <span class="badge badge-info">Low Priority</span>
+                                <span class="time">7-10 days</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Reports Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Recent Reports in Your Area</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="recent-report-item">
+                                <div class="report-icon">
+                                    <i class="bi bi-cone-striped text-primary"></i>
+                                </div>
+                                <div class="report-content">
+                                    <div class="report-title">Pothole on Main St</div>
+                                    <div class="report-meta">
+                                        <span class="badge badge-warning">In Progress</span>
+                                        <span class="text-muted">2 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="recent-report-item">
+                                <div class="report-icon">
+                                    <i class="bi bi-lightbulb text-warning"></i>
+                                </div>
+                                <div class="report-content">
+                                    <div class="report-title">Street Light Out</div>
+                                    <div class="report-meta">
+                                        <span class="badge badge-success">Resolved</span>
+                                        <span class="text-muted">5 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="recent-report-item">
+                                <div class="report-icon">
+                                    <i class="bi bi-trash3 text-success"></i>
+                                </div>
+                                <div class="report-content">
+                                    <div class="report-title">Missed Collection</div>
+                                    <div class="report-meta">
+                                        <span class="badge badge-success">Resolved</span>
+                                        <span class="text-muted">1 week ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -289,6 +642,7 @@
 
     <!-- Custom JS -->
     <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/report.js"></script>
 
 </body>
 
