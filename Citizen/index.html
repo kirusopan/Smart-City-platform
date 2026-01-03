@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart City - Citizen Portal</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="citizen-navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="navbar-brand">
+                    <i class="bi bi-building"></i>
+                    <span class="brand-text">SmartCity</span>
+                    <span class="brand-badge">Citizen</span>
+                </div>
+            </div>
+
+            <div class="navbar-center">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search services, complaints, or help...">
+                </div>
+            </div>
+
+            <div class="navbar-right">
+                <button class="nav-btn" id="themeToggle" title="Toggle Dark Mode">
+                    <i class="bi bi-moon-stars"></i>
+                </button>
+
+                <div class="notification-dropdown">
+                    <button class="nav-btn" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end notification-menu">
+                        <div class="dropdown-header">
+                            <h6>Notifications</h6>
+                            <a href="#" class="mark-all-read">Mark all as read</a>
+                        </div>
+                        <div class="notification-list">
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon bg-success">
+                                    <i class="bi bi-check-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Complaint Resolved</div>
+                                    <div class="notification-text">Your complaint #1245 has been resolved</div>
+                                    <div class="notification-time">2 hours ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item">
+                                <div class="notification-icon bg-warning">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Road Closure Alert</div>
+                                    <div class="notification-text">Main St closed until 6 PM today</div>
+                                    <div class="notification-time">5 hours ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item">
+                                <div class="notification-icon bg-info">
+                                    <i class="bi bi-info-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">New Announcement</div>
+                                    <div class="notification-text">City Marathon scheduled for Sunday</div>
+                                    <div class="notification-time">1 day ago</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="dropdown-footer">
+                            <a href="#" class="view-all">View All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown">
+                    <button class="user-btn" data-bs-toggle="dropdown">
+                        <div class="user-avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <span class="user-name">John Smith</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li class="dropdown-header">
+                            <div class="user-info-dropdown">
+                                <strong>John Smith</strong>
+                                <small>john.smith@email.com</small>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-chat-left-text"></i> My Complaints</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle"></i> Help & Support</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right"></i>
+                                Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Navigation -->
+    <aside class="citizen-sidebar" id="citizenSidebar">
+        <div class="sidebar-header">
+            <h6 class="sidebar-title">Main Menu</h6>
+            <button class="sidebar-close d-lg-none" id="sidebarClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="citizen-dashboard.html" class="nav-link active">
+                <i class="bi bi-house-door"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="report-issue.html" class="nav-link">
+                <i class="bi bi-plus-circle"></i>
+                <span>Report Issue</span>
+            </a>
+
+            <a href="my-complaints.html" class="nav-link">
+                <i class="bi bi-chat-left-text"></i>
+                <span>My Complaints</span>
+                <span class="nav-badge">2</span>
+            </a>
+
+            <a href="track-status.html" class="nav-link">
+                <i class="bi bi-search"></i>
+                <span>Track Status</span>
+            </a>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-section-title">City Services</div>
+
+            <a href="traffic-info.html" class="nav-link">
+                <i class="bi bi-car-front"></i>
+                <span>Traffic & Transit</span>
+            </a>
+
+            <a href="waste-schedule.html" class="nav-link">
+                <i class="bi bi-calendar-check"></i>
+                <span>Waste Schedule</span>
+            </a>
+
+            <a href="city-alerts.html" class="nav-link">
+                <i class="bi bi-exclamation-triangle"></i>
+                <span>City Alerts</span>
+                <span class="nav-badge badge-warning">3</span>
+            </a>
+
+            <a href="announcements.html" class="nav-link">
+                <i class="bi bi-megaphone"></i>
+                <span>Announcements</span>
+            </a>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-section-title">Account</div>
+
+            <a href="profile.html" class="nav-link">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="notifications.html" class="nav-link">
+                <i class="bi bi-bell"></i>
+                <span>Notifications</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="help-card">
+                <div class="help-icon">
+                    <i class="bi bi-question-circle"></i>
+                </div>
+                <h6 class="help-title">Need Help?</h6>
+                <p class="help-text">Contact our support team</p>
+                <button class="btn btn-sm btn-primary w-100">
+                    <i class="bi bi-headset"></i> Get Support
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="citizen-main-content">
+        <div class="content-wrapper">
+
+        
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="citizen-footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 SmartCity. All rights reserved.</p>
+                </div>
+                <div class="footer-center">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="footer-right">
+                    <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Quick Action Button (Floating) -->
+    <button class="quick-action-btn" data-bs-toggle="modal" data-bs-target="#quickReportModal">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+
+    <!-- Quick Report Modal -->
+    <div class="modal fade" id="quickReportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Quick Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted mb-3">What would you like to do?</p>
+                    <div class="quick-actions">
+                        <button class="quick-action-item" onclick="navigateTo('report-issue')">
+                            <i class="bi bi-exclamation-circle"></i>
+                            <span>Report Issue</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('track-status')">
+                            <i class="bi bi-search"></i>
+                            <span>Track Status</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('traffic-info')">
+                            <i class="bi bi-car-front"></i>
+                            <span>Check Traffic</span>
+                        </button>
+                        <button class="quick-action-item" onclick="navigateTo('waste-schedule')">
+                            <i class="bi bi-calendar-check"></i>
+                            <span>Waste Schedule</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+
+</body>
+
+</html>

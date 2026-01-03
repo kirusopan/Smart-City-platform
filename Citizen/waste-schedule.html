@@ -14,6 +14,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/waste.css">
+    <link rel="stylesheet" href="assets/css/notifications.css">
 </head>
 
 <body>
@@ -221,7 +223,448 @@
     <main class="citizen-main-content">
         <div class="content-wrapper">
 
+            <!-- WASTE COLLECTION SCHEDULE PAGE - MAIN CONTENT ONLY -->
+            <!-- Insert this inside .page-content div after page-header -->
 
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Waste Collection Schedule</h1>
+                    <p class="page-subtitle">View collection schedules and manage waste services</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-outline-primary">
+                        <i class="bi bi-download"></i> Download Schedule
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="bi bi-bell"></i> Set Reminder
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards Row -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card stat-success">
+                        <div class="stat-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">98.2%</div>
+                            <div class="stat-label">Collection Rate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card stat-primary">
+                        <div class="stat-icon">
+                            <i class="bi bi-truck"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">45</div>
+                            <div class="stat-label">Active Trucks</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card stat-warning">
+                        <div class="stat-icon">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">Tomorrow</div>
+                            <div class="stat-label">Next Collection</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card stat-info">
+                        <div class="stat-icon">
+                            <i class="bi bi-recycle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">1,245</div>
+                            <div class="stat-label">Tons Recycled</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Collection Schedule -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">My Collection Schedule</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="schedule-grid">
+                                <div class="schedule-item schedule-today">
+                                    <div class="schedule-date">
+                                        <div class="day">MON</div>
+                                        <div class="date">Jan 20</div>
+                                    </div>
+                                    <div class="schedule-content">
+                                        <div class="waste-type">
+                                            <i class="bi bi-trash3 text-success"></i>
+                                            <span>General Waste</span>
+                                        </div>
+                                        <div class="schedule-time">6:00 AM - 10:00 AM</div>
+                                        <span class="badge badge-success">Today</span>
+                                    </div>
+                                </div>
+
+                                <div class="schedule-item">
+                                    <div class="schedule-date">
+                                        <div class="day">WED</div>
+                                        <div class="date">Jan 22</div>
+                                    </div>
+                                    <div class="schedule-content">
+                                        <div class="waste-type">
+                                            <i class="bi bi-recycle text-info"></i>
+                                            <span>Recyclables</span>
+                                        </div>
+                                        <div class="schedule-time">6:00 AM - 10:00 AM</div>
+                                    </div>
+                                </div>
+
+                                <div class="schedule-item">
+                                    <div class="schedule-date">
+                                        <div class="day">FRI</div>
+                                        <div class="date">Jan 24</div>
+                                    </div>
+                                    <div class="schedule-content">
+                                        <div class="waste-type">
+                                            <i class="bi bi-trash3 text-success"></i>
+                                            <span>General Waste</span>
+                                        </div>
+                                        <div class="schedule-time">6:00 AM - 10:00 AM</div>
+                                    </div>
+                                </div>
+
+                                <div class="schedule-item">
+                                    <div class="schedule-date">
+                                        <div class="day">SAT</div>
+                                        <div class="date">Jan 25</div>
+                                    </div>
+                                    <div class="schedule-content">
+                                        <div class="waste-type">
+                                            <i class="bi bi-tree text-warning"></i>
+                                            <span>Garden Waste</span>
+                                        </div>
+                                        <div class="schedule-time">7:00 AM - 11:00 AM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Collection History -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5 class="card-title">Collection History</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Waste Type</th>
+                                            <th>Scheduled Time</th>
+                                            <th>Actual Time</th>
+                                            <th>Weight</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Jan 17, 2026</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-trash3 text-success"></i>
+                                                    <span>General Waste</span>
+                                                </div>
+                                            </td>
+                                            <td>6:00 AM - 10:00 AM</td>
+                                            <td>7:45 AM</td>
+                                            <td>45 kg</td>
+                                            <td><span class="badge badge-success">Collected</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jan 15, 2026</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-recycle text-info"></i>
+                                                    <span>Recyclables</span>
+                                                </div>
+                                            </td>
+                                            <td>6:00 AM - 10:00 AM</td>
+                                            <td>8:15 AM</td>
+                                            <td>18 kg</td>
+                                            <td><span class="badge badge-success">Collected</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jan 13, 2026</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-trash3 text-success"></i>
+                                                    <span>General Waste</span>
+                                                </div>
+                                            </td>
+                                            <td>6:00 AM - 10:00 AM</td>
+                                            <td>—</td>
+                                            <td>—</td>
+                                            <td><span class="badge badge-danger">Missed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jan 11, 2026</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-tree text-warning"></i>
+                                                    <span>Garden Waste</span>
+                                                </div>
+                                            </td>
+                                            <td>7:00 AM - 11:00 AM</td>
+                                            <td>9:30 AM</td>
+                                            <td>62 kg</td>
+                                            <td><span class="badge badge-success">Collected</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jan 10, 2026</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-trash3 text-success"></i>
+                                                    <span>General Waste</span>
+                                                </div>
+                                            </td>
+                                            <td>6:00 AM - 10:00 AM</td>
+                                            <td>8:00 AM</td>
+                                            <td>38 kg</td>
+                                            <td><span class="badge badge-success">Collected</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jan 8, 2026</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-recycle text-info"></i>
+                                                    <span>Recyclables</span>
+                                                </div>
+                                            </td>
+                                            <td>6:00 AM - 10:00 AM</td>
+                                            <td>7:30 AM</td>
+                                            <td>22 kg</td>
+                                            <td><span class="badge badge-success">Collected</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Waste Guidelines -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title">Waste Categories</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="waste-category-list">
+                                <div class="waste-category-item">
+                                    <div class="category-icon" style="background: rgba(16, 185, 129, 0.1);">
+                                        <i class="bi bi-trash3 text-success"></i>
+                                    </div>
+                                    <div class="category-content">
+                                        <div class="category-name">General Waste</div>
+                                        <div class="category-schedule">Mon & Fri</div>
+                                    </div>
+                                </div>
+
+                                <div class="waste-category-item">
+                                    <div class="category-icon" style="background: rgba(6, 182, 212, 0.1);">
+                                        <i class="bi bi-recycle text-info"></i>
+                                    </div>
+                                    <div class="category-content">
+                                        <div class="category-name">Recyclables</div>
+                                        <div class="category-schedule">Wednesday</div>
+                                    </div>
+                                </div>
+
+                                <div class="waste-category-item">
+                                    <div class="category-icon" style="background: rgba(245, 158, 11, 0.1);">
+                                        <i class="bi bi-tree text-warning"></i>
+                                    </div>
+                                    <div class="category-content">
+                                        <div class="category-name">Garden Waste</div>
+                                        <div class="category-schedule">Saturday</div>
+                                    </div>
+                                </div>
+
+                                <div class="waste-category-item">
+                                    <div class="category-icon" style="background: rgba(239, 68, 68, 0.1);">
+                                        <i class="bi bi-exclamation-triangle text-danger"></i>
+                                    </div>
+                                    <div class="category-content">
+                                        <div class="category-name">Hazardous Waste</div>
+                                        <div class="category-schedule">By Appointment</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title">Quick Actions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary">
+                                    <i class="bi bi-exclamation-circle"></i> Report Missed Collection
+                                </button>
+                                <button class="btn btn-outline-primary">
+                                    <i class="bi bi-calendar-plus"></i> Request Special Pickup
+                                </button>
+                                <button class="btn btn-outline-primary">
+                                    <i class="bi bi-info-circle"></i> Waste Guidelines
+                                </button>
+                                <button class="btn btn-outline-primary">
+                                    <i class="bi bi-map"></i> Find Drop-off Center
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tips -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Waste Reduction Tips</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="tip-item">
+                                <i class="bi bi-lightbulb text-warning"></i>
+                                <p>Separate recyclables from general waste to increase recycling rates</p>
+                            </div>
+                            <div class="tip-item">
+                                <i class="bi bi-lightbulb text-warning"></i>
+                                <p>Compost organic waste to reduce landfill contribution</p>
+                            </div>
+                            <div class="tip-item">
+                                <i class="bi bi-lightbulb text-warning"></i>
+                                <p>Flatten cardboard boxes to save space in recycling bins</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zone Collection Schedule -->
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Zone-wise Collection Schedule</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Zone</th>
+                                            <th>Area Name</th>
+                                            <th>General Waste</th>
+                                            <th>Recyclables</th>
+                                            <th>Garden Waste</th>
+                                            <th>Collection Time</th>
+                                            <th>Next Collection</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="zone-badge zone-a">Zone A</span></td>
+                                            <td>Downtown District</td>
+                                            <td>Mon, Wed, Fri</td>
+                                            <td>Tuesday</td>
+                                            <td>Saturday</td>
+                                            <td>6:00 AM - 10:00 AM</td>
+                                            <td><span class="badge badge-success">Tomorrow</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="zone-badge zone-b">Zone B</span></td>
+                                            <td>Residential North</td>
+                                            <td>Mon, Thu</td>
+                                            <td>Wednesday</td>
+                                            <td>Saturday</td>
+                                            <td>6:00 AM - 10:00 AM</td>
+                                            <td><span class="badge badge-warning">In 2 Days</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="zone-badge zone-c">Zone C</span></td>
+                                            <td>Business Center</td>
+                                            <td>Daily</td>
+                                            <td>Wed, Fri</td>
+                                            <td>—</td>
+                                            <td>5:00 AM - 9:00 AM</td>
+                                            <td><span class="badge badge-success">Tomorrow</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="zone-badge zone-d">Zone D</span></td>
+                                            <td>Suburban East</td>
+                                            <td>Tue, Fri</td>
+                                            <td>Thursday</td>
+                                            <td>Saturday</td>
+                                            <td>7:00 AM - 11:00 AM</td>
+                                            <td><span class="badge badge-warning">In 3 Days</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="zone-badge zone-e">Zone E</span></td>
+                                            <td>Industrial Area</td>
+                                            <td>Mon, Wed, Fri</td>
+                                            <td>Tuesday</td>
+                                            <td>—</td>
+                                            <td>5:00 AM - 9:00 AM</td>
+                                            <td><span class="badge badge-success">Tomorrow</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="zone-badge zone-f">Zone F</span></td>
+                                            <td>Residential South</td>
+                                            <td>Mon, Thu</td>
+                                            <td>Wednesday</td>
+                                            <td>Saturday</td>
+                                            <td>6:00 AM - 10:00 AM</td>
+                                            <td><span class="badge badge-warning">In 2 Days</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="zone-badge zone-g">Zone G</span></td>
+                                            <td>Suburban West</td>
+                                            <td>Tue, Fri</td>
+                                            <td>Thursday</td>
+                                            <td>Saturday</td>
+                                            <td>7:00 AM - 11:00 AM</td>
+                                            <td><span class="badge badge-warning">In 3 Days</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="zone-badge zone-h">Zone H</span></td>
+                                            <td>Coastal Area</td>
+                                            <td>Wed, Sat</td>
+                                            <td>Friday</td>
+                                            <td>Saturday</td>
+                                            <td>6:00 AM - 10:00 AM</td>
+                                            <td><span class="badge badge-success">Tomorrow</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -289,6 +732,7 @@
 
     <!-- Custom JS -->
     <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/waste.js"></script>
 
 </body>
 

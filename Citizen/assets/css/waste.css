@@ -1,0 +1,446 @@
+/* ============================================
+   WASTE COLLECTION SCHEDULE PAGE - CUSTOM STYLES
+   ============================================ */
+
+/* Schedule Grid */
+.schedule-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.schedule-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border-left: 4px solid var(--border-color);
+    transition: all var(--transition-base);
+}
+
+.schedule-item:hover {
+    background: var(--bg-tertiary);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+}
+
+.schedule-item.schedule-today {
+    border-left-color: var(--success-color);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.schedule-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    padding: 0.75rem;
+    background: var(--bg-primary);
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+}
+
+.schedule-date .day {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.schedule-date .date {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 0.25rem;
+}
+
+.schedule-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.waste-type {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.125rem;
+}
+
+.waste-type i {
+    font-size: 1.5rem;
+}
+
+.schedule-time {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Waste Category List */
+.waste-category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.waste-category-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    transition: all var(--transition-fast);
+}
+
+.waste-category-item:hover {
+    background: var(--bg-tertiary);
+    transform: translateX(4px);
+}
+
+.category-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.category-content {
+    flex: 1;
+}
+
+.category-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.category-schedule {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Zone Badges */
+.zone-badge {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-align: center;
+    min-width: 70px;
+}
+
+.zone-badge.zone-a {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+}
+
+.zone-badge.zone-b {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.zone-badge.zone-c {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+.zone-badge.zone-d {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+.zone-badge.zone-e {
+    background: rgba(124, 58, 237, 0.1);
+    color: var(--secondary-color);
+}
+
+.zone-badge.zone-f {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--info-color);
+}
+
+.zone-badge.zone-g {
+    background: rgba(236, 72, 153, 0.1);
+    color: #ec4899;
+}
+
+.zone-badge.zone-h {
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+}
+
+/* Tip Items */
+.tip-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tip-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.tip-item i {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+
+.tip-item p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Collection Status Badge */
+.collection-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.collection-status.status-collected {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.collection-status.status-pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+.collection-status.status-missed {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+/* Calendar View */
+.calendar-view {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.calendar-day:hover {
+    background: var(--bg-tertiary);
+    transform: translateY(-2px);
+}
+
+.calendar-day.has-collection {
+    background: rgba(37, 99, 235, 0.1);
+    border: 2px solid var(--primary-color);
+}
+
+.calendar-day .day-number {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.calendar-day .collection-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    margin-top: 0.25rem;
+}
+
+/* Statistics Cards */
+.stat-card {
+    cursor: pointer;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Weight Display */
+.weight-display {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Quick Action Buttons */
+.btn-outline-primary:hover i {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .schedule-item {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .schedule-date {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.5rem 1rem;
+    }
+    
+    .schedule-date .day {
+        font-size: 1rem;
+    }
+    
+    .schedule-date .date {
+        font-size: 1.125rem;
+    }
+    
+    .waste-type {
+        font-size: 1rem;
+    }
+    
+    .calendar-view {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Loading State */
+.schedule-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: var(--text-tertiary);
+}
+
+.schedule-loading i {
+    font-size: 2rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-tertiary);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: var(--text-secondary);
+}
+
+/* Hover Effects */
+.table tbody tr:hover {
+    background: var(--bg-secondary);
+    cursor: pointer;
+}
+
+/* Icon Animations */
+.waste-type i {
+    transition: transform 0.3s ease;
+}
+
+.schedule-item:hover .waste-type i {
+    transform: scale(1.1);
+}
+
+/* Progress Indicator */
+.collection-progress {
+    height: 4px;
+    background: var(--bg-tertiary);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.collection-progress-bar {
+    height: 100%;
+    background: var(--success-color);
+    border-radius: 2px;
+    transition: width 0.6s ease;
+}
+
+/* Notification Banner */
+.collection-notification {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(37, 99, 235, 0.1);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.collection-notification i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.collection-notification .notification-content {
+    flex: 1;
+}
+
+.collection-notification .notification-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.collection-notification .notification-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .schedule-item.schedule-today {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+[data-theme="dark"] .schedule-date {
+    background: var(--bg-tertiary);
+}

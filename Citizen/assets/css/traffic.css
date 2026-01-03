@@ -1,0 +1,439 @@
+/* ============================================
+   TRAFFIC & TRANSPORTATION PAGE - CUSTOM STYLES
+   ============================================ */
+
+/* Traffic Legend */
+.traffic-legend {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Incident List */
+.incident-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.incident-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    border-left: 4px solid transparent;
+    transition: all var(--transition-fast);
+}
+
+.incident-item:hover {
+    background: var(--bg-tertiary);
+    transform: translateX(4px);
+}
+
+.incident-item.incident-high {
+    border-left-color: var(--danger-color);
+}
+
+.incident-item.incident-medium {
+    border-left-color: var(--warning-color);
+}
+
+.incident-item.incident-low {
+    border-left-color: var(--info-color);
+}
+
+.incident-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.incident-high .incident-icon {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+.incident-medium .incident-icon {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+.incident-low .incident-icon {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--info-color);
+}
+
+.incident-content {
+    flex: 1;
+}
+
+.incident-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.incident-location {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.incident-time {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-top: 0.25rem;
+}
+
+.incident-badge {
+    flex-shrink: 0;
+}
+
+/* Route Badge */
+.route-badge {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-align: center;
+    min-width: 50px;
+}
+
+.route-badge.route-1 {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+}
+
+.route-badge.route-2 {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.route-badge.route-3 {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+.route-badge.route-4 {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+.route-badge.route-5 {
+    background: rgba(124, 58, 237, 0.1);
+    color: var(--secondary-color);
+}
+
+.route-badge.route-6 {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--info-color);
+}
+
+/* Traffic Area List */
+.traffic-area-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.traffic-area-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.area-info {
+    min-width: 180px;
+}
+
+.area-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.area-vehicles {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.area-status {
+    min-width: 100px;
+    text-align: right;
+}
+
+/* Progress Bar Custom */
+.progress {
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+}
+
+.progress-bar {
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+
+/* Parking List */
+.parking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.parking-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    transition: all var(--transition-fast);
+}
+
+.parking-item:hover {
+    background: var(--bg-tertiary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.parking-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    background: rgba(37, 99, 235, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.parking-info {
+    flex: 1;
+}
+
+.parking-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.parking-spaces {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.parking-percentage {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Status Dot Animation */
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+}
+
+/* Traffic Map */
+#trafficMap {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Trend Indicators */
+.stat-trend {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.25rem 0.625rem;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.stat-trend.positive {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.stat-trend.negative {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+/* Table Enhancements */
+.table tbody tr:hover {
+    background: var(--bg-secondary);
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Real-time Update Indicator */
+.update-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.update-indicator::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+/* Traffic Density Colors */
+.density-light {
+    color: var(--success-color);
+}
+
+.density-moderate {
+    color: var(--warning-color);
+}
+
+.density-heavy {
+    color: var(--danger-color);
+}
+
+/* Violation Status */
+.violation-paid {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.violation-pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+.violation-unpaid {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .traffic-legend {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .incident-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .incident-badge {
+        align-self: flex-start;
+    }
+    
+    .traffic-area-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .progress {
+        width: 100%;
+    }
+    
+    .area-status {
+        align-self: flex-start;
+        text-align: left;
+    }
+    
+    .parking-percentage {
+        font-size: 1rem;
+    }
+}
+
+/* Loading Animation */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.loading-skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--bg-tertiary) 25%,
+        var(--bg-secondary) 50%,
+        var(--bg-tertiary) 75%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Live Update Badge */
+.live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.live-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}

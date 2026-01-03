@@ -14,6 +14,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/traffic.css">
+    <link rel="stylesheet" href="assets/css/notifications.css">
 </head>
 
 <body>
@@ -221,7 +223,479 @@
     <main class="citizen-main-content">
         <div class="content-wrapper">
 
+            <!-- TRAFFIC & TRANSPORTATION PAGE - MAIN CONTENT ONLY -->
+            <!-- Insert this inside .page-content div after page-header -->
 
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Traffic & Transportation</h1>
+                    <p class="page-subtitle">Real-time traffic monitoring and public transport information</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-outline-primary">
+                        <i class="bi bi-download"></i> Export Report
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="bi bi-funnel"></i> Filter Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards Row -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card stat-primary">
+                        <div class="stat-icon">
+                            <i class="bi bi-car-front"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">45,234</div>
+                            <div class="stat-label">Vehicles Today</div>
+                        </div>
+                        <div class="stat-trend positive">
+                            <i class="bi bi-arrow-up"></i> 8.2%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card stat-success">
+                        <div class="stat-icon">
+                            <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">42 km/h</div>
+                            <div class="stat-label">Average Speed</div>
+                        </div>
+                        <div class="stat-trend positive">
+                            <i class="bi bi-arrow-up"></i> 5.3%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card stat-warning">
+                        <div class="stat-icon">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">7</div>
+                            <div class="stat-label">Active Incidents</div>
+                        </div>
+                        <div class="stat-trend negative">
+                            <i class="bi bi-arrow-down"></i> 15%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card stat-info">
+                        <div class="stat-icon">
+                            <i class="bi bi-bus-front"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">98.5%</div>
+                            <div class="stat-label">Transit On-Time</div>
+                        </div>
+                        <div class="stat-trend positive">
+                            <i class="bi bi-arrow-up"></i> 2.1%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Traffic Map & Live Incidents -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title">Live Traffic Map</h5>
+                            <div class="d-flex gap-2">
+                                <span class="status-badge badge-success">
+                                    <span class="status-dot"></span> Live
+                                </span>
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-arrow-clockwise"></i> Refresh
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="trafficMap"
+                                style="height: 450px; background: var(--bg-secondary); border: 2px dashed var(--border-color); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-tertiary);">
+                                <div class="text-center">
+                                    <i class="bi bi-geo-alt" style="font-size: 3rem;"></i>
+                                    <p class="mb-0 mt-2">Interactive traffic map will be displayed here</p>
+                                    <small>Live traffic density, incidents, and road closures</small>
+                                </div>
+                            </div>
+
+                            <!-- Map Legend -->
+                            <div class="traffic-legend mt-3">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #10b981;"></span>
+                                    <span>Light Traffic</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #f59e0b;"></span>
+                                    <span>Moderate Traffic</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #ef4444;"></span>
+                                    <span>Heavy Traffic</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #6b7280;"></span>
+                                    <span>Road Closed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Active Incidents</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="incident-list">
+                                <div class="incident-item incident-high">
+                                    <div class="incident-icon">
+                                        <i class="bi bi-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="incident-content">
+                                        <div class="incident-title">Major Accident</div>
+                                        <div class="incident-location">Highway 101, Exit 45</div>
+                                        <div class="incident-time">15 mins ago</div>
+                                    </div>
+                                    <div class="incident-badge">
+                                        <span class="badge badge-danger">High</span>
+                                    </div>
+                                </div>
+
+                                <div class="incident-item incident-medium">
+                                    <div class="incident-icon">
+                                        <i class="bi bi-cone-striped"></i>
+                                    </div>
+                                    <div class="incident-content">
+                                        <div class="incident-title">Road Construction</div>
+                                        <div class="incident-location">Main Street & 5th Ave</div>
+                                        <div class="incident-time">2 hours ago</div>
+                                    </div>
+                                    <div class="incident-badge">
+                                        <span class="badge badge-warning">Medium</span>
+                                    </div>
+                                </div>
+
+                                <div class="incident-item incident-low">
+                                    <div class="incident-icon">
+                                        <i class="bi bi-car-front"></i>
+                                    </div>
+                                    <div class="incident-content">
+                                        <div class="incident-title">Vehicle Breakdown</div>
+                                        <div class="incident-location">Park Avenue, Lane 2</div>
+                                        <div class="incident-time">45 mins ago</div>
+                                    </div>
+                                    <div class="incident-badge">
+                                        <span class="badge badge-info">Low</span>
+                                    </div>
+                                </div>
+
+                                <div class="incident-item incident-medium">
+                                    <div class="incident-icon">
+                                        <i class="bi bi-stoplights"></i>
+                                    </div>
+                                    <div class="incident-content">
+                                        <div class="incident-title">Traffic Light Malfunction</div>
+                                        <div class="incident-location">Oak St & Broadway</div>
+                                        <div class="incident-time">1 hour ago</div>
+                                    </div>
+                                    <div class="incident-badge">
+                                        <span class="badge badge-warning">Medium</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Public Transport & Traffic Flow -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Bus Routes Status</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Route</th>
+                                            <th>Name</th>
+                                            <th>Status</th>
+                                            <th>Next Bus</th>
+                                            <th>Delay</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="route-badge route-1">101</span></td>
+                                            <td>Downtown Express</td>
+                                            <td><span class="badge badge-success">On Time</span></td>
+                                            <td>5 mins</td>
+                                            <td>—</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="route-badge route-2">205</span></td>
+                                            <td>City Circle</td>
+                                            <td><span class="badge badge-success">On Time</span></td>
+                                            <td>8 mins</td>
+                                            <td>—</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="route-badge route-3">312</span></td>
+                                            <td>Airport Shuttle</td>
+                                            <td><span class="badge badge-warning">Delayed</span></td>
+                                            <td>12 mins</td>
+                                            <td>+5 mins</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="route-badge route-4">420</span></td>
+                                            <td>Suburban Line</td>
+                                            <td><span class="badge badge-success">On Time</span></td>
+                                            <td>3 mins</td>
+                                            <td>—</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="route-badge route-5">515</span></td>
+                                            <td>North Route</td>
+                                            <td><span class="badge badge-warning">Delayed</span></td>
+                                            <td>15 mins</td>
+                                            <td>+7 mins</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="route-badge route-6">622</span></td>
+                                            <td>South Express</td>
+                                            <td><span class="badge badge-success">On Time</span></td>
+                                            <td>6 mins</td>
+                                            <td>—</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Traffic Density by Area</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="traffic-area-list">
+                                <div class="traffic-area-item">
+                                    <div class="area-info">
+                                        <div class="area-name">Downtown District</div>
+                                        <div class="area-vehicles">12,450 vehicles</div>
+                                    </div>
+                                    <div class="progress" style="height: 10px; flex: 1; margin: 0 1rem;">
+                                        <div class="progress-bar bg-danger" style="width: 85%"></div>
+                                    </div>
+                                    <div class="area-status">
+                                        <span class="badge badge-danger">Heavy</span>
+                                    </div>
+                                </div>
+
+                                <div class="traffic-area-item">
+                                    <div class="area-info">
+                                        <div class="area-name">Business Center</div>
+                                        <div class="area-vehicles">8,230 vehicles</div>
+                                    </div>
+                                    <div class="progress" style="height: 10px; flex: 1; margin: 0 1rem;">
+                                        <div class="progress-bar bg-warning" style="width: 65%"></div>
+                                    </div>
+                                    <div class="area-status">
+                                        <span class="badge badge-warning">Moderate</span>
+                                    </div>
+                                </div>
+
+                                <div class="traffic-area-item">
+                                    <div class="area-info">
+                                        <div class="area-name">Residential North</div>
+                                        <div class="area-vehicles">3,890 vehicles</div>
+                                    </div>
+                                    <div class="progress" style="height: 10px; flex: 1; margin: 0 1rem;">
+                                        <div class="progress-bar bg-success" style="width: 35%"></div>
+                                    </div>
+                                    <div class="area-status">
+                                        <span class="badge badge-success">Light</span>
+                                    </div>
+                                </div>
+
+                                <div class="traffic-area-item">
+                                    <div class="area-info">
+                                        <div class="area-name">Industrial Zone</div>
+                                        <div class="area-vehicles">5,670 vehicles</div>
+                                    </div>
+                                    <div class="progress" style="height: 10px; flex: 1; margin: 0 1rem;">
+                                        <div class="progress-bar bg-warning" style="width: 55%"></div>
+                                    </div>
+                                    <div class="area-status">
+                                        <span class="badge badge-warning">Moderate</span>
+                                    </div>
+                                </div>
+
+                                <div class="traffic-area-item">
+                                    <div class="area-info">
+                                        <div class="area-name">Suburban Areas</div>
+                                        <div class="area-vehicles">2,120 vehicles</div>
+                                    </div>
+                                    <div class="progress" style="height: 10px; flex: 1; margin: 0 1rem;">
+                                        <div class="progress-bar bg-success" style="width: 25%"></div>
+                                    </div>
+                                    <div class="area-status">
+                                        <span class="badge badge-success">Light</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parking & Traffic Violations -->
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Parking Availability</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="parking-list">
+                                <div class="parking-item">
+                                    <div class="parking-icon">
+                                        <i class="bi bi-p-square"></i>
+                                    </div>
+                                    <div class="parking-info">
+                                        <div class="parking-name">Central Mall Parking</div>
+                                        <div class="parking-spaces">145/300 spaces available</div>
+                                    </div>
+                                    <div class="parking-percentage">48%</div>
+                                </div>
+
+                                <div class="parking-item">
+                                    <div class="parking-icon">
+                                        <i class="bi bi-p-square"></i>
+                                    </div>
+                                    <div class="parking-info">
+                                        <div class="parking-name">City Center Garage</div>
+                                        <div class="parking-spaces">23/250 spaces available</div>
+                                    </div>
+                                    <div class="parking-percentage text-danger">9%</div>
+                                </div>
+
+                                <div class="parking-item">
+                                    <div class="parking-icon">
+                                        <i class="bi bi-p-square"></i>
+                                    </div>
+                                    <div class="parking-info">
+                                        <div class="parking-name">Park & Ride Station A</div>
+                                        <div class="parking-spaces">180/200 spaces available</div>
+                                    </div>
+                                    <div class="parking-percentage text-success">90%</div>
+                                </div>
+
+                                <div class="parking-item">
+                                    <div class="parking-icon">
+                                        <i class="bi bi-p-square"></i>
+                                    </div>
+                                    <div class="parking-info">
+                                        <div class="parking-name">Stadium Parking Lot</div>
+                                        <div class="parking-spaces">450/500 spaces available</div>
+                                    </div>
+                                    <div class="parking-percentage text-success">90%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Recent Traffic Violations</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Violation ID</th>
+                                            <th>Type</th>
+                                            <th>Location</th>
+                                            <th>Date & Time</th>
+                                            <th>Vehicle</th>
+                                            <th>Fine</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>#VIO-2451</strong></td>
+                                            <td>Speeding</td>
+                                            <td>Highway 101</td>
+                                            <td>Jan 15, 10:30 AM</td>
+                                            <td>ABC-1234</td>
+                                            <td>$150</td>
+                                            <td><span class="badge badge-warning">Pending</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>#VIO-2450</strong></td>
+                                            <td>Red Light</td>
+                                            <td>Main St & 5th Ave</td>
+                                            <td>Jan 15, 09:15 AM</td>
+                                            <td>XYZ-5678</td>
+                                            <td>$200</td>
+                                            <td><span class="badge badge-warning">Pending</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>#VIO-2449</strong></td>
+                                            <td>Illegal Parking</td>
+                                            <td>Park Avenue</td>
+                                            <td>Jan 14, 03:45 PM</td>
+                                            <td>DEF-9012</td>
+                                            <td>$75</td>
+                                            <td><span class="badge badge-success">Paid</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>#VIO-2448</strong></td>
+                                            <td>Stop Sign Violation</td>
+                                            <td>Oak St & Elm Rd</td>
+                                            <td>Jan 14, 11:20 AM</td>
+                                            <td>GHI-3456</td>
+                                            <td>$125</td>
+                                            <td><span class="badge badge-warning">Pending</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>#VIO-2447</strong></td>
+                                            <td>Speeding</td>
+                                            <td>School Zone, Cedar St</td>
+                                            <td>Jan 13, 08:00 AM</td>
+                                            <td>JKL-7890</td>
+                                            <td>$250</td>
+                                            <td><span class="badge badge-danger">Unpaid</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -289,6 +763,7 @@
 
     <!-- Custom JS -->
     <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/traffic.js"></script>
 
 </body>
 
