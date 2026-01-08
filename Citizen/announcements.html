@@ -14,6 +14,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/announcements.css">
 </head>
 
 <body>
@@ -221,8 +222,482 @@
     <main class="citizen-main-content">
         <div class="content-wrapper">
 
+            <!-- ANNOUNCEMENTS PAGE - MAIN CONTENT ONLY -->
+            <!-- Insert this inside .page-content div after page-header -->
 
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">City Announcements</h1>
+                    <p class="page-subtitle">Stay updated with the latest news and events</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-outline-primary" id="filterAnnouncementsBtn">
+                        <i class="bi bi-funnel"></i> Filter
+                    </button>
+                    <button class="btn btn-primary" id="refreshAnnouncementsBtn">
+                        <i class="bi bi-arrow-clockwise"></i> Refresh
+                    </button>
+                </div>
+            </div>
 
+            <!-- Filter Bar -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-lg-4">
+                            <div class="search-box-custom">
+                                <i class="bi bi-search"></i>
+                                <input type="text" id="searchAnnouncement" class="form-control"
+                                    placeholder="Search announcements...">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <select class="form-select" id="categoryFilterAnn">
+                                <option value="all">All Categories</option>
+                                <option value="alert">Alerts</option>
+                                <option value="event">Events</option>
+                                <option value="news">News</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="update">Updates</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3">
+                            <select class="form-select" id="priorityFilterAnn">
+                                <option value="all">All Priority</option>
+                                <option value="urgent">Urgent</option>
+                                <option value="important">Important</option>
+                                <option value="normal">Normal</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <button class="btn btn-outline-secondary w-100" id="clearAnnouncementFilters">
+                                <i class="bi bi-x-circle"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Urgent Announcements Banner -->
+            <div class="alert alert-danger border-0 mb-4" role="alert">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="alert-icon-large">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h5 class="alert-heading mb-2">🚨 Urgent: Water Supply Maintenance</h5>
+                        <p class="mb-2">Scheduled maintenance will affect water supply in Districts 5 and 6 on January
+                            20, 2026, from 9:00 AM to 3:00 PM.</p>
+                        <button class="btn btn-sm btn-light" onclick="viewAnnouncementDetail('ANN-001')">Read
+                            More</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Announcements Grid -->
+            <div class="row g-4" id="announcementsContainer">
+
+                <!-- Announcement Card 1 -->
+                <div class="col-lg-6" data-category="alert" data-priority="urgent">
+                    <div class="announcement-card announcement-urgent">
+                        <div class="announcement-badge-corner">
+                            <span class="badge badge-danger">Urgent</span>
+                        </div>
+                        <div class="announcement-header">
+                            <div class="announcement-category">
+                                <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+                                <span>Alert</span>
+                            </div>
+                            <div class="announcement-date">
+                                <span>Jan 18, 2026</span>
+                            </div>
+                        </div>
+                        <div class="announcement-body">
+                            <h4 class="announcement-title">Emergency Road Closure</h4>
+                            <p class="announcement-excerpt">Highway 101 will be closed for emergency repairs from
+                                January 19-21. Alternative routes are available via Highway 50.</p>
+                            <div class="announcement-tags">
+                                <span class="tag tag-danger">Traffic</span>
+                                <span class="tag tag-danger">Emergency</span>
+                            </div>
+                        </div>
+                        <div class="announcement-footer">
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewAnnouncementDetail('ANN-002')">
+                                <i class="bi bi-eye"></i> Read More
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="shareAnnouncement('ANN-002')">
+                                <i class="bi bi-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcement Card 2 -->
+                <div class="col-lg-6" data-category="event" data-priority="important">
+                    <div class="announcement-card announcement-important">
+                        <div class="announcement-badge-corner">
+                            <span class="badge badge-warning">Important</span>
+                        </div>
+                        <div class="announcement-header">
+                            <div class="announcement-category">
+                                <i class="bi bi-calendar-event text-primary"></i>
+                                <span>Event</span>
+                            </div>
+                            <div class="announcement-date">
+                                <!-- <i class="bi bi-calendar"></i> -->
+                                <span>Jan 17, 2026</span>
+                            </div>
+                        </div>
+                        <div class="announcement-body">
+                            <h4 class="announcement-title">City Marathon 2026</h4>
+                            <p class="announcement-excerpt">Annual City Marathon scheduled for February 15. Registration
+                                now open. Road closures will be in effect from 6 AM to 12 PM.</p>
+                            <div class="announcement-tags">
+                                <span class="tag tag-primary">Sports</span>
+                                <span class="tag tag-primary">Community</span>
+                            </div>
+                        </div>
+                        <div class="announcement-footer">
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewAnnouncementDetail('ANN-003')">
+                                <i class="bi bi-eye"></i> Read More
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="shareAnnouncement('ANN-003')">
+                                <i class="bi bi-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcement Card 3 -->
+                <div class="col-lg-6" data-category="news" data-priority="normal">
+                    <div class="announcement-card">
+                        <div class="announcement-header">
+                            <div class="announcement-category">
+                                <i class="bi bi-newspaper text-info"></i>
+                                <span>News</span>
+                            </div>
+                            <div class="announcement-date">
+                                <!-- <i class="bi bi-calendar"></i> -->
+                                <span>Jan 16, 2026</span>
+                            </div>
+                        </div>
+                        <div class="announcement-body">
+                            <h4 class="announcement-title">New Park Opening in District 3</h4>
+                            <p class="announcement-excerpt">Greenwood Park officially opens next month. The 15-acre park
+                                features playgrounds, walking trails, and picnic areas.</p>
+                            <div class="announcement-tags">
+                                <span class="tag tag-success">Parks</span>
+                                <span class="tag tag-success">Recreation</span>
+                            </div>
+                        </div>
+                        <div class="announcement-footer">
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewAnnouncementDetail('ANN-004')">
+                                <i class="bi bi-eye"></i> Read More
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="shareAnnouncement('ANN-004')">
+                                <i class="bi bi-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcement Card 4 -->
+                <div class="col-lg-6" data-category="maintenance" data-priority="important">
+                    <div class="announcement-card announcement-important">
+                        <div class="announcement-badge-corner">
+                            <span class="badge badge-warning">Important</span>
+                        </div>
+                        <div class="announcement-header">
+                            <div class="announcement-category">
+                                <i class="bi bi-tools text-warning"></i>
+                                <span>Maintenance</span>
+                            </div>
+                            <div class="announcement-date">
+                                <!-- <i class="bi bi-calendar"></i> -->
+                                <span>Jan 15, 2026</span>
+                            </div>
+                        </div>
+                        <div class="announcement-body">
+                            <h4 class="announcement-title">Scheduled Power Maintenance</h4>
+                            <p class="announcement-excerpt">Power grid maintenance in Zones A & B on January 25.
+                                Expected duration: 4 hours (8 AM - 12 PM).</p>
+                            <div class="announcement-tags">
+                                <span class="tag tag-warning">Utilities</span>
+                                <span class="tag tag-warning">Power</span>
+                            </div>
+                        </div>
+                        <div class="announcement-footer">
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewAnnouncementDetail('ANN-005')">
+                                <i class="bi bi-eye"></i> Read More
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="shareAnnouncement('ANN-005')">
+                                <i class="bi bi-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcement Card 5 -->
+                <div class="col-lg-6" data-category="update" data-priority="normal">
+                    <div class="announcement-card">
+                        <div class="announcement-header">
+                            <div class="announcement-category">
+                                <i class="bi bi-arrow-repeat text-success"></i>
+                                <span>Update</span>
+                            </div>
+                            <div class="announcement-date">
+                                <!-- <i class="bi bi-calendar"></i> -->
+                                <span>Jan 14, 2026</span>
+                            </div>
+                        </div>
+                        <div class="announcement-body">
+                            <h4 class="announcement-title">Mobile App Update Available</h4>
+                            <p class="announcement-excerpt">Version 3.5 of the City Services app is now available. New
+                                features include real-time tracking and improved navigation.</p>
+                            <div class="announcement-tags">
+                                <span class="tag tag-info">Technology</span>
+                                <span class="tag tag-info">App</span>
+                            </div>
+                        </div>
+                        <div class="announcement-footer">
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewAnnouncementDetail('ANN-006')">
+                                <i class="bi bi-eye"></i> Read More
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="shareAnnouncement('ANN-006')">
+                                <i class="bi bi-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcement Card 6 -->
+                <div class="col-lg-6" data-category="event" data-priority="normal">
+                    <div class="announcement-card">
+                        <div class="announcement-header">
+                            <div class="announcement-category">
+                                <i class="bi bi-calendar-event text-primary"></i>
+                                <span>Event</span>
+                            </div>
+                            <div class="announcement-date">
+                                <!-- <i class="bi bi-calendar"></i> -->
+                                <span>Jan 12, 2026</span>
+                            </div>
+                        </div>
+                        <div class="announcement-body">
+                            <h4 class="announcement-title">Community Town Hall Meeting</h4>
+                            <p class="announcement-excerpt">Join us for a community discussion on January 30 at City
+                                Hall. Topics include infrastructure improvements and public safety.</p>
+                            <div class="announcement-tags">
+                                <span class="tag tag-primary">Community</span>
+                                <span class="tag tag-primary">Meeting</span>
+                            </div>
+                        </div>
+                        <div class="announcement-footer">
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewAnnouncementDetail('ANN-007')">
+                                <i class="bi bi-eye"></i> Read More
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="shareAnnouncement('ANN-007')">
+                                <i class="bi bi-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcement Card 7 -->
+                <div class="col-lg-6" data-category="news" data-priority="normal">
+                    <div class="announcement-card">
+                        <div class="announcement-header">
+                            <div class="announcement-category">
+                                <i class="bi bi-newspaper text-info"></i>
+                                <span>News</span>
+                            </div>
+                            <div class="announcement-date">
+                                <!-- <i class="bi bi-calendar"></i> -->
+                                <span>Jan 10, 2026</span>
+                            </div>
+                        </div>
+                        <div class="announcement-body">
+                            <h4 class="announcement-title">Free WiFi Zones Expanded</h4>
+                            <p class="announcement-excerpt">Public WiFi now available in 20 additional locations across
+                                the city including parks, libraries, and community centers.</p>
+                            <div class="announcement-tags">
+                                <span class="tag tag-info">Technology</span>
+                                <span class="tag tag-info">Public Service</span>
+                            </div>
+                        </div>
+                        <div class="announcement-footer">
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewAnnouncementDetail('ANN-008')">
+                                <i class="bi bi-eye"></i> Read More
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="shareAnnouncement('ANN-008')">
+                                <i class="bi bi-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcement Card 8 -->
+                <div class="col-lg-6" data-category="alert" data-priority="normal">
+                    <div class="announcement-card">
+                        <div class="announcement-header">
+                            <div class="announcement-category">
+                                <i class="bi bi-info-circle text-warning"></i>
+                                <span>Alert</span>
+                            </div>
+                            <div class="announcement-date">
+                                <!-- <i class="bi bi-calendar"></i> -->
+                                <span>Jan 8, 2026</span>
+                            </div>
+                        </div>
+                        <div class="announcement-body">
+                            <h4 class="announcement-title">Waste Collection Holiday Schedule</h4>
+                            <p class="announcement-excerpt">Modified collection schedule for upcoming holidays.
+                                Collections normally on Monday will shift to Tuesday.</p>
+                            <div class="announcement-tags">
+                                <span class="tag tag-success">Waste Management</span>
+                                <span class="tag tag-success">Schedule</span>
+                            </div>
+                        </div>
+                        <div class="announcement-footer">
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewAnnouncementDetail('ANN-009')">
+                                <i class="bi bi-eye"></i> Read More
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="shareAnnouncement('ANN-009')">
+                                <i class="bi bi-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <div class="text-muted">
+                    Showing 8 of 24 announcements
+                </div>
+                <nav>
+                    <ul class="pagination mb-0">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Modal for Announcement Details -->
+            <div class="modal fade" id="announcementDetailModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Announcement Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" id="announcementModalBody">
+                            <!-- Dynamic content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ANNOUNCEMENT DETAIL MODAL -->
+        <!-- Add this before closing </body> tag -->
+
+        <div class="modal fade" id="announcementDetailModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Announcement Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="announcementModalBody">
+                        <!-- Content will be dynamically loaded -->
+                        <div class="announcement-detail-content">
+                            <div class="announcement-detail-header">
+                                <h3 class="announcement-detail-title">Emergency Road Closure</h3>
+                                <div class="announcement-detail-meta">
+                                    <div class="announcement-detail-meta-item">
+                                        <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+                                        <span>Alert</span>
+                                    </div>
+                                    <div class="announcement-detail-meta-item">
+                                        <i class="bi bi-calendar"></i>
+                                        <span>Jan 18, 2026</span>
+                                    </div>
+                                    <div class="announcement-detail-meta-item">
+                                        <span class="badge badge-danger">URGENT</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="announcement-detail-body">
+                                <p>Highway 101 will be closed for emergency repairs from January 19-21, 2026. The
+                                    closure is necessary due to structural issues discovered during routine inspection.
+                                </p>
+
+                                <h5>Affected Areas</h5>
+                                <ul>
+                                    <li>Highway 101 between Exit 25 and Exit 32</li>
+                                    <li>All connecting ramps in the affected section</li>
+                                    <li>Service roads adjacent to the highway</li>
+                                </ul>
+
+                                <h5>Alternative Routes</h5>
+                                <p>Drivers are advised to use the following alternative routes:</p>
+                                <ul>
+                                    <li><strong>Highway 50:</strong> Main alternative route with additional lane
+                                        capacity</li>
+                                    <li><strong>Route 7:</strong> Local road option for shorter distances</li>
+                                    <li><strong>Interstate 95:</strong> For long-distance travelers</li>
+                                </ul>
+
+                                <h5>Expected Impact</h5>
+                                <p>Traffic delays of 15-30 minutes are expected on alternative routes during peak hours.
+                                    Commuters are advised to:</p>
+                                <ul>
+                                    <li>Allow extra travel time</li>
+                                    <li>Consider carpooling or public transportation</li>
+                                    <li>Check real-time traffic updates before departure</li>
+                                </ul>
+
+                                <h5>Updates and Information</h5>
+                                <p>For real-time updates on the closure and reopening schedule, please:</p>
+                                <ul>
+                                    <li>Visit our traffic information website</li>
+                                    <li>Follow @CityTraffic on social media</li>
+                                    <li>Call our traffic hotline: (555) 123-4567</li>
+                                </ul>
+
+                                <div class="alert alert-info mt-4">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    <strong>Note:</strong> Emergency vehicles will have priority access. If reopening
+                                    occurs earlier than scheduled, notifications will be sent immediately.
+                                </div>
+                            </div>
+
+                            <div class="announcement-detail-footer">
+                                <button class="btn btn-primary" onclick="subscribeToUpdates('ANN-002')">
+                                    <i class="bi bi-bell"></i> Subscribe to Updates
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="shareAnnouncement('ANN-002')">
+                                    <i class="bi bi-share"></i> Share
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="printAnnouncement('ANN-002')">
+                                    <i class="bi bi-printer"></i> Print
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->
@@ -289,6 +764,9 @@
 
     <!-- Custom JS -->
     <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/announcements.js"></script>
+    <script src="assets/js/models.js"></script>
+
 
 </body>
 

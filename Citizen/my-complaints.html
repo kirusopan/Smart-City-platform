@@ -736,6 +736,191 @@
 
         </div>
 
+        <!-- COMPLAINT/REQUEST DETAIL MODAL -->
+        <!-- Add this before closing </body> tag -->
+
+        <div class="modal fade" id="requestDetailModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Request Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="modalBodyContent">
+                        <!-- Content will be dynamically loaded -->
+                        <div class="request-detail-content">
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-2">Request ID</h6>
+                                    <p class="request-id-display">#REQ-1045</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-2">Status</h6>
+                                    <span class="badge badge-warning">IN PROGRESS</span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-2">Category</h6>
+                                    <p class="detail-text">
+                                        <i class="bi bi-cone-striped text-primary me-2"></i>
+                                        Road Repair
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-2">Priority</h6>
+                                    <span class="badge badge-danger">HIGH</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="text-muted mb-2">Title</h6>
+                                <p class="detail-title">Pothole on Main Street</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="text-muted mb-2">Description</h6>
+                                <p class="detail-text">Large pothole causing traffic issues near the intersection of
+                                    Main Street and 5th Avenue. The pothole is approximately 2 feet in diameter and 6
+                                    inches deep, creating a hazard for vehicles and motorcycles.</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="text-muted mb-2">Location</h6>
+                                <p class="detail-text">
+                                    <i class="bi bi-geo-alt text-danger me-2"></i>
+                                    Main Street & 5th Avenue
+                                </p>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-2">Submitted Date</h6>
+                                    <p class="detail-text">
+                                        <i class="bi bi-calendar me-2"></i>
+                                        January 15, 2026
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-2">Expected Resolution</h6>
+                                    <p class="detail-text">
+                                        <i class="bi bi-clock me-2"></i>
+                                        January 20, 2026
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="text-muted mb-2">Progress</h6>
+                                <div class="progress-bar-container">
+                                    <div class="progress-label mb-2">
+                                        <span class="detail-text fw-semibold">60%</span>
+                                        <span class="text-muted">Team assigned and materials ordered</span>
+                                    </div>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-warning" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="text-muted mb-2">Assigned Team</h6>
+                                <div class="team-member">
+                                    <div class="team-avatar">
+                                        <i class="bi bi-person-circle"></i>
+                                    </div>
+                                    <div class="team-info">
+                                        <div class="team-name">Public Works Team A</div>
+                                        <div class="team-role">Road Maintenance Division</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="text-muted mb-2">Timeline</h6>
+                                <div class="timeline">
+                                    <div class="timeline-item completed">
+                                        <div class="timeline-content">
+                                            <div class="timeline-title">Request Submitted</div>
+                                            <div class="timeline-desc">Request received and logged in system</div>
+                                            <div class="timeline-time">January 15, 2026 - 10:30 AM</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item completed">
+                                        <div class="timeline-content">
+                                            <div class="timeline-title">Request Reviewed</div>
+                                            <div class="timeline-desc">Priority assessment completed</div>
+                                            <div class="timeline-time">January 15, 2026 - 2:45 PM</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item completed">
+                                        <div class="timeline-content">
+                                            <div class="timeline-title">Team Assigned</div>
+                                            <div class="timeline-desc">Public Works Team A dispatched</div>
+                                            <div class="timeline-time">January 16, 2026 - 9:00 AM</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item active">
+                                        <div class="timeline-content">
+                                            <div class="timeline-title">Work in Progress</div>
+                                            <div class="timeline-desc">Materials ordered, scheduled for repair</div>
+                                            <div class="timeline-time">Current Status</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-content">
+                                            <div class="timeline-title">Resolution</div>
+                                            <div class="timeline-desc">Awaiting completion</div>
+                                            <div class="timeline-time">Expected: January 20, 2026</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="text-muted mb-2">Updates & Notes</h6>
+                                <div class="update-item">
+                                    <div class="update-header">
+                                        <strong>Site inspection completed</strong>
+                                        <span class="update-time">Jan 16, 2026</span>
+                                    </div>
+                                    <p class="update-text">Engineering team assessed the damage. Repair materials have
+                                        been ordered and will arrive within 2 business days.</p>
+                                </div>
+                                <div class="update-item">
+                                    <div class="update-header">
+                                        <strong>Traffic management plan approved</strong>
+                                        <span class="update-time">Jan 17, 2026</span>
+                                    </div>
+                                    <p class="update-text">Temporary traffic diversion will be in place during repair
+                                        work. Expected duration: 4-6 hours.</p>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle me-2"></i>
+                                <strong>Note:</strong> You will receive email and SMS notifications when the status
+                                changes. Contact city services at (555) 123-4567 for urgent inquiries.
+                            </div>
+
+                            <div class="request-detail-footer">
+                                <button class="btn btn-outline-primary" onclick="printRequest('REQ-1045')">
+                                    <i class="bi bi-printer"></i> Print
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="downloadRequest('REQ-1045')">
+                                    <i class="bi bi-download"></i> Download PDF
+                                </button>
+                                <button class="btn btn-primary" onclick="contactSupport('REQ-1045')">
+                                    <i class="bi bi-headset"></i> Contact Support
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Footer -->
         <footer class="citizen-footer">
             <div class="footer-content">
@@ -801,6 +986,7 @@
     <!-- Custom JS -->
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/complaints.js"></script>
+    <script src="assets/js/models.js"></script>
 
 </body>
 

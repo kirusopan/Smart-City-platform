@@ -14,6 +14,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/track-status.css">
 </head>
 
 <body>
@@ -221,7 +222,434 @@
     <main class="citizen-main-content">
         <div class="content-wrapper">
 
+            <!-- TRACK STATUS PAGE - MAIN CONTENT ONLY -->
+            <!-- Insert this inside .page-content div after page-header -->
 
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Track Request Status</h1>
+                    <p class="page-subtitle">Monitor the progress of your submitted requests</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-outline-primary" id="filterBtn">
+                        <i class="bi bi-funnel"></i> Filter
+                    </button>
+                    <button class="btn btn-primary" id="refreshBtn">
+                        <i class="bi bi-arrow-clockwise"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search and Filter Bar -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-lg-4">
+                            <div class="search-box-custom">
+                                <i class="bi bi-search"></i>
+                                <input type="text" id="searchRequest" class="form-control"
+                                    placeholder="Search by Request ID or Description">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <select class="form-select" id="statusFilter">
+                                <option value="all">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="in_progress">In Progress</option>
+                                <option value="resolved">Resolved</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3">
+                            <select class="form-select" id="categoryFilter">
+                                <option value="all">All Categories</option>
+                                <option value="road_repair">Road Repair</option>
+                                <option value="street_light">Street Light</option>
+                                <option value="waste">Waste Collection</option>
+                                <option value="water">Water Supply</option>
+                                <option value="traffic">Traffic Signal</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <button class="btn btn-outline-secondary w-100" id="clearFilters">
+                                <i class="bi bi-x-circle"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards Row -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card stat-primary">
+                        <div class="stat-icon">
+                            <i class="bi bi-folder"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Total Requests</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card stat-warning">
+                        <div class="stat-icon">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">In Progress</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card stat-success">
+                        <div class="stat-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Resolved</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card stat-info">
+                        <div class="stat-icon">
+                            <i class="bi bi-hourglass-split"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">1</div>
+                            <div class="stat-label">Pending</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Request Cards -->
+            <div class="row g-4" id="requestsContainer">
+                <!-- Request Card 1 -->
+                <div class="col-lg-6">
+                    <div class="request-card">
+                        <div class="request-card-header">
+                            <div class="request-id">
+                                <strong>#REQ-1045</strong>
+                                <span class="badge badge-warning">In Progress</span>
+                            </div>
+                            <div class="request-date">
+                                <i class="bi bi-calendar"></i> Jan 15, 2026
+                            </div>
+                        </div>
+                        <div class="request-card-body">
+                            <div class="request-category">
+                                <i class="bi bi-cone-striped text-primary"></i>
+                                <span>Road Repair</span>
+                            </div>
+                            <h5 class="request-title">Pothole on Main Street</h5>
+                            <p class="request-description">Large pothole causing traffic issues near the intersection of
+                                Main Street and 5th Avenue</p>
+
+                            <div class="request-location">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>Main Street & 5th Avenue</span>
+                            </div>
+
+                            <div class="request-priority">
+                                <span class="badge badge-danger">High Priority</span>
+                            </div>
+                        </div>
+                        <div class="request-card-footer">
+                            <div class="progress-bar-container">
+                                <div class="progress-label">
+                                    <span>Progress: 60%</span>
+                                    <span class="text-muted">Team assigned</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewDetails('REQ-1045')">
+                                <i class="bi bi-eye"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Request Card 2 -->
+                <div class="col-lg-6">
+                    <div class="request-card">
+                        <div class="request-card-header">
+                            <div class="request-id">
+                                <strong>#REQ-1044</strong>
+                                <span class="badge badge-success">Resolved</span>
+                            </div>
+                            <div class="request-date">
+                                <i class="bi bi-calendar"></i> Jan 12, 2026
+                            </div>
+                        </div>
+                        <div class="request-card-body">
+                            <div class="request-category">
+                                <i class="bi bi-lightbulb text-warning"></i>
+                                <span>Street Light</span>
+                            </div>
+                            <h5 class="request-title">Broken street light near park</h5>
+                            <p class="request-description">Street light not working near Central Park entrance, causing
+                                safety concerns</p>
+
+                            <div class="request-location">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>Central Park, North Entrance</span>
+                            </div>
+
+                            <div class="request-priority">
+                                <span class="badge badge-warning">Medium Priority</span>
+                            </div>
+                        </div>
+                        <div class="request-card-footer">
+                            <div class="progress-bar-container">
+                                <div class="progress-label">
+                                    <span>Completed</span>
+                                    <span class="text-success">Resolved on Jan 14, 2026</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewDetails('REQ-1044')">
+                                <i class="bi bi-eye"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Request Card 3 -->
+                <div class="col-lg-6">
+                    <div class="request-card">
+                        <div class="request-card-header">
+                            <div class="request-id">
+                                <strong>#REQ-1043</strong>
+                                <span class="badge badge-success">Resolved</span>
+                            </div>
+                            <div class="request-date">
+                                <i class="bi bi-calendar"></i> Jan 10, 2026
+                            </div>
+                        </div>
+                        <div class="request-card-body">
+                            <div class="request-category">
+                                <i class="bi bi-trash3 text-success"></i>
+                                <span>Waste Collection</span>
+                            </div>
+                            <h5 class="request-title">Missed garbage pickup</h5>
+                            <p class="request-description">Scheduled garbage collection was missed on regular pickup day
+                            </p>
+
+                            <div class="request-location">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>Oak Street, Block 12</span>
+                            </div>
+
+                            <div class="request-priority">
+                                <span class="badge badge-info">Low Priority</span>
+                            </div>
+                        </div>
+                        <div class="request-card-footer">
+                            <div class="progress-bar-container">
+                                <div class="progress-label">
+                                    <span>Completed</span>
+                                    <span class="text-success">Resolved on Jan 11, 2026</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewDetails('REQ-1043')">
+                                <i class="bi bi-eye"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Request Card 4 -->
+                <div class="col-lg-6">
+                    <div class="request-card">
+                        <div class="request-card-header">
+                            <div class="request-id">
+                                <strong>#REQ-1042</strong>
+                                <span class="badge badge-warning">In Progress</span>
+                            </div>
+                            <div class="request-date">
+                                <i class="bi bi-calendar"></i> Jan 8, 2026
+                            </div>
+                        </div>
+                        <div class="request-card-body">
+                            <div class="request-category">
+                                <i class="bi bi-droplet text-info"></i>
+                                <span>Water Supply</span>
+                            </div>
+                            <h5 class="request-title">Low water pressure issue</h5>
+                            <p class="request-description">Experiencing significantly reduced water pressure in
+                                residential area</p>
+
+                            <div class="request-location">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>Maple Avenue, Units 50-60</span>
+                            </div>
+
+                            <div class="request-priority">
+                                <span class="badge badge-danger">High Priority</span>
+                            </div>
+                        </div>
+                        <div class="request-card-footer">
+                            <div class="progress-bar-container">
+                                <div class="progress-label">
+                                    <span>Progress: 40%</span>
+                                    <span class="text-muted">Investigation ongoing</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" style="width: 40%"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewDetails('REQ-1042')">
+                                <i class="bi bi-eye"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Request Card 5 -->
+                <div class="col-lg-6">
+                    <div class="request-card">
+                        <div class="request-card-header">
+                            <div class="request-id">
+                                <strong>#REQ-1041</strong>
+                                <span class="badge badge-success">Resolved</span>
+                            </div>
+                            <div class="request-date">
+                                <i class="bi bi-calendar"></i> Jan 5, 2026
+                            </div>
+                        </div>
+                        <div class="request-card-body">
+                            <div class="request-category">
+                                <i class="bi bi-volume-up text-danger"></i>
+                                <span>Noise Complaint</span>
+                            </div>
+                            <h5 class="request-title">Construction noise disturbance</h5>
+                            <p class="request-description">Excessive noise from construction site during restricted
+                                hours</p>
+
+                            <div class="request-location">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>Downtown, Block 8</span>
+                            </div>
+
+                            <div class="request-priority">
+                                <span class="badge badge-warning">Medium Priority</span>
+                            </div>
+                        </div>
+                        <div class="request-card-footer">
+                            <div class="progress-bar-container">
+                                <div class="progress-label">
+                                    <span>Completed</span>
+                                    <span class="text-success">Resolved on Jan 7, 2026</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewDetails('REQ-1041')">
+                                <i class="bi bi-eye"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Request Card 6 -->
+                <div class="col-lg-6">
+                    <div class="request-card">
+                        <div class="request-card-header">
+                            <div class="request-id">
+                                <strong>#REQ-1040</strong>
+                                <span class="badge badge-info">Pending</span>
+                            </div>
+                            <div class="request-date">
+                                <i class="bi bi-calendar"></i> Jan 3, 2026
+                            </div>
+                        </div>
+                        <div class="request-card-body">
+                            <div class="request-category">
+                                <i class="bi bi-traffic-cone text-warning"></i>
+                                <span>Traffic Signal</span>
+                            </div>
+                            <h5 class="request-title">Malfunctioning traffic light</h5>
+                            <p class="request-description">Traffic signal stuck on red at intersection causing
+                                congestion</p>
+
+                            <div class="request-location">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>3rd Street & Washington Ave</span>
+                            </div>
+
+                            <div class="request-priority">
+                                <span class="badge badge-danger">High Priority</span>
+                            </div>
+                        </div>
+                        <div class="request-card-footer">
+                            <div class="progress-bar-container">
+                                <div class="progress-label">
+                                    <span>Progress: 10%</span>
+                                    <span class="text-muted">Awaiting assignment</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" style="width: 10%"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewDetails('REQ-1040')">
+                                <i class="bi bi-eye"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <div class="text-muted">
+                    Showing 6 of 12 requests
+                </div>
+                <nav>
+                    <ul class="pagination mb-0">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Modal for Request Details -->
+            <div class="modal fade" id="requestDetailModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Request Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" id="modalBodyContent">
+                            <!-- Dynamic content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -289,6 +717,7 @@
 
     <!-- Custom JS -->
     <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/track-status.js"></script>
 
 </body>
 
