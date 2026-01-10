@@ -15,6 +15,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/utilities.css">
+    <link rel="stylesheet" href="assets/css/model.css">
 </head>
 
 <body>
@@ -772,6 +773,330 @@
                 </div>
             </div>
         </div>
+
+        <!-- UTILITIES MONITORING STATION DETAIL MODAL (ADMIN PANEL) -->
+        <!-- Add this before closing </body> tag -->
+
+        <div class="modal fade" id="monitoringStationModal" tabindex="-1">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Monitoring Station Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="monitoringStationModalBody">
+                        <div class="monitoring-station-detail">
+                            <!-- Header -->
+                            <div class="row mb-4">
+                                <div class="col-lg-8">
+                                    <div class="station-header-info">
+                                        <h3 class="station-name">Power Grid Station - District 5</h3>
+                                        <div class="station-meta">
+                                            <span class="station-id-badge">STATION-PG-045</span>
+                                            <span class="badge badge-success">
+                                                <i class="bi bi-circle-fill pulse-icon"></i> Online
+                                            </span>
+                                            <span class="badge badge-info">Type: Electricity</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 text-lg-end">
+                                    <div class="station-status-time">
+                                        <div class="status-time-item">
+                                            <i class="bi bi-clock-history"></i>
+                                            <span>Last Update: 2 mins ago</span>
+                                        </div>
+                                        <div class="status-time-item">
+                                            <i class="bi bi-arrow-clockwise"></i>
+                                            <span>Uptime: 99.8%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Real-time Metrics -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="metric-card metric-success">
+                                        <div class="metric-icon">
+                                            <i class="bi bi-lightning-charge-fill"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <div class="metric-label">Power Output</div>
+                                            <div class="metric-value">850 kW</div>
+                                            <div class="metric-change positive">
+                                                <i class="bi bi-arrow-up"></i> 5.2%
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="metric-card metric-warning">
+                                        <div class="metric-icon">
+                                            <i class="bi bi-thermometer-half"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <div class="metric-label">Temperature</div>
+                                            <div class="metric-value">68°C</div>
+                                            <div class="metric-change normal">
+                                                <i class="bi bi-dash"></i> Normal
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="metric-card metric-info">
+                                        <div class="metric-icon">
+                                            <i class="bi bi-speedometer2"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <div class="metric-label">Load</div>
+                                            <div class="metric-value">72%</div>
+                                            <div class="metric-change normal">
+                                                <i class="bi bi-check-circle"></i> Optimal
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="metric-card metric-primary">
+                                        <div class="metric-icon">
+                                            <i class="bi bi-graph-up"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <div class="metric-label">Efficiency</div>
+                                            <div class="metric-value">94.5%</div>
+                                            <div class="metric-change positive">
+                                                <i class="bi bi-arrow-up"></i> 2.1%
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-4">
+                                <!-- Left Column -->
+                                <div class="col-lg-8">
+                                    <!-- Location & Info -->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Station Information</h6>
+                                            <div class="info-grid">
+                                                <div class="info-item">
+                                                    <i class="bi bi-geo-alt text-danger"></i>
+                                                    <div>
+                                                        <div class="info-label">Location</div>
+                                                        <div class="info-value">123 Industrial Blvd, District 5</div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <i class="bi bi-calendar-check text-success"></i>
+                                                    <div>
+                                                        <div class="info-label">Installation Date</div>
+                                                        <div class="info-value">March 15, 2020</div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <i class="bi bi-building text-primary"></i>
+                                                    <div>
+                                                        <div class="info-label">Managed By</div>
+                                                        <div class="info-value">Utilities Department - Power Division
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <i class="bi bi-person-badge text-info"></i>
+                                                    <div>
+                                                        <div class="info-label">Technician</div>
+                                                        <div class="info-value">Robert Martinez (ID: TECH-842)</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Sensor Readings -->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Live Sensor Readings</h6>
+                                            <div class="sensor-grid">
+                                                <div class="sensor-item">
+                                                    <div class="sensor-header">
+                                                        <i class="bi bi-activity text-success"></i>
+                                                        <span>Voltage</span>
+                                                    </div>
+                                                    <div class="sensor-value">230.5 V</div>
+                                                    <div class="sensor-status normal">Normal</div>
+                                                </div>
+                                                <div class="sensor-item">
+                                                    <div class="sensor-header">
+                                                        <i class="bi bi-lightning text-warning"></i>
+                                                        <span>Current</span>
+                                                    </div>
+                                                    <div class="sensor-value">3,695 A</div>
+                                                    <div class="sensor-status normal">Normal</div>
+                                                </div>
+                                                <div class="sensor-item">
+                                                    <div class="sensor-header">
+                                                        <i class="bi bi-speedometer text-info"></i>
+                                                        <span>Frequency</span>
+                                                    </div>
+                                                    <div class="sensor-value">60.0 Hz</div>
+                                                    <div class="sensor-status normal">Normal</div>
+                                                </div>
+                                                <div class="sensor-item">
+                                                    <div class="sensor-header">
+                                                        <i class="bi bi-battery-charging text-primary"></i>
+                                                        <span>Power Factor</span>
+                                                    </div>
+                                                    <div class="sensor-value">0.95</div>
+                                                    <div class="sensor-status good">Excellent</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Maintenance History -->
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Maintenance History</h6>
+                                            <div class="maintenance-timeline">
+                                                <div class="maintenance-item completed">
+                                                    <div class="maintenance-icon bg-success">
+                                                        <i class="bi bi-check-circle"></i>
+                                                    </div>
+                                                    <div class="maintenance-content">
+                                                        <div class="maintenance-header">
+                                                            <strong>Routine Inspection</strong>
+                                                            <span class="maintenance-date">Jan 10, 2026</span>
+                                                        </div>
+                                                        <p>Quarterly maintenance check completed. All systems
+                                                            operational.</p>
+                                                        <span class="maintenance-tech">By: Robert Martinez</span>
+                                                    </div>
+                                                </div>
+                                                <div class="maintenance-item completed">
+                                                    <div class="maintenance-icon bg-warning">
+                                                        <i class="bi bi-tools"></i>
+                                                    </div>
+                                                    <div class="maintenance-content">
+                                                        <div class="maintenance-header">
+                                                            <strong>Circuit Breaker Replacement</strong>
+                                                            <span class="maintenance-date">Dec 5, 2025</span>
+                                                        </div>
+                                                        <p>Replaced aging circuit breaker CB-12. System tested and
+                                                            verified.</p>
+                                                        <span class="maintenance-tech">By: Sarah Wilson</span>
+                                                    </div>
+                                                </div>
+                                                <div class="maintenance-item completed">
+                                                    <div class="maintenance-icon bg-info">
+                                                        <i class="bi bi-gear"></i>
+                                                    </div>
+                                                    <div class="maintenance-content">
+                                                        <div class="maintenance-header">
+                                                            <strong>Sensor Calibration</strong>
+                                                            <span class="maintenance-date">Nov 20, 2025</span>
+                                                        </div>
+                                                        <p>All monitoring sensors recalibrated and tested.</p>
+                                                        <span class="maintenance-tech">By: James Lee</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Right Column -->
+                                <div class="col-lg-4">
+                                    <!-- Quick Actions -->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Quick Actions</h6>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-outline-primary">
+                                                    <i class="bi bi-gear"></i> Configure Settings
+                                                </button>
+                                                <button class="btn btn-outline-warning">
+                                                    <i class="bi bi-tools"></i> Schedule Maintenance
+                                                </button>
+                                                <button class="btn btn-outline-info">
+                                                    <i class="bi bi-graph-up"></i> View Analytics
+                                                </button>
+                                                <button class="btn btn-outline-danger">
+                                                    <i class="bi bi-exclamation-triangle"></i> Report Issue
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Alerts -->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Active Alerts</h6>
+                                            <div class="alert-list-modal">
+                                                <div class="alert-item-modal info">
+                                                    <i class="bi bi-info-circle"></i>
+                                                    <div>
+                                                        <div class="alert-title-modal">Scheduled Maintenance</div>
+                                                        <div class="alert-time-modal">Tomorrow, 2:00 PM</div>
+                                                    </div>
+                                                </div>
+                                                <div class="alert-item-modal success">
+                                                    <i class="bi bi-check-circle"></i>
+                                                    <div>
+                                                        <div class="alert-title-modal">Efficiency Improved</div>
+                                                        <div class="alert-time-modal">2 hours ago</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Coverage Area -->
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Coverage Statistics</h6>
+                                            <div class="coverage-stats">
+                                                <div class="coverage-item">
+                                                    <span class="coverage-label">Households Served</span>
+                                                    <span class="coverage-value">8,450</span>
+                                                </div>
+                                                <div class="coverage-item">
+                                                    <span class="coverage-label">Businesses Served</span>
+                                                    <span class="coverage-value">325</span>
+                                                </div>
+                                                <div class="coverage-item">
+                                                    <span class="coverage-label">Coverage Area</span>
+                                                    <span class="coverage-value">12.5 km²</span>
+                                                </div>
+                                                <div class="coverage-item">
+                                                    <span class="coverage-label">Daily Consumption</span>
+                                                    <span class="coverage-value">18,500 kWh</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Footer Actions -->
+                            <div class="modal-footer-actions">
+                                <button class="btn btn-outline-secondary" onclick="exportStationReport()">
+                                    <i class="bi bi-file-earmark-text"></i> Export Report
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="viewStationHistory()">
+                                    <i class="bi bi-clock-history"></i> View History
+                                </button>
+                                <button class="btn btn-primary" onclick="updateStationSettings()">
+                                    <i class="bi bi-gear-fill"></i> Update Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap 5 JS Bundle -->
@@ -780,6 +1105,7 @@
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/utilities.js"></script>
+    <script src="assets/js/models.js"></script>
 
 </body>
 

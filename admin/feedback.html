@@ -15,6 +15,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/feedback.css">
+    <link rel="stylesheet" href="assets/css/model.css">
 </head>
 
 <body>
@@ -819,6 +820,251 @@
 
             </div>
         </div>
+
+        <!-- FEEDBACK DETAIL MODAL (ADMIN PANEL) -->
+<!-- Add this before closing </body> tag -->
+
+<div class="modal fade" id="feedbackDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Feedback Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="feedbackDetailModalBody">
+                <div class="feedback-detail-content">
+                    <!-- Header -->
+                    <div class="feedback-header mb-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h4 class="feedback-subject">Excellent Service Quality</h4>
+                                <div class="feedback-meta">
+                                    <span class="feedback-id-badge">FEEDBACK-5847</span>
+                                    <span class="badge badge-success">Positive</span>
+                                    <span class="badge badge-info">Response Sent</span>
+                                </div>
+                            </div>
+                            <div class="rating-display">
+                                <div class="star-rating">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                                <div class="rating-text">5.0 / 5.0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Citizen Information -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h6 class="section-title">Citizen Information</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="info-item-feedback">
+                                        <i class="bi bi-person text-primary"></i>
+                                        <div>
+                                            <div class="info-label">Name</div>
+                                            <div class="info-value">Sarah Johnson</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-item-feedback">
+                                        <i class="bi bi-envelope text-success"></i>
+                                        <div>
+                                            <div class="info-label">Email</div>
+                                            <div class="info-value">sarah.j@email.com</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-item-feedback">
+                                        <i class="bi bi-telephone text-info"></i>
+                                        <div>
+                                            <div class="info-label">Phone</div>
+                                            <div class="info-value">+1 (555) 987-6543</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-item-feedback">
+                                        <i class="bi bi-geo-alt text-danger"></i>
+                                        <div>
+                                            <div class="info-label">District</div>
+                                            <div class="info-value">District 4</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Content -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h6 class="section-title">Feedback Message</h6>
+                            <div class="feedback-message">
+                                <p>I wanted to express my appreciation for the excellent service provided by the waste management team. The collection has been consistent, timely, and the crew is always professional and courteous.</p>
+                                <p>The new recycling program has also been very helpful, and I appreciate the educational materials provided. Keep up the great work!</p>
+                            </div>
+                            <div class="feedback-timestamp">
+                                <i class="bi bi-clock"></i>
+                                <span>Submitted on January 16, 2026 at 3:45 PM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category & Details -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h6 class="section-title">Feedback Details</h6>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="detail-box">
+                                        <div class="detail-label">Category</div>
+                                        <div class="detail-value">
+                                            <i class="bi bi-tag text-primary"></i>
+                                            Waste Management
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="detail-box">
+                                        <div class="detail-label">Sentiment</div>
+                                        <div class="detail-value">
+                                            <i class="bi bi-emoji-smile text-success"></i>
+                                            Positive
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="detail-box">
+                                        <div class="detail-label">Priority</div>
+                                        <div class="detail-value">
+                                            <i class="bi bi-flag text-info"></i>
+                                            Normal
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Response Section -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h6 class="section-title">Department Response</h6>
+                            <div class="response-box">
+                                <div class="response-header">
+                                    <div class="responder-info">
+                                        <div class="responder-avatar bg-primary">
+                                            <i class="bi bi-person"></i>
+                                        </div>
+                                        <div>
+                                            <div class="responder-name">Maria Garcia</div>
+                                            <div class="responder-role">Waste Management Supervisor</div>
+                                        </div>
+                                    </div>
+                                    <div class="response-date">
+                                        <i class="bi bi-calendar"></i>
+                                        <span>Jan 17, 2026</span>
+                                    </div>
+                                </div>
+                                <div class="response-message">
+                                    <p>Dear Sarah,</p>
+                                    <p>Thank you so much for your kind words and positive feedback! We're delighted to hear that our waste management services are meeting your expectations.</p>
+                                    <p>Your appreciation means a lot to our team, and we'll make sure to share your feedback with the crew. We're committed to maintaining this level of service and continuing to improve our recycling programs.</p>
+                                    <p>If you have any questions or need assistance in the future, please don't hesitate to reach out.</p>
+                                    <p>Best regards,<br>Waste Management Department</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Timeline -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="section-title">Action Timeline</h6>
+                            <div class="feedback-timeline">
+                                <div class="timeline-item-feedback completed">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content-feedback">
+                                        <div class="timeline-header">
+                                            <strong>Feedback Submitted</strong>
+                                            <span class="timeline-time">Jan 16, 2026 - 3:45 PM</span>
+                                        </div>
+                                        <p>Feedback received from citizen</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item-feedback completed">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content-feedback">
+                                        <div class="timeline-header">
+                                            <strong>Assigned to Department</strong>
+                                            <span class="timeline-time">Jan 16, 2026 - 4:00 PM</span>
+                                        </div>
+                                        <p>Forwarded to Waste Management Department</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item-feedback completed">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content-feedback">
+                                        <div class="timeline-header">
+                                            <strong>Response Sent</strong>
+                                            <span class="timeline-time">Jan 17, 2026 - 10:30 AM</span>
+                                        </div>
+                                        <p>Official response sent to citizen via email</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item-feedback completed">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content-feedback">
+                                        <div class="timeline-header">
+                                            <strong>Case Closed</strong>
+                                            <span class="timeline-time">Jan 17, 2026 - 2:00 PM</span>
+                                        </div>
+                                        <p>Feedback acknowledged and case marked as resolved</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="feedback-tags mt-4">
+                        <h6 class="section-title mb-3">Tags</h6>
+                        <div class="tag-list">
+                            <span class="tag-badge">waste-management</span>
+                            <span class="tag-badge">positive-feedback</span>
+                            <span class="tag-badge">service-quality</span>
+                            <span class="tag-badge">district-4</span>
+                        </div>
+                    </div>
+
+                    <!-- Footer Actions -->
+                    <div class="modal-footer-actions">
+                        <button class="btn btn-outline-secondary" onclick="printFeedback()">
+                            <i class="bi bi-printer"></i> Print
+                        </button>
+                        <button class="btn btn-outline-primary" onclick="exportFeedback()">
+                            <i class="bi bi-download"></i> Export
+                        </button>
+                        <button class="btn btn-outline-success" onclick="forwardFeedback()">
+                            <i class="bi bi-share"></i> Forward
+                        </button>
+                        <button class="btn btn-primary" onclick="reopenFeedback()">
+                            <i class="bi bi-arrow-clockwise"></i> Reopen Case
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     </div>
 
     <!-- Bootstrap 5 JS Bundle -->
@@ -827,6 +1073,7 @@
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/feedback.js"></script>
+    <script src="assets/js/models.js"></script>
 
 </body>
 

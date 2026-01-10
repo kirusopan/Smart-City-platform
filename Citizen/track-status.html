@@ -15,6 +15,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/dashboard.css">
     <link rel="stylesheet" href="assets/css/track-status.css">
+    <link rel="stylesheet" href="assets/css/model.css">
 </head>
 
 <body>
@@ -679,6 +680,317 @@
         <i class="bi bi-plus-lg"></i>
     </button>
 
+    <!-- TASK REQUEST DETAIL MODAL (CITIZEN PANEL) -->
+
+    <div class="modal fade" id="taskRequestDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Task Request Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="taskRequestModalBody">
+                    <div class="task-request-detail-content">
+                        <!-- Header Info -->
+                        <div class="row mb-4">
+                            <div class="col-lg-8">
+                                <div class="task-header-info">
+                                    <h3 class="task-main-title">Road Repair - Pothole on Main Street</h3>
+                                    <div class="task-meta-info">
+                                        <span class="task-id-badge">#TASK-2045</span>
+                                        <span class="badge badge-warning">In Progress</span>
+                                        <span class="badge badge-danger">High Priority</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 text-lg-end">
+                                <div class="task-dates">
+                                    <div class="date-item">
+                                        <i class="bi bi-calendar-plus"></i>
+                                        <span><strong>Created:</strong> Jan 15, 2026</span>
+                                    </div>
+                                    <div class="date-item">
+                                        <i class="bi bi-calendar-check"></i>
+                                        <span><strong>Due:</strong> Jan 20, 2026</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Section -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h6 class="section-title">Task Progress</h6>
+                                <div class="progress-info-row">
+                                    <div class="progress-stat">
+                                        <div class="progress-stat-value">65%</div>
+                                        <div class="progress-stat-label">Completion</div>
+                                    </div>
+                                    <div class="progress-stat">
+                                        <div class="progress-stat-value">3 Days</div>
+                                        <div class="progress-stat-label">Remaining</div>
+                                    </div>
+                                    <div class="progress-stat">
+                                        <div class="progress-stat-value">5</div>
+                                        <div class="progress-stat-label">Team Members</div>
+                                    </div>
+                                </div>
+                                <div class="progress" style="height: 12px;">
+                                    <div class="progress-bar bg-warning" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Left Column -->
+                            <div class="col-lg-8">
+                                <!-- Description -->
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h6 class="section-title">Description</h6>
+                                        <p class="task-description">Large pothole causing traffic issues near the
+                                            intersection of Main Street and 5th Avenue. The pothole is approximately 2
+                                            feet in diameter and 6 inches deep, creating a hazard for vehicles and
+                                            motorcycles. Multiple citizen reports received.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Location & Details -->
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h6 class="section-title">Location & Details</h6>
+                                        <div class="info-grid">
+                                            <div class="info-item">
+                                                <i class="bi bi-geo-alt text-danger"></i>
+                                                <div>
+                                                    <div class="info-label">Location</div>
+                                                    <div class="info-value">Main Street & 5th Avenue, District 4</div>
+                                                </div>
+                                            </div>
+                                            <div class="info-item">
+                                                <i class="bi bi-tag text-primary"></i>
+                                                <div>
+                                                    <div class="info-label">Category</div>
+                                                    <div class="info-value">Road Maintenance</div>
+                                                </div>
+                                            </div>
+                                            <div class="info-item">
+                                                <i class="bi bi-person text-success"></i>
+                                                <div>
+                                                    <div class="info-label">Reported By</div>
+                                                    <div class="info-value">John Citizen (ID: CIT-5847)</div>
+                                                </div>
+                                            </div>
+                                            <div class="info-item">
+                                                <i class="bi bi-telephone text-info"></i>
+                                                <div>
+                                                    <div class="info-label">Contact</div>
+                                                    <div class="info-value">+1 (555) 123-4567</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Attached Files -->
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h6 class="section-title">Attached Files</h6>
+                                        <div class="file-list">
+                                            <div class="file-item">
+                                                <i class="bi bi-file-image text-primary"></i>
+                                                <div class="file-info">
+                                                    <div class="file-name">pothole_photo1.jpg</div>
+                                                    <div class="file-size">2.4 MB</div>
+                                                </div>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-download"></i>
+                                                </button>
+                                            </div>
+                                            <div class="file-item">
+                                                <i class="bi bi-file-image text-primary"></i>
+                                                <div class="file-info">
+                                                    <div class="file-name">pothole_photo2.jpg</div>
+                                                    <div class="file-size">1.8 MB</div>
+                                                </div>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-download"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Activity Timeline -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="section-title">Activity Timeline</h6>
+                                        <div class="activity-timeline">
+                                            <div class="activity-item completed">
+                                                <div class="activity-icon">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </div>
+                                                <div class="activity-content">
+                                                    <div class="activity-header">
+                                                        <strong>Task Created</strong>
+                                                        <span class="activity-time">Jan 15, 2026 - 10:30 AM</span>
+                                                    </div>
+                                                    <p>Request received from citizen and logged in system</p>
+                                                </div>
+                                            </div>
+                                            <div class="activity-item completed">
+                                                <div class="activity-icon">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </div>
+                                                <div class="activity-content">
+                                                    <div class="activity-header">
+                                                        <strong>Inspection Scheduled</strong>
+                                                        <span class="activity-time">Jan 15, 2026 - 2:45 PM</span>
+                                                    </div>
+                                                    <p>Site inspection assigned to Engineering Team A</p>
+                                                </div>
+                                            </div>
+                                            <div class="activity-item completed">
+                                                <div class="activity-icon">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </div>
+                                                <div class="activity-content">
+                                                    <div class="activity-header">
+                                                        <strong>Materials Ordered</strong>
+                                                        <span class="activity-time">Jan 16, 2026 - 9:15 AM</span>
+                                                    </div>
+                                                    <p>Asphalt and repair materials ordered from supplier</p>
+                                                </div>
+                                            </div>
+                                            <div class="activity-item active">
+                                                <div class="activity-icon">
+                                                    <i class="bi bi-hourglass-split"></i>
+                                                </div>
+                                                <div class="activity-content">
+                                                    <div class="activity-header">
+                                                        <strong>Repair in Progress</strong>
+                                                        <span class="activity-time">Current</span>
+                                                    </div>
+                                                    <p>Road crew dispatched, repair work underway</p>
+                                                </div>
+                                            </div>
+                                            <div class="activity-item pending">
+                                                <div class="activity-icon">
+                                                    <i class="bi bi-clock"></i>
+                                                </div>
+                                                <div class="activity-content">
+                                                    <div class="activity-header">
+                                                        <strong>Final Inspection</strong>
+                                                        <span class="activity-time">Pending</span>
+                                                    </div>
+                                                    <p>Quality check and approval</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="col-lg-4">
+                                <!-- Assigned Team -->
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h6 class="section-title">Assigned Team</h6>
+                                        <div class="team-list">
+                                            <div class="team-member-card">
+                                                <div class="member-avatar bg-primary">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                                <div class="member-info">
+                                                    <div class="member-name">Michael Johnson</div>
+                                                    <div class="member-role">Team Lead</div>
+                                                </div>
+                                            </div>
+                                            <div class="team-member-card">
+                                                <div class="member-avatar bg-success">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                                <div class="member-info">
+                                                    <div class="member-name">Sarah Williams</div>
+                                                    <div class="member-role">Engineer</div>
+                                                </div>
+                                            </div>
+                                            <div class="team-member-card">
+                                                <div class="member-avatar bg-warning">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                                <div class="member-info">
+                                                    <div class="member-name">David Brown</div>
+                                                    <div class="member-role">Technician</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Resources -->
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h6 class="section-title">Resources Allocated</h6>
+                                        <div class="resource-list">
+                                            <div class="resource-item">
+                                                <i class="bi bi-truck text-primary"></i>
+                                                <span>2 Service Vehicles</span>
+                                            </div>
+                                            <div class="resource-item">
+                                                <i class="bi bi-tools text-warning"></i>
+                                                <span>Road Repair Equipment</span>
+                                            </div>
+                                            <div class="resource-item">
+                                                <i class="bi bi-box text-success"></i>
+                                                <span>500 lbs Asphalt</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Statistics -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="section-title">Task Statistics</h6>
+                                        <div class="stat-list">
+                                            <div class="stat-item">
+                                                <span class="stat-label">Hours Worked</span>
+                                                <span class="stat-value">18.5 hrs</span>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-label">Estimated Cost</span>
+                                                <span class="stat-value">$2,450</span>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-label">Citizens Affected</span>
+                                                <span class="stat-value">~1,200</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer Actions -->
+                        <div class="modal-footer-actions">
+                            <button class="btn btn-outline-secondary" onclick="printTaskRequest()">
+                                <i class="bi bi-printer"></i> Print
+                            </button>
+                            <button class="btn btn-outline-primary" onclick="exportTaskPDF()">
+                                <i class="bi bi-file-pdf"></i> Export PDF
+                            </button>
+                            <button class="btn btn-primary" onclick="contactTaskTeam()">
+                                <i class="bi bi-telephone"></i> Contact Team
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Quick Report Modal -->
     <div class="modal fade" id="quickReportModal" tabindex="-1">
         <div class="modal-dialog">
@@ -718,6 +1030,7 @@
     <!-- Custom JS -->
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/track-status.js"></script>
+    <script src="assets/js/models.js"></script>
 
 </body>
 

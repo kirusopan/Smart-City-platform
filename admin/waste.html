@@ -15,6 +15,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/waste.css">
+    <link rel="stylesheet" href="assets/css/model.css">
 </head>
 
 <body>
@@ -866,6 +867,346 @@
 
 
         </div>
+
+        <!-- WASTE COLLECTION POINT DETAIL MODAL (ADMIN PANEL) -->
+        <!-- Add this before closing </body> tag -->
+
+        <div class="modal fade" id="wasteCollectionModal" tabindex="-1">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Waste Collection Point Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="wasteCollectionModalBody">
+                        <div class="waste-collection-detail">
+                            <!-- Header -->
+                            <div class="row mb-4">
+                                <div class="col-lg-8">
+                                    <div class="collection-header-info">
+                                        <h3 class="collection-name">Collection Point - Oak Street Zone</h3>
+                                        <div class="collection-meta">
+                                            <span class="collection-id-badge">WCP-D4-085</span>
+                                            <span class="badge badge-success">
+                                                <i class="bi bi-check-circle"></i> Active
+                                            </span>
+                                            <span class="badge badge-warning">Last Collected: 2 days ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 text-lg-end">
+                                    <div class="collection-status">
+                                        <div class="status-indicator">
+                                            <div class="fill-level-indicator">
+                                                <div class="fill-level-bar" style="height: 75%; background: #f59e0b;">
+                                                </div>
+                                            </div>
+                                            <div class="fill-level-text">
+                                                <strong>75%</strong>
+                                                <span>Fill Level</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Status Cards -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="waste-stat-card">
+                                        <div class="waste-stat-icon bg-primary">
+                                            <i class="bi bi-trash3"></i>
+                                        </div>
+                                        <div class="waste-stat-content">
+                                            <div class="waste-stat-value">850 kg</div>
+                                            <div class="waste-stat-label">Total Collected</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="waste-stat-card">
+                                        <div class="waste-stat-icon bg-success">
+                                            <i class="bi bi-calendar-check"></i>
+                                        </div>
+                                        <div class="waste-stat-content">
+                                            <div class="waste-stat-value">12</div>
+                                            <div class="waste-stat-label">Collections/Month</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="waste-stat-card">
+                                        <div class="waste-stat-icon bg-warning">
+                                            <i class="bi bi-clock-history"></i>
+                                        </div>
+                                        <div class="waste-stat-content">
+                                            <div class="waste-stat-value">Next</div>
+                                            <div class="waste-stat-label">Tomorrow 6:00 AM</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="waste-stat-card">
+                                        <div class="waste-stat-icon bg-info">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <div class="waste-stat-content">
+                                            <div class="waste-stat-value">450</div>
+                                            <div class="waste-stat-label">Households Served</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-4">
+                                <!-- Left Column -->
+                                <div class="col-lg-8">
+                                    <!-- Location & Info -->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Collection Point Information</h6>
+                                            <div class="info-grid">
+                                                <div class="info-item">
+                                                    <i class="bi bi-geo-alt text-danger"></i>
+                                                    <div>
+                                                        <div class="info-label">Location</div>
+                                                        <div class="info-value">Oak Street & Maple Avenue, District 4
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <i class="bi bi-tag text-primary"></i>
+                                                    <div>
+                                                        <div class="info-label">Zone Type</div>
+                                                        <div class="info-value">Residential - High Density</div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <i class="bi bi-truck text-success"></i>
+                                                    <div>
+                                                        <div class="info-label">Assigned Vehicle</div>
+                                                        <div class="info-value">Truck #WM-045</div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <i class="bi bi-person-badge text-info"></i>
+                                                    <div>
+                                                        <div class="info-label">Route Supervisor</div>
+                                                        <div class="info-value">Carlos Rodriguez</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bin Status -->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Bin Status Overview</h6>
+                                            <div class="bin-status-grid">
+                                                <div class="bin-status-item">
+                                                    <div class="bin-icon bg-success">
+                                                        <i class="bi bi-recycle"></i>
+                                                    </div>
+                                                    <div class="bin-info">
+                                                        <div class="bin-type">Recyclables</div>
+                                                        <div class="bin-fill">
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-success" style="width: 45%">
+                                                                </div>
+                                                            </div>
+                                                            <span class="fill-percent">45% Full</span>
+                                                        </div>
+                                                        <div class="bin-capacity">Capacity: 500L</div>
+                                                    </div>
+                                                </div>
+                                                <div class="bin-status-item">
+                                                    <div class="bin-icon bg-warning">
+                                                        <i class="bi bi-trash"></i>
+                                                    </div>
+                                                    <div class="bin-info">
+                                                        <div class="bin-type">General Waste</div>
+                                                        <div class="bin-fill">
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-warning" style="width: 75%">
+                                                                </div>
+                                                            </div>
+                                                            <span class="fill-percent">75% Full</span>
+                                                        </div>
+                                                        <div class="bin-capacity">Capacity: 1000L</div>
+                                                    </div>
+                                                </div>
+                                                <div class="bin-status-item">
+                                                    <div class="bin-icon bg-info">
+                                                        <i class="bi bi-droplet"></i>
+                                                    </div>
+                                                    <div class="bin-info">
+                                                        <div class="bin-type">Organic Waste</div>
+                                                        <div class="bin-fill">
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-info" style="width: 60%">
+                                                                </div>
+                                                            </div>
+                                                            <span class="fill-percent">60% Full</span>
+                                                        </div>
+                                                        <div class="bin-capacity">Capacity: 500L</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Collection History -->
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Collection History (Last 7 Days)</h6>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Time</th>
+                                                            <th>Type</th>
+                                                            <th>Weight</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Jan 17, 2026</td>
+                                                            <td>6:15 AM</td>
+                                                            <td><span class="badge badge-warning">General</span></td>
+                                                            <td>285 kg</td>
+                                                            <td><span class="badge badge-success">Completed</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Jan 15, 2026</td>
+                                                            <td>6:30 AM</td>
+                                                            <td><span class="badge badge-success">Recyclable</span></td>
+                                                            <td>140 kg</td>
+                                                            <td><span class="badge badge-success">Completed</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Jan 14, 2026</td>
+                                                            <td>6:20 AM</td>
+                                                            <td><span class="badge badge-info">Organic</span></td>
+                                                            <td>95 kg</td>
+                                                            <td><span class="badge badge-success">Completed</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Jan 12, 2026</td>
+                                                            <td>6:10 AM</td>
+                                                            <td><span class="badge badge-warning">General</span></td>
+                                                            <td>305 kg</td>
+                                                            <td><span class="badge badge-success">Completed</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Right Column -->
+                                <div class="col-lg-4">
+                                    <!-- Schedule -->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Collection Schedule</h6>
+                                            <div class="schedule-list">
+                                                <div class="schedule-item">
+                                                    <div class="schedule-day">Monday</div>
+                                                    <div class="schedule-types">
+                                                        <span class="schedule-badge bg-warning">General</span>
+                                                    </div>
+                                                    <div class="schedule-time">6:00 AM</div>
+                                                </div>
+                                                <div class="schedule-item">
+                                                    <div class="schedule-day">Wednesday</div>
+                                                    <div class="schedule-types">
+                                                        <span class="schedule-badge bg-success">Recyclable</span>
+                                                    </div>
+                                                    <div class="schedule-time">6:30 AM</div>
+                                                </div>
+                                                <div class="schedule-item">
+                                                    <div class="schedule-day">Thursday</div>
+                                                    <div class="schedule-types">
+                                                        <span class="schedule-badge bg-info">Organic</span>
+                                                    </div>
+                                                    <div class="schedule-time">6:15 AM</div>
+                                                </div>
+                                                <div class="schedule-item">
+                                                    <div class="schedule-day">Saturday</div>
+                                                    <div class="schedule-types">
+                                                        <span class="schedule-badge bg-warning">General</span>
+                                                    </div>
+                                                    <div class="schedule-time">7:00 AM</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Issues & Alerts -->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Recent Issues</h6>
+                                            <div class="issue-list">
+                                                <div class="issue-item warning">
+                                                    <i class="bi bi-exclamation-triangle"></i>
+                                                    <div>
+                                                        <div class="issue-title">High Fill Level</div>
+                                                        <div class="issue-time">2 hours ago</div>
+                                                    </div>
+                                                </div>
+                                                <div class="issue-item resolved">
+                                                    <i class="bi bi-check-circle"></i>
+                                                    <div>
+                                                        <div class="issue-title">Bin Overflow Resolved</div>
+                                                        <div class="issue-time">Yesterday</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Quick Actions -->
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="section-title">Quick Actions</h6>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-outline-primary">
+                                                    <i class="bi bi-calendar-plus"></i> Schedule Pickup
+                                                </button>
+                                                <button class="btn btn-outline-warning">
+                                                    <i class="bi bi-tools"></i> Request Maintenance
+                                                </button>
+                                                <button class="btn btn-outline-danger">
+                                                    <i class="bi bi-exclamation-triangle"></i> Report Issue
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Footer Actions -->
+                            <div class="modal-footer-actions">
+                                <button class="btn btn-outline-secondary" onclick="exportCollectionReport()">
+                                    <i class="bi bi-file-earmark-text"></i> Export Report
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="viewRouteMap()">
+                                    <i class="bi bi-map"></i> View Route
+                                </button>
+                                <button class="btn btn-primary" onclick="updateSchedule()">
+                                    <i class="bi bi-calendar-week"></i> Update Schedule
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Bootstrap 5 JS Bundle -->
@@ -874,6 +1215,7 @@
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/waste.js"></script>
+    <script src="assets/js/models.js"></script>
 
 </body>
 
